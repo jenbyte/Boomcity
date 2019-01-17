@@ -21,7 +21,7 @@ const { ApolloError } = require('apollo-server-express');
 // -------------------------------
 const { UploadScalar, DateScalar } = require('../custom-types');
 
-module.exports = (app) => {
+module.exports = app => {
   return {
     // Upload: UploadScalar,
     // Date: DateScalar,
@@ -47,20 +47,28 @@ module.exports = (app) => {
       async user(parent, { id }, { pgResource }, info) {
         try {
           const user = await pgResource.getUserById(id);
-          return user;
+          return user.rows[0];
         } catch (e) {
           throw new ApolloError(e);
         }
       },
-      async items() {
-        // @TODO: Replace this mock return statement with the correct items from Postgres
-        return [];
-        // -------------------------------
+      async items(parent, { filter }, { pgResource }, info) {
+        // @DONEISH: Replace this mock return statement with the correct items from Postgres
+        try {
+          const items = await pgResource.getItems(filter);
+          return items;
+        } catch (e) {
+          throw new ApolloError(e);
+        }
       },
-      async tags() {
+      async tags(parent, args, { pgResource }, info) {
         // @TODO: Replace this mock return statement with the correct tags from Postgres
-        return [];
-        // -------------------------------
+        try {
+          const tags = await pgResource.getTags();
+          return tags;
+        } catch (e) {
+          throw new ApolloError(e);
+        }
       }
     },
 
@@ -76,16 +84,16 @@ module.exports = (app) => {
        *
        */
       // @TODO: Uncomment these lines after you define the User type with these fields
-      // items() {
-      //   // @TODO: Replace this mock return statement with the correct items from Postgres
-      //   return []
-      //   // -------------------------------
-      // },
-      // borrowed() {
-      //   // @TODO: Replace this mock return statement with the correct items from Postgres
-      //   return []
-      //   // -------------------------------
-      // }
+      items(parent, { id }, { pgResource }, info) {
+        // @TODO: Replace this mock return statement with the correct items from Postgres
+        return [];
+        //   // -------------------------------
+      },
+      borrowed() {
+        // @TODO: Replace this mock return statement with the correct items from Postgres
+        return [];
+        // -------------------------------
+      }
       // -------------------------------
     },
 

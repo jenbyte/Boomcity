@@ -17,7 +17,7 @@ const UploadScalar = new GraphQLScalarType({
 });
 
 /**
- *  @TODO: Custom Types
+ *  @DONE: Custom Types
  *  GraphQL includes the following built-in Scalar Types: https://graphql.org/learn/schema/#scalar-types
  *
  *  The purpose of the Scalar type is to validate the information being sent and received
