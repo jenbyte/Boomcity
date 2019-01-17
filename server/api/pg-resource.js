@@ -77,7 +77,6 @@ module.exports = postgres => {
         text: 'SELECT id, email, name AS fullname FROM users WHERE id = $1', // @DONE: Basic queries
         values: [id]
       };
-
       /**
        *  Refactor the following code using the error handling logic described above.
        *  When you're done here, ensure all of the resource methods in this file

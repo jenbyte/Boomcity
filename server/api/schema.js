@@ -20,11 +20,10 @@ module.exports = gql`
     title: String!
     imageurl: String
     description: String!
-    ownerid: User!
+    itemowner: User!
     tags: [Tag]
     created: Date!
-    borrowerid: User
-    _: Boolean
+    borrower: User
   }
 
   type User {
@@ -34,13 +33,11 @@ module.exports = gql`
     bio: String
     items: [Item]
     borrowed: [Item]
-    _: Boolean
   }
 
   type Tag {
     id: ID!
     title: String!
-    _: Boolean
   }
 
   type File {
@@ -49,25 +46,21 @@ module.exports = gql`
     mimetype: String!
     encoding: String!
     itemid: ID!
-    _: Boolean
   }
 
   input AssignedTag {
     id: ID!
     title: String!
-    _: Boolean
   }
 
   input AssignedBorrower {
     id: ID!
-    _: Boolean
   }
 
   input NewItemInput {
     title: String!
     description: String
     tags: [AssignedTag]!
-    _: Boolean
   }
 
   type Query {

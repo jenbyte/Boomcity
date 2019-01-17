@@ -53,7 +53,6 @@ module.exports = app => {
         }
       },
       async items(parent, { filter }, { pgResource }, info) {
-        // @DONEISH: Replace this mock return statement with the correct items from Postgres
         try {
           const items = await pgResource.getItems(filter);
           return items;
@@ -64,7 +63,7 @@ module.exports = app => {
       async tags(parent, args, { pgResource }, info) {
         // @TODO: Replace this mock return statement with the correct tags from Postgres
         try {
-          const tags = await pgResource.getTags();
+          const tags = await pgResource.getTags(args);
           return tags;
         } catch (e) {
           throw new ApolloError(e);
@@ -83,18 +82,24 @@ module.exports = app => {
        *  Items (GraphQL type) the user has lent (items) and borrowed (borrowed).
        *
        */
-      // @TODO: Uncomment these lines after you define the User type with these fields
-      items(parent, { id }, { pgResource }, info) {
-        // @TODO: Replace this mock return statement with the correct items from Postgres
-        return [];
-        //   // -------------------------------
+      async items(user, _args, { pgResource }) {
+        try {
+          const lentItems = await pgResource.getItemsForUser(user.id);
+          return lentItems;
+        } catch (e) {
+          throw new ApolloError(e);
+        }
       },
-      borrowed() {
-        // @TODO: Replace this mock return statement with the correct items from Postgres
-        return [];
-        // -------------------------------
+      async borrowed(borrowed, _args, { pgResource }) {
+        try {
+          const borrowedItems = await pgResource.getBorrowedItemsForUser(
+            borrowed.id
+          );
+          return borrowedItems;
+        } catch (e) {
+          throw new ApolloError(e);
+        }
       }
-      // -------------------------------
     },
 
     Item: {
@@ -109,36 +114,35 @@ module.exports = app => {
        *
        */
       // @TODO: Uncomment these lines after you define the Item type with these fields
-      // async itemowner() {
-      //   // @TODO: Replace this mock return statement with the correct user from Postgres
-      //   return {
-      //     id: 29,
-      //     fullname: "Mock user",
-      //     email: "mock@user.com",
-      //     bio: "Mock user. Remove me."
-      //   }
-      //   // -------------------------------
-      // },
-      // async tags() {
-      //   // @TODO: Replace this mock return statement with the correct tags for the queried Item from Postgres
-      //   return []
-      //   // -------------------------------
-      // },
-      // async borrower() {
-      //   /**
-      //    * @TODO: Replace this mock return statement with the correct user from Postgres
-      //    * or null in the case where the item has not been borrowed.
-      //    */
-      //   return null
-      //   // -------------------------------
-      // },
-      // async imageurl({ imageurl, imageid, mimetype, data }) {
-      //   if (imageurl) return imageurl
-      //   if (imageid) {
-      //     return `data:${mimetype};base64, ${data}`
-      //   }
-      // }
-      // -------------------------------
+      async itemowner() {
+        // @TODO: Replace this mock return statement with the correct user from Postgres
+        return {
+          id: 29,
+          fullname: 'Mock user',
+          email: 'mock@user.com',
+          bio: 'Mock user. Remove me.'
+        };
+        // -------------------------------
+      },
+      async tags() {
+        // @TODO: Replace this mock return statement with the correct tags for the queried Item from Postgres
+        return [];
+        // -------------------------------
+      },
+      async borrower() {
+        /**
+         * @TODO: Replace this mock return statement with the correct user from Postgres
+         * or null in the case where the item has not been borrowed.
+         */
+        return null;
+        // -------------------------------
+      },
+      async imageurl({ imageurl, imageid, mimetype, data }) {
+        if (imageurl) return imageurl;
+        if (imageid) {
+          return `data:${mimetype};base64, ${data}`;
+        }
+      }
     },
 
     Mutation: {
