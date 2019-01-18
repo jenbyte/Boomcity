@@ -74,7 +74,7 @@ module.exports = postgres => {
        */
 
       const findUserQuery = {
-        text: 'SELECT id, email, name AS fullname FROM users WHERE id = $1', // @DONE: Basic queries
+        text: 'SELECT id, email, name AS fullname FROM users WHERE id = $1',
         values: [id]
       };
       /**
@@ -90,7 +90,7 @@ module.exports = postgres => {
         if (!user) {
           throw 'There is no user with matching id';
         } else {
-          return user;
+          return user.rows;
         }
       } catch (e) {
         console.log(e);

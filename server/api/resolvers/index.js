@@ -126,7 +126,7 @@ module.exports = app => {
         }
       },
       async tags(item, args, { pgResource }) {
-        // @TODO: Replace this mock return statement with the correct tags for the queried Item from Postgres
+        // @DONE: Replace this mock return statement with the correct tags for the queried Item from Postgres
         try {
           const itemTags = await pgResource.getTagsForItem(item.id);
           console.log(itemTags);
@@ -135,13 +135,18 @@ module.exports = app => {
           throw new ApolloError(e);
         }
       },
-      async borrower() {
+      async borrower(item, args, { pgResource }) {
         /**
          * @TODO: Replace this mock return statement with the correct user from Postgres
          * or null in the case where the item has not been borrowed.
          */
-        return null;
-        // -------------------------------
+        try {
+          const itemBorrower = await pgResource.getUserById(item.borrowerid);
+          console.log(itemBorrower);
+          return itemBorrower;
+        } catch (e) {
+          throw new ApolloError(e);
+        }
       },
       async imageurl({ imageurl, imageid, mimetype, data }) {
         if (imageurl) return imageurl;
