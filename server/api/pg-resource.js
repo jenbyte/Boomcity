@@ -53,16 +53,10 @@ module.exports = postgres => {
       }
     },
     async getUserById(id) {
-      /**
-       *  @TODO: Handling Server Errors
+      /** @TODO: Handling Server Errors
        *
        *  Inside of our resource methods we get to determine when and how errors are returned
        *  to our resolvers using try / catch / throw semantics.
-       *
-       *  Ideally, the errors that we'll throw from our resource should be able to be used by the client
-       *  to display user feedback. This means we'll be catching errors and throwing new ones.
-       *
-       *  Errors thrown from our resource will be captured and returned from our resolvers.
        *
        *  This will be the basic logic for this resource method:
        *  1) Query for the user using the given id. If no user is found throw an error.
@@ -77,6 +71,7 @@ module.exports = postgres => {
         text: 'SELECT id, email, name AS fullname FROM users WHERE id = $1',
         values: [id]
       };
+
       /**
        *  Refactor the following code using the error handling logic described above.
        *  When you're done here, ensure all of the resource methods in this file
@@ -96,8 +91,8 @@ module.exports = postgres => {
         console.log(e);
         throw 'Unable to find user by id';
       }
-      // -------------------------------
     },
+
     async getItems(idToOmit) {
       const query = {
         /**
@@ -120,7 +115,7 @@ module.exports = postgres => {
 
         return items.rows;
       } catch (e) {
-        throw 'Unable to retrieve list of all items';
+        throw 'Unable to retrieve list of items';
       }
     },
     async getItemsForUser(id) {
