@@ -21,8 +21,7 @@ module.exports = postgres => {
   return {
     async createUser({ fullname, email, password }) {
       const newUserInsert = {
-        text:
-          'INSERT INTO users(fullname, email, password) VALUES($1, $2, $3) RETURNING *', // @DONE: Authentication - Server
+        text: 'INSERT INTO users(fullname, email, password) VALUES($1, $2, $3)', // @DONE: Authentication - Server
         values: [fullname, email, password]
       };
       try {
@@ -68,7 +67,7 @@ module.exports = postgres => {
        */
 
       const findUserQuery = {
-        text: 'SELECT id, email, name AS fullname FROM users WHERE id = $1',
+        text: 'SELECT fullname, id, email FROM users WHERE id = $1',
         values: [id]
       };
 
@@ -85,7 +84,7 @@ module.exports = postgres => {
         if (!user) {
           throw 'There is no user with matching id';
         } else {
-          return user.rows;
+          return user.rows[0];
         }
       } catch (e) {
         console.log(e);
@@ -94,7 +93,7 @@ module.exports = postgres => {
     },
 
     async getItems(idToOmit) {
-      const query = {
+      const query = await postgres.query({
         /**
          *  @TODO: Advanced queries
          *
@@ -108,15 +107,8 @@ module.exports = postgres => {
 
         text: `SELECT * FROM items ${idToOmit ? 'WHERE ownerid != $1' : ''}`,
         values: idToOmit ? [idToOmit] : []
-      };
-      try {
-        const items = await postgres.query(query);
-        console.log(`query is : ${query}`);
-
-        return items.rows;
-      } catch (e) {
-        throw 'Unable to retrieve list of items';
-      }
+      });
+      return query.row;
     },
     async getItemsForUser(id) {
       try {
@@ -125,9 +117,10 @@ module.exports = postgres => {
            *  @TODO: Advanced queries
            *  Get all Items. Hint: You'll need to use a LEFT INNER JOIN among others
            */
-          text: `SELECT * FROM items WHERE ownerid = Value($1) AND borrowerid is null`,
+          text: `SELECT * FROM items WHERE ownerid = $1 AND (borrowerid = null)`,
           values: [id]
         });
+
         return items.rows;
       } catch (e) {
         throw 'Error getting items for the user id';
@@ -139,24 +132,23 @@ module.exports = postgres => {
          *  @TODO: Advanced queries
          *  Get all Items. Hint: You'll need to use a LEFT INNER JOIN among others
          */
-        text: `SELECT * FROM items WHERE borrowerid =value($1)`,
+        text: `SELECT * FROM items WHERE borrowerid = $1`,
         values: [id]
       });
       return items.rows;
     },
     async getTags() {
       const tags = await postgres.query({
-        text: `SELECT id, name AS title FROM tags`
+        text: `SELECT id, title FROM tags`
       });
       // console.log(tags.rows);
       return tags.rows;
     },
     async getTagsForItem(id) {
       const tagsQuery = {
-        text: `SELECT id, name AS title FROM tags WHERE id IN (SELECT tagid FROM itemtags WHERE itemid = $1)`, // @DONE: Advanced queries
+        text: `SELECT id, title FROM tags WHERE id IN (SELECT tagid FROM itemtags WHERE itemid = $1)`, // @DONE: Advanced queries
         values: [id]
       };
-
       const tags = await postgres.query(tagsQuery);
       return tags.rows;
     },
@@ -202,13 +194,14 @@ module.exports = postgres => {
                 const { title, description, tags } = item;
 
                 // Generate new Item query
-                // @TODO
-                // -------------------------------
+                const newItemQuery = {
+                  text:
+                    'INSERT INTO items(title, description, ownerid) VALUES($1, $2, $3) RETURNING *',
+                  values: [title, description, user.id]
+                };
 
                 // Insert new Item
-                // @TODO
-                // -------------------------------
-
+                const insertNewItem = await postgres.query(newItemQuery);
                 const imageUploadQuery = {
                   text:
                     'INSERT INTO uploads (itemid, filename, mimetype, encoding, data) VALUES ($1, $2, $3, $4, $5) RETURNING *',
@@ -234,8 +227,14 @@ module.exports = postgres => {
                 // -------------------------------
 
                 // Generate tag relationships query (use the'tagsQueryString' helper function provided)
-                // @TODO
-                // -------------------------------
+                const tagRelationshipQuery = {
+                  text: `INSERT INTO itemtags(tagid, itemid,) VALUES ${tagsQueryString(
+                    tags,
+                    itemid,
+                    ''
+                  )} `,
+                  values: [tagid, itemid]
+                };
 
                 // Insert tags
                 // @TODO

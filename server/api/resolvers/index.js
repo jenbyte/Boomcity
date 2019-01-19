@@ -1,5 +1,4 @@
-/**
- *  @TODO: Handling Server Errors
+/** @TODO: Handling Server Errors
  *
  *  Once you've completed your pg-resource.js methods and handled errors
  *  use the ApolloError constructor to capture and return errors from your resolvers.
@@ -39,7 +38,7 @@ module.exports = app => {
       async user(parent, { id }, { pgResource }, info) {
         try {
           const user = await pgResource.getUserById(id);
-          return user.rows[0];
+          return user;
         } catch (e) {
           throw new ApolloError(e);
         }
@@ -55,7 +54,7 @@ module.exports = app => {
       async tags(parent, args, { pgResource }, info) {
         // @TODO: Replace this mock return statement with the correct tags from Postgres
         try {
-          const tags = await pgResource.getTags(args);
+          const tags = await pgResource.getTags();
           return tags;
         } catch (e) {
           throw new ApolloError(e);
@@ -84,7 +83,7 @@ module.exports = app => {
       },
       async borrowed(user, _args, { pgResource }) {
         try {
-          const borrowedItems = await pgResource.getBorrowedItemsForUser(
+          const userBorrowed = await pgResource.getBorrowedItemsForUser(
             user.id
           );
           return borrowedItems;
@@ -106,7 +105,7 @@ module.exports = app => {
       async itemowner(item, args, { pgResource }) {
         try {
           const itemOwner = await pgResource.getUserById(item.ownerid);
-          // console.log(item.ownerid);
+          console.log(itemOwner);
           return itemOwner;
         } catch (e) {
           throw new ApolloError(e);
@@ -120,7 +119,7 @@ module.exports = app => {
         // @DONE: Replace this mock return statement with the correct tags for the queried Item from Postgres
         try {
           const itemTags = await pgResource.getTagsForItem(item.id);
-          console.log(itemTags);
+          // console.log(itemTags);
           return itemTags;
         } catch (e) {
           throw new ApolloError(e);
@@ -133,7 +132,7 @@ module.exports = app => {
          */
         try {
           const itemBorrower = await pgResource.getUserById(item.borrowerid);
-          console.log(itemBorrower);
+          // console.log(itemBorrower);
           return itemBorrower;
         } catch (e) {
           throw new ApolloError(e);
