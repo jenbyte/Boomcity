@@ -14,7 +14,7 @@
     "start:dev": "NODE_ENV=development nodemon main.js "
   },
   "keywords": [],
-  "author": "",
+  "author": "Jennifer Yiu",
   "license": "ISC",
   "dependencies": {
     "apollo-server": "^2.0.0-rc.0",

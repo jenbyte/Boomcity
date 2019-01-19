@@ -43,7 +43,7 @@ module.exports = app => {
           throw new ApolloError(e);
         }
       },
-      async items(parent, { filter }, { pgResource }, info) {
+      async items(parent, { filter }, { pgResource }) {
         try {
           const items = await pgResource.getItems(filter);
           return items;
@@ -51,7 +51,7 @@ module.exports = app => {
           throw new ApolloError(e);
         }
       },
-      async tags(parent, args, { pgResource }, info) {
+      async tags(parent, args, { pgResource }) {
         // @TODO: Replace this mock return statement with the correct tags from Postgres
         try {
           const tags = await pgResource.getTags();
@@ -94,8 +94,7 @@ module.exports = app => {
     },
 
     Item: {
-      /*@TODO: Advanced resolvers
-       *
+      /* @TODO: Advanced resolvers
        *  The Item GraphQL type has two fields that are not present in the
        *  Items table in Postgres: itemowner, tags and borrower.
        *
@@ -126,6 +125,7 @@ module.exports = app => {
         }
       },
       async borrower(item, args, { pgResource }) {
+        if (!item.borrowerid) return null;
         /**
          * @TODO: Replace this mock return statement with the correct user from Postgres
          * or null in the case where the item has not been borrowed.
@@ -163,7 +163,7 @@ module.exports = app => {
          *  Look at user resolver for example of what destructuring should look like.
          */
 
-        image = await image;
+        const image = await image;
         const user = await jwt.decode(context.token, app.get('JWT_SECRET'));
         const newItem = await context.pgResource.saveNewItem({
           item: args.item,

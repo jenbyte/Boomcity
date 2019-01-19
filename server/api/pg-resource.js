@@ -21,7 +21,7 @@ module.exports = postgres => {
   return {
     async createUser({ fullname, email, password }) {
       const newUserInsert = {
-        text: 'INSERT INTO users(fullname, email, password) VALUES($1, $2, $3)', // @DONE: Authentication - Server
+        text: 'INSERT INTO users(fullname, email, password) VALUES($1, $2, $3)', // @TODO: Authentication - Server
         values: [fullname, email, password]
       };
       try {
@@ -40,7 +40,7 @@ module.exports = postgres => {
     },
     async getUserAndPasswordForVerification(email) {
       const findUserQuery = {
-        text: 'SELECT * FROM users WHERE email = $1', // @DONE: Authentication - Server
+        text: 'SELECT * FROM users WHERE email = $1', // @TODO: Authentication - Server
         values: [email]
       };
       try {
@@ -93,9 +93,8 @@ module.exports = postgres => {
     },
 
     async getItems(idToOmit) {
-      const query = await postgres.query({
-        /**
-         *  @TODO: Advanced queries
+      const items = await postgres.query({
+        /** @TODO: Advanced queries
          *
          *  Get all Items. If the idToOmit parameter has a value,
          *  the query should only return Items were the ownerid column
@@ -108,19 +107,17 @@ module.exports = postgres => {
         text: `SELECT * FROM items ${idToOmit ? 'WHERE ownerid != $1' : ''}`,
         values: idToOmit ? [idToOmit] : []
       });
-      return query.row;
+      return items.row;
     },
     async getItemsForUser(id) {
       try {
         const items = await postgres.query({
           /**
-           *  @TODO: Advanced queries
-           *  Get all Items. Hint: You'll need to use a LEFT INNER JOIN among others
+           *  @TODO:  Get all Items. Hint: You'll need to use a LEFT INNER JOIN among others
            */
-          text: `SELECT * FROM items WHERE ownerid = $1 AND (borrowerid = null)`,
+          text: `SELECT * FROM items WHERE ownerid = $1`,
           values: [id]
         });
-
         return items.rows;
       } catch (e) {
         throw 'Error getting items for the user id';
@@ -202,11 +199,12 @@ module.exports = postgres => {
 
                 // Insert new Item
                 const insertNewItem = await postgres.query(newItemQuery);
+
                 const imageUploadQuery = {
                   text:
                     'INSERT INTO uploads (itemid, filename, mimetype, encoding, data) VALUES ($1, $2, $3, $4, $5) RETURNING *',
                   values: [
-                    // itemid,
+                    itemid,
                     image.filename,
                     image.mimetype,
                     'base64',
@@ -229,15 +227,15 @@ module.exports = postgres => {
                 // Generate tag relationships query (use the'tagsQueryString' helper function provided)
                 const tagRelationshipQuery = {
                   text: `INSERT INTO itemtags(tagid, itemid,) VALUES ${tagsQueryString(
-                    tags,
+                    [...tags],
                     itemid,
                     ''
-                  )} `,
-                  values: [tagid, itemid]
+                  )} RETURNING *`,
+                  values: tags.map(tag => tag.id)
                 };
 
                 // Insert tags
-                // @TODO
+                const insertNewTag = await postgres.query(tagRelationshipQuery);
                 // -------------------------------
 
                 // Commit the entire transaction!
