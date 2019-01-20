@@ -1,6 +1,8 @@
 # Boomtown 🏙
 
-## Server
+This web-based application that allows users to freely lend out their items as well as borrow items from other users.
+
+## Server-side
 
 Commands must be run from the `server` directory:
 
@@ -16,78 +18,7 @@ npm install
 npm run start:dev
 ```
 
-### Tests
+## Technologies Used
 
-Just linting:
-
-```bash
-npm run lint
-```
-
-Run linting, and fix any errors:
-
-```bash
-npm run lint:fix
-```
-
-Run Jest tests:
-
-```
-npm run jest
-```
-
-Run Jest tests, and watch for changes:
-
-```bash
-npm run jest:watch
-```
-
-Run all tests:
-
-```bash
-npm run test
-```
-
-## Client
-
-Commands must be run from the `client` directory:
-
-### Installation
-
-```bash
-npm install
-```
-
-### Run
-
-```bash
-npm start
-```
-
-### Build
-
-```bash
-npm run build
-```
-
-### Tests
-
-Just linting:
-
-```bash
-npm run lint
-```
-
-Run linting, and fix any errors:
-
-```bash
-npm run lint:fix
-```
-
-Run all tests:
-
-```bash
-npm run test
-```
-
-
+- Apollo Client
+-
