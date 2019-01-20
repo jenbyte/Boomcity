@@ -118,8 +118,7 @@ module.exports = postgres => {
       return tags.rows;
     },
     async saveNewItem({ item, image, user }) {
-      /**
-       *  @TODO: Adding a New Item
+      /** @TODO: Adding a New Item
        *
        *  Adding a new Item to Posgtres is the most advanced query.
        *  It requires 3 separate INSERT statements.
