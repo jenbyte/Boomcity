@@ -1,6 +1,6 @@
 # Boomtown 🏙
 
-This web-based application that allows users to freely lend out their items as well as borrow items from other users.
+This web-based application that allows users to freely lend out their items, as well as borrow items from other users.
 
 ## Installation Instructions
 
@@ -27,5 +27,6 @@ npm run start:dev
 - Node.js
 - Postgres
 
-##License
+## License
+
 Learning materials content is copyright (c) 2019 RED Academy.
