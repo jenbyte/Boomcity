@@ -52,33 +52,11 @@ module.exports = postgres => {
       }
     },
     async getUserById(id) {
-      /** @TODO: Handling Server Errors
-       *
-       *  Inside of our resource methods we get to determine when and how errors are returned
-       *  to our resolvers using try / catch / throw semantics.
-       *
-       *  This will be the basic logic for this resource method:
-       *  1) Query for the user using the given id. If no user is found throw an error.
-       *  2) If there is an error with the query (500) throw an error.
-       *  3) If the user is found and there are no errors, return only the id, email, fullname, bio fields.
-       *     -- this is important, don't return the password!
-       *
-       *  You'll need to complete the query first before attempting this exercise.
-       */
-
       const findUserQuery = {
         text: 'SELECT fullname, id, email FROM users WHERE id = $1',
         values: [id]
       };
 
-      /**
-       *  Refactor the following code using the error handling logic described above.
-       *  When you're done here, ensure all of the resource methods in this file
-       *  include a try catch, and throw appropriate errors.
-       *
-       *  Here is an example throw statement: throw 'User was not found.'
-       *  Customize your throw statements so the message can be used by the client.
-       */
       try {
         const user = await postgres.query(findUserQuery);
         if (!user) {
@@ -94,20 +72,10 @@ module.exports = postgres => {
 
     async getItems(idToOmit) {
       const items = await postgres.query({
-        /** @TODO: Advanced queries
-         *
-         *  Get all Items. If the idToOmit parameter has a value,
-         *  the query should only return Items were the ownerid column
-         *  does not contain the 'idToOmit'
-         *
-         *  Hint: You'll need to use a conditional AND and WHERE clause
-         *  to your query text using string interpolation
-         */
-
-        text: `SELECT * FROM items ${idToOmit ? 'WHERE ownerid != $1' : ''}`,
+        text: `SELECT * FROM items ${idToOmit ? 'WHERE ownerid <> $1' : ''}`,
         values: idToOmit ? [idToOmit] : []
       });
-      return items.row;
+      return items.rows;
     },
     async getItemsForUser(id) {
       try {
@@ -138,7 +106,7 @@ module.exports = postgres => {
       const tags = await postgres.query({
         text: `SELECT id, title FROM tags`
       });
-      // console.log(tags.rows);
+
       return tags.rows;
     },
     async getTagsForItem(id) {

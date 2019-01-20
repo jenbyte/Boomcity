@@ -1,11 +1,3 @@
-/** @TODO: Handling Server Errors
- *
- *  Once you've completed your pg-resource.js methods and handled errors
- *  use the ApolloError constructor to capture and return errors from your resolvers.
-
- *  The user resolver has been completed as an example of what you'll need to do.
- *  Finish of the rest of the resolvers when you're ready.
- */
 const { ApolloError } = require('apollo-server-express');
 
 // @TODO: Uncomment these lines later when we add auth
@@ -52,7 +44,6 @@ module.exports = app => {
         }
       },
       async tags(parent, args, { pgResource }) {
-        // @TODO: Replace this mock return statement with the correct tags from Postgres
         try {
           const tags = await pgResource.getTags();
           return tags;
@@ -63,16 +54,6 @@ module.exports = app => {
     },
 
     User: {
-      /**
-       *  @TODO: Advanced resolvers
-       *
-       *  The User GraphQL type has two fields that are not present in the
-       *  user table in Postgres: items and borrowed.
-       *
-       *  According to our GraphQL schema, these fields should return a list of
-       *  Items (GraphQL type) the user has lent (items) and borrowed (borrowed).
-       *
-       */
       async items(user, args, { pgResource }) {
         try {
           const userItems = await pgResource.getItemsForUser(user.id);
@@ -94,13 +75,6 @@ module.exports = app => {
     },
 
     Item: {
-      /* @TODO: Advanced resolvers
-       *  The Item GraphQL type has two fields that are not present in the
-       *  Items table in Postgres: itemowner, tags and borrower.
-       *
-       * According to our GraphQL schema, the itemowner and borrower should return
-       * a User (GraphQL type) and tags should return a list of Tags (GraphQL type)
-       */
       async itemowner(item, args, { pgResource }) {
         try {
           const itemOwner = await pgResource.getUserById(item.ownerid);
@@ -108,17 +82,11 @@ module.exports = app => {
           return itemOwner;
         } catch (e) {
           throw new ApolloError(e);
-          // id: 29,
-          // fullname: 'Mock user',
-          // email: 'mock@user.com',
-          // bio: 'Mock user. Remove me.'
         }
       },
       async tags(item, args, { pgResource }) {
-        // @DONE: Replace this mock return statement with the correct tags for the queried Item from Postgres
         try {
           const itemTags = await pgResource.getTagsForItem(item.id);
-          // console.log(itemTags);
           return itemTags;
         } catch (e) {
           throw new ApolloError(e);
@@ -126,13 +94,8 @@ module.exports = app => {
       },
       async borrower(item, args, { pgResource }) {
         if (!item.borrowerid) return null;
-        /**
-         * @TODO: Replace this mock return statement with the correct user from Postgres
-         * or null in the case where the item has not been borrowed.
-         */
         try {
           const itemBorrower = await pgResource.getUserById(item.borrowerid);
-          // console.log(itemBorrower);
           return itemBorrower;
         } catch (e) {
           throw new ApolloError(e);
@@ -152,17 +115,6 @@ module.exports = app => {
       // -------------------------------
 
       async addItem(parent, { filter }, { pgResource }, info) {
-        /* @TODO: Destructuring
-         *
-         *  The 'args' and 'context' parameters of this resolver can be destructured
-         *  to make things more readable and avoid duplication.
-         *
-         *  When finished with this resolver, destructure all necessary
-         *  parameters in all of your resolver functions.
-         *
-         *  Look at user resolver for example of what destructuring should look like.
-         */
-
         const image = await image;
         const user = await jwt.decode(context.token, app.get('JWT_SECRET'));
         const newItem = await context.pgResource.saveNewItem({
