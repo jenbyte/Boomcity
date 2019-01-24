@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Home from './Home';
+// import Home from './Home';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
 import gql from 'graphql-tag';

@@ -7,8 +7,8 @@ const { UploadScalar, DateScalar } = require('../custom-types');
 
 module.exports = app => {
   return {
-    // Upload: UploadScalar,
-    // Date: DateScalar,
+    Upload: UploadScalar,
+    Date: DateScalar,
 
     Query: {
       viewer() {
@@ -87,13 +87,13 @@ module.exports = app => {
         } catch (e) {
           throw new ApolloError(e);
         }
-      },
-      async imageurl({ imageurl, imageid, mimetype, data }) {
-        if (imageurl) return imageurl;
-        if (imageid) {
-          return `data:${mimetype};base64, ${data}`;
-        }
       }
+      // async imageurl({ imageurl, imageid, mimetype, data }) {
+      //   if (imageurl) return imageurl;
+      //   if (imageid) {
+      //     return `data:${mimetype};base64, ${data}`;
+      //   }
+      // }
     },
 
     Mutation: {
@@ -101,12 +101,12 @@ module.exports = app => {
       // ...authMutations(app),
       // -------------------------------
 
-      async addItem(parent, args, { filter }, { pgResource }, info) {
-        const image = await image;
-        const user = await jwt.decode(context.token, app.get('JWT_SECRET'));
+      async addItem(parent, args, { filter }, { pgResource }) {
+        // const image = await image;
+        // const user = await jwt.decode(context.token, app.get('JWT_SECRET'));
         const newItem = await context.pgResource.saveNewItem({
           item: args.item,
-          image: args.image,
+          // image: args.image,
           user
         });
         return newItem;
