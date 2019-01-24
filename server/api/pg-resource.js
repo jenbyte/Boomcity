@@ -21,7 +21,8 @@ module.exports = postgres => {
   return {
     async createUser({ fullname, email, password }) {
       const newUserInsert = {
-        text: 'INSERT INTO users(fullname, email, password) VALUES($1, $2, $3)', // @TODO: Authentication - Server
+        text:
+          'INSERT INTO users(fullname, email, password) VALUES($1, $2, $3) RETURNING *', // @TODO: Authentication - Server
         values: [fullname, email, password]
       };
       try {
@@ -56,16 +57,11 @@ module.exports = postgres => {
         text: 'SELECT fullname, id, email FROM users WHERE id = $1',
         values: [id]
       };
-
       try {
         const user = await postgres.query(findUserQuery);
-        if (!user) {
-          throw 'There is no user with matching id';
-        } else {
-          return user.rows[0];
-        }
+        if (!user) throw 'There is no user with matching id';
+        return user.rows[0];
       } catch (e) {
-        console.log(e);
         throw 'Unable to find user by id';
       }
     },
@@ -78,18 +74,14 @@ module.exports = postgres => {
       return items.rows;
     },
     async getItemsForUser(id) {
-      try {
-        const items = await postgres.query({
-          /**
-           *  @TODO:  Get all Items. Hint: You'll need to use a LEFT INNER JOIN among others
-           */
-          text: `SELECT * FROM items WHERE ownerid = $1`,
-          values: [id]
-        });
-        return items.rows;
-      } catch (e) {
-        throw 'Error getting items for the user id';
-      }
+      const items = await postgres.query({
+        /**
+         *  @TODO:  Get all Items. Hint: You'll need to use a LEFT INNER JOIN among others
+         */
+        text: `SELECT * FROM items WHERE ownerid = $1`,
+        values: [id]
+      });
+      return items.rows;
     },
     async getBorrowedItemsForUser(id) {
       const items = await postgres.query({
@@ -104,20 +96,21 @@ module.exports = postgres => {
     },
     async getTags() {
       const tags = await postgres.query({
-        text: `SELECT id, title FROM tags`
+        text: `SELECT * FROM tags`
       });
-
       return tags.rows;
     },
     async getTagsForItem(id) {
       const tagsQuery = {
-        text: `SELECT id, title FROM tags WHERE id IN (SELECT tagid FROM itemtags WHERE itemid = $1)`, // @DONE: Advanced queries
+        text: `SELECT * FROM tags WHERE id IN (SELECT tagid FROM itemtags WHERE itemid = $1)`, // @DONE: Advanced queries
         values: [id]
       };
       const tags = await postgres.query(tagsQuery);
       return tags.rows;
     },
-    async saveNewItem({ item, image, user }) {
+    async saveNewItem({ item, user }) {
+      // add image in parameter
+
       /** @TODO: Adding a New Item
        *
        *  Adding a new Item to Posgtres is the most advanced query.
@@ -144,80 +137,79 @@ module.exports = postgres => {
         postgres.connect((err, client, done) => {
           try {
             // Begin postgres transaction
-            client.query('BEGIN', err => {
+            client.query('BEGIN', async err => {
               // Convert image (file stream) to Base64
-              const imageStream = image.stream.pipe(strs('base64'));
+              // const imageStream = image.stream.pipe(strs('base64'));
 
-              let base64Str = '';
-              imageStream.on('data', data => {
-                base64Str += data;
-              });
+              // let base64Str = '';
+              // imageStream.on('data', data => {
+              //   base64Str += data;
+              // });
 
-              imageStream.on('end', async () => {
-                // Image has been converted, begin saving things
-                const { title, description, tags } = item;
+              // imageStream.on('end', async () => {
+              // Image has been converted, begin saving things
+              const { title, description, tags } = item;
 
-                // Generate new Item query
-                const newItemQuery = {
-                  text:
-                    'INSERT INTO items(title, description, ownerid) VALUES($1, $2, $3) RETURNING *',
-                  values: [title, description, user.id]
-                };
+              // Generate new Item query
+              const newItemQuery = {
+                text:
+                  'INSERT INTO items (title, description, ownerid) VALUES ($1, $2, $3) RETURNING *',
+                values: [title, description, user.id]
+              };
 
-                // Insert new Item
-                const insertNewItem = await postgres.query(newItemQuery);
+              // Insert new Item
+              const insertNewItem = await postgres.query(newItemQuery);
+              // const itemId = newItem.rows[0].id;
 
-                const imageUploadQuery = {
-                  text:
-                    'INSERT INTO uploads (itemid, filename, mimetype, encoding, data) VALUES ($1, $2, $3, $4, $5) RETURNING *',
-                  values: [
-                    itemid,
-                    image.filename,
-                    image.mimetype,
-                    'base64',
-                    base64Str
-                  ]
-                };
+              // const imageUploadQuery = {
+              //   text:
+              //     'INSERT INTO uploads (itemid, filename, mimetype, encoding, data) VALUES ($1, $2, $3, $4, $5) RETURNING *',
+              //   values: [
+              // itemid,
+              // image.filename,
+              // image.mimetype,
+              // 'base64',
+              // base64Str
+              //   ]
+              // };
 
-                // Upload image
-                const uploadedImage = await client.query(imageUploadQuery);
-                const imageid = uploadedImage.rows[0].id;
+              // Upload image
+              // const uploadedImage = await client.query(imageUploadQuery);
+              // const imageid = uploadedImage.rows[0].id;
 
-                // Generate image relation query
-                // @TODO
-                // -------------------------------
+              // Generate image relation query
+              // @TODO
+              // -------------------------------
 
-                // Insert image
-                // @TODO
-                // -------------------------------
+              // Insert image
+              // @TODO
+              // -------------------------------
 
-                // Generate tag relationships query (use the'tagsQueryString' helper function provided)
-                const tagRelationshipQuery = {
-                  text: `INSERT INTO itemtags(tagid, itemid,) VALUES ${tagsQueryString(
-                    [...tags],
-                    itemid,
-                    ''
-                  )} RETURNING *`,
-                  values: tags.map(tag => tag.id)
-                };
+              // Generate tag relationships query (use the'tagsQueryString' helper function provided)
+              const tagRelationshipQuery = {
+                text: `INSERT INTO itemtags (tagid, itemid) VALUES ${tagsQueryString(
+                  [...tags],
+                  insertNewItem.rows[0].id,
+                  ''
+                )}`,
+                values: tags.map(tag => tag.id)
+              };
 
-                // Insert tags
-                const insertNewTag = await postgres.query(tagRelationshipQuery);
-                // -------------------------------
+              // Insert tags
+              const insertNewTag = await postgres.query(tagRelationshipQuery);
+              // -------------------------------
 
-                // Commit the entire transaction!
-                client.query('COMMIT', err => {
-                  if (err) {
-                    throw err;
-                  }
-                  // release the client back to the pool
-                  done();
-                  // Uncomment this resolve statement when you're ready!
-                  // resolve(newItem.rows[0])
-                  // -------------------------------
-                });
+              // Commit the entire transaction!
+              client.query('COMMIT', err => {
+                if (err) {
+                  throw err;
+                }
+                // release the client back to the pool
+                done();
+                resolve(insertNewItem.rows[0]);
               });
             });
+            // });
           } catch (e) {
             // Something went wrong
             client.query('ROLLBACK', err => {

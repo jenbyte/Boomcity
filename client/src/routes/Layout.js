@@ -10,7 +10,7 @@ import Share from '../pages/Share';
 export default ({ match }) => (
   <Fragment>
     {/* @TODO: Add your menu component here */}
-    <nav />
+
     <Switch>
       {/**
        * @TODO: Define routes here for: /items, /profile, /profile/:userid, and /share

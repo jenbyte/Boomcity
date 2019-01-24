@@ -30,8 +30,8 @@ module.exports = ({ app, pgResource }) => {
   const apolloServer = new ApolloServer({
     context: ({ req }) => {
       // @TODO: Uncomment this later when we add auth (to be added to Apollo's context)
-      // const tokenName = app.get("JWT_COOKIE_NAME")
-      // const token = req ? req.cookies[tokenName] : undefined
+      // const tokenName = app.get('JWT_COOKIE_NAME');
+      // const token = req ? req.cookies[tokenName] : undefined;
       // -------------------------------
 
       return {
@@ -57,7 +57,6 @@ module.exports = ({ app, pgResource }) => {
   apolloServer.applyMiddleware({
     app,
     uploads: true,
-    // @TODO: Add the CORS_CONFIG from your application configuration
     cors: app.get('CORS_CONFIG'),
     // -------------------------------
     uploads: apolloUploadExpress({
