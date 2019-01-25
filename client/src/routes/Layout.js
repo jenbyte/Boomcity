@@ -5,7 +5,7 @@ import Home from '../pages/Home';
 import Items from '../pages/Items';
 import Profile from '../pages/Profile';
 import Share from '../pages/Share';
-import MenuBar from '../components/MenuBar';
+import MenuBar from '../components/Menu/MenuBar';
 import Typography from '@material-ui/core/Typography';
 
 export default ({ match }) => (

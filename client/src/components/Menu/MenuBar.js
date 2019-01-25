@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 // import MenuIcon from '@material-ui/icons/Menu';
-import logo from '../images/boomtown.svg';
+import logo from '../../images/boomtown.svg';
 import MoreVert from '@material-ui/icons/MoreVert';
 import AddCircle from '@material-ui/icons/AddCircle';
 
@@ -40,7 +40,7 @@ function MenuBar(props) {
           </IconButton>
           <Typography variant="h6" color="inherit" className={classes.grow} />
           <Button color="inherit">
-            <AddCircle className={classes.menuButton} />Share something
+            <AddCircle className={classes.menuButton} href="" />Share something
           </Button>
           <IconButton color="inherit">
             <MoreVert />

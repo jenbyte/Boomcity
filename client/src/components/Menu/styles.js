@@ -2,12 +2,12 @@ const styles = theme => ({
   root: {
     flexGrow: 1
   },
-  card: {
-    height: 140,
-    width: 100
+  grow: {
+    flexGrow: 1
   },
-  control: {
-    padding: theme.spacing.unit * 2
+  menuButton: {
+    marginLeft: -12,
+    marginRight: 20
   }
 });
 
