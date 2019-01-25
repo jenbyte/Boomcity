@@ -1,14 +1,18 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import ItemsGrid from '../../components/ItemsGrid';
 
-const Items = ({ classes }) => {
+const Items = ({ classes, items }) => {
   return (
-    <div>
-      <p>
-        This is the items page located at <code>/items</code>.
-      </p>
-    </div>
+    <Fragment>
+      {items.map(i => (
+        <li>
+          {i.title}
+          <p>{i.description}</p>
+        </li>
+      ))}
+    </Fragment>
   );
 };
 

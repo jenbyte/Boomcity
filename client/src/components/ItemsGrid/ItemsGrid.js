@@ -21,7 +21,7 @@ const styles = theme => ({
   }
 });
 
-const ItemsGrid = () => {
+const ItemsGrid = ({ classes, spacing }) => {
   return (
     <Grid container className={classes.root} spacing={16}>
       <Grid item xs={12}>
@@ -33,13 +33,14 @@ const ItemsGrid = () => {
         >
           {[0, 1, 2].map(value => (
             <Grid key={value} item>
-              <Card className={classes.paper} />
+              <Card className={classes.card} />
             </Grid>
           ))}
         </Grid>
       </Grid>
       <Grid item xs={12}>
         <Card className={classes.control}>
+          {console.log(classes.card)}
           <Grid container>
             <Grid item>
               <FormLabel>spacing</FormLabel>

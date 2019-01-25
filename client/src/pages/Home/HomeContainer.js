@@ -16,7 +16,6 @@ import styles from './styles';
 
 class HomeContainer extends Component {
   render() {
-    // return <Query query={GET_TAGS} />;
     return <Home classes={this.props.classes} />;
   }
 }
