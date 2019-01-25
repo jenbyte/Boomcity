@@ -1,23 +1,23 @@
 import React, { Component } from 'react';
-// import Home from './Home';
+import Home from './Home';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
-import gql from 'graphql-tag';
-import { Query } from 'react-apollo';
+// import gql from 'graphql-tag';
+// import { Query } from 'react-apollo';
 
-const GET_TAGS = gql`
-  {
-    tags {
-      id
-      title
-    }
-  }
-`;
+// const GET_TAGS = gql`
+//   {
+//     tags {
+//       id
+//       title
+//     }
+//   }
+// `;
 
 class HomeContainer extends Component {
   render() {
-    return <Query query={GET_TAGS} />;
-    // <Home classes={this.props.classes} />;
+    // return <Query query={GET_TAGS} />;
+    return <Home classes={this.props.classes} />;
   }
 }
 // return (
