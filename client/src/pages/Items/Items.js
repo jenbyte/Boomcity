@@ -7,24 +7,22 @@ import Button from '@material-ui/core/Button';
 
 const Items = ({ classes, items }) => {
   return (
-    <Grid className={classes.grid} container spacing={8}>
-      <Grid container className={classes.demo} justify="center">
-        {items.map(item => {
-          return (
-            <Grid item xs={12} sm={6} md={4} className={classes.gridItem}>
-              <Card className={classes.card}>
-                <Typography>
-                  <h2>{item.title}</h2>
-                  <figure>{item.imageurl}</figure>
-                  <p>{item.description}</p>
-                  <p>{item.tags.map(tag => tag.title)}</p>
-                </Typography>
-                <Button>Borrow</Button>
-              </Card>
-            </Grid>
-          );
-        })}
-      </Grid>
+    <Grid className={classes.grid} container spacing={24}>
+      {items.map(item => {
+        return (
+          <Grid item xs={12} sm={6} md={4} className={classes.gridItem}>
+            <Card className={classes.card}>
+              <Typography>
+                <h2>{item.title}</h2>
+                <figure>{item.imageurl}</figure>
+                <p>{item.description}</p>
+                <p>{item.tags.map(tag => tag.title)}</p>
+              </Typography>
+              <Button>Borrow</Button>
+            </Card>
+          </Grid>
+        );
+      })}
     </Grid>
   );
 };

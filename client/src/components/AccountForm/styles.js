@@ -16,6 +16,7 @@ const styles = theme => ({
   },
   accountForm: {
     width: '100%',
+
     [theme.breakpoints.up('sm')]: {
       width: '400px'
     }

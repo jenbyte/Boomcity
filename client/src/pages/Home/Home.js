@@ -18,10 +18,10 @@ const Home = ({ classes }) => {
           gutterBottom
           className={classes.subheading}
         >
-          Boomtown
+          Boomcity
         </Typography>
         <Typography variant="display4" className={classes.headline}>
-          Share. Borrow. Prosper.
+          Share. Borrow. Grow.
         </Typography>
       </Grid>
       <Grid item xs={12} sm={12} md={6}>

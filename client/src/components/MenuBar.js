@@ -6,9 +6,10 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
+// import MenuIcon from '@material-ui/icons/Menu';
 import logo from '../images/boomtown.svg';
 import MoreVert from '@material-ui/icons/MoreVert';
+import AddCircle from '@material-ui/icons/AddCircle';
 
 const styles = {
   root: {
@@ -38,8 +39,12 @@ function MenuBar(props) {
             <img className="img-responsive" src={logo} alt="logo" width="40" />
           </IconButton>
           <Typography variant="h6" color="inherit" className={classes.grow} />
-          <Button color="inherit">Share something</Button>
-          <MoreVert />
+          <Button color="inherit">
+            <AddCircle className={classes.menuButton} />Share something
+          </Button>
+          <IconButton color="inherit">
+            <MoreVert />
+          </IconButton>
         </Toolbar>
       </AppBar>
     </div>
