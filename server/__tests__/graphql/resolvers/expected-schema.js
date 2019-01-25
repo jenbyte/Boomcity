@@ -1,7 +1,7 @@
 module.exports = `
 
-  scalar Date
-  scalar Upload
+   scalar Date
+   scalar Upload
 
   enum Role {
     VIEWER  

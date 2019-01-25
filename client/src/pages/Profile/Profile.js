@@ -1,11 +1,9 @@
 import React from 'react';
 
-const Profile = ({ classes }) => {
+const Profile = ({ classes, users }) => {
   return (
     <div>
-      <p>
-        This is the profile page located at <code>/profile/:userId</code>.
-      </p>
+      <p>{users}</p>
     </div>
   );
 };

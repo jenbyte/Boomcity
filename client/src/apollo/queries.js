@@ -7,19 +7,19 @@ const ItemFields = gql`
   fragment ItemFields on Item {
     id
     title
-    # imageurl
+    imageurl
     description
-    # created
-    # tags {
-    # id
-    # title
-    # }
-    # itemowner {
-    # id
-    # fullname
-    # email
-    # bio
-    # }
+    created
+    tags {
+      id
+      title
+    }
+    itemowner {
+      id
+      fullname
+      email
+      bio
+    }
     # borrower {
     # id
     # fullname
@@ -34,15 +34,12 @@ export const ITEM_QUERY = gql`
     item(id: $id) {
       ...ItemFields
     }
-
-    # @DONE: Query an item by its id and return the ItemFields fragment.
   }
   ${ItemFields}
 `;
 
 export const ALL_ITEMS_QUERY = gql`
   query items($filter: ID) {
-    # @DONE: Query items (optionally by tag id) and return the ItemFields fragment.
     items(filter: $filter) {
       ...ItemFields
     }
@@ -63,8 +60,6 @@ export const ALL_USER_ITEMS_QUERY = gql`
         ...ItemFields
       }
     }
-    # @DONE: Query the bio, email, fullname, items, and borrowed for the user by id
-    # Use the ItemFields fragment for the items and borrowed fields.
   }
   ${ItemFields}
 `;
@@ -85,8 +80,8 @@ export const ADD_ITEM_MUTATION = gql`
       title
       description
       tags {
-        title
         id
+        title
       }
     }
 

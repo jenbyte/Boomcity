@@ -54,7 +54,7 @@ module.exports = app => {
           const userBorrowed = await pgResource.getBorrowedItemsForUser(
             user.id
           );
-          return borrowedItems;
+          return userBorrowed;
         } catch (e) {
           throw new ApolloError(e);
         }

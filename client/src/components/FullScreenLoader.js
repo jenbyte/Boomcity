@@ -1,9 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class FullScreenLoader extends Component {
-  render() {
-    return <div>Loading...</div>;
-  }
-}
+const FullScreenLoader = () => <div>Loading...</div>;
 
 export default FullScreenLoader;
