@@ -29,7 +29,7 @@ class ShareItemForm extends Component {
     const { classes, tags } = this.props;
     console.log('Tags:', this.props.tags);
     return (
-      <div className={classes.container}>
+      <Fragment className={classes.container}>
         <Typography>
           <h1>Share. Borrow. Grow.</h1>
         </Typography>
@@ -39,16 +39,18 @@ class ShareItemForm extends Component {
           render={({ handleSubmit }) => (
             <form onSubmit={handleSubmit}>
               <Button className={classes.imageButton}>select an image</Button>
+
               <Field
                 name="name"
                 render={({ input, meta }) => (
-                  <div>
+                  <div className="field">
                     <TextField
+                      multiline
                       className={classes.textField}
-                      id="filled-name"
-                      inputProps={input}
+                      id="standard-textarea"
                       label="Name your item"
-                      id="margin-none"
+                      margin="normal"
+                      placeholder=""
                       // onChange={handleChange('name')}
                       // value={values.name}
                     />
@@ -65,6 +67,7 @@ class ShareItemForm extends Component {
                   </div>
                 )}
               />
+
               <Field
                 name="description"
                 render={({ input, meta }) => (
@@ -72,31 +75,26 @@ class ShareItemForm extends Component {
                     <TextField
                       className={classes.textField}
                       id="filled-description"
-                      inputProps={input}
-                      label="Describe your item"
+                      placeholder="Describe your item"
+                      multiline
                       rows="4"
                     />
-                    {meta.touched &&
-                      meta.invalid && (
-                        <div
-                          className="error"
-                          style={{ color: 'red', fontsize: '10px' }}
-                        >
-                          {meta.error}
-                        </div>
-                      )}
                   </div>
                 )}
               />
-              {console.log({ tags })}
+
               <Field
                 name="tags"
                 render={({ input, meta }) => (
-                  <FormControl>
-                    <InputLabel htmlFor="select-multiple-checkbox">
+                  <FormControl className={classes.fromControl}>
+                    <InputLabel
+                      className={classes.dropDown}
+                      htmlFor="select-multiple-checkbox"
+                    >
                       Add some tags
                     </InputLabel>
                     <Select
+                      className={classes.menu}
                       multiple
                       // open={open}
                       // onClose={handleClose}
@@ -119,11 +117,11 @@ class ShareItemForm extends Component {
                   </FormControl>
                 )}
               />
-              <Button type="submit">Share</Button>
             </form>
           )}
         />
-      </div>
+        <Button type="submit">Share</Button>
+      </Fragment>
     );
   }
 }

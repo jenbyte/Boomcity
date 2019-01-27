@@ -18,6 +18,9 @@ const styles = theme => ({
     margin: theme.spacing.unit,
     minWidth: 120
   },
+  dropDown: {
+    width: 250
+  },
   imageButton: {
     background: theme.palette.primary.main,
     width: 200
