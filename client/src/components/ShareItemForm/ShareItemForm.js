@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import TextField from '@material-ui/core/TextField';
 
-class ShareForm extends Component {
+import { Form, Field } from 'react-final-form';
+
+class ShareItemForm extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -8,11 +11,56 @@ class ShareForm extends Component {
 
   render() {
     return (
-      <div>
-        <p>This is the share form.</p>
+      <div className="App">
+        <h1>Email Form</h1>
+        <Form
+          onSubmit={this.onSubmit}
+          validate={this.validate}
+          render={({ handleSubmit }) => (
+            <form onSubmit={handleSubmit}>
+              <Field
+                name="name"
+                render={({ input, meta }) => (
+                  <div className="field">
+                    <label for="name">Name</label>
+                    <TextField inputProps={input} />
+
+                    {meta.touched &&
+                      meta.invalid && (
+                        <div
+                          className="error"
+                          style={{ color: 'red', fontsize: '10px' }}
+                        >
+                          {meta.error}
+                        </div>
+                      )}
+                  </div>
+                )}
+              />
+              <Field
+                name="email"
+                render={({ input, meta }) => (
+                  <div className="field">
+                    <label for="email">Email</label>
+                    <TextField inputProps={input} />
+                    {meta.touched &&
+                      meta.invalid && (
+                        <div
+                          className="error"
+                          style={{ color: 'red', fontsize: '10px' }}
+                        >
+                          {meta.error}
+                        </div>
+                      )}
+                  </div>
+                )}
+              />
+            </form>
+          )}
+        />
       </div>
     );
   }
 }
 
-export default ShareForm;
+export default ShareItemForm;
