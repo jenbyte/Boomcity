@@ -15,12 +15,13 @@ import Card from '@material-ui/core/Card';
 import ShareItemForm from '../../components/ShareItemForm';
 // import ShareItemPreview from '../../components/ShareItemPreview';
 
-const Share = ({ classes }) => {
+const Share = ({ classes, tags }) => {
   return (
     <div>
-      <p>
-        <ShareItemForm />
-      </p>
+      <div>{/* <ShareItemPreview /> */}</div>
+      <div>
+        <ShareItemForm className={classes} tags={tags} />
+      </div>
     </div>
   );
 };
