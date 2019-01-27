@@ -1,43 +1,35 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Form, Field } from 'react-final-form';
-import styles from './styles';
-import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
-import MenuItem from '@material-ui/core/MenuItem';
-import Button from '@material-ui/core/Button';
-import Checkbox from '@material-ui/core/Checkbox';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
+import {
+  FormControl,
+  TextField,
+  Typography,
+  MenuItem,
+  Button,
+  Checkbox,
+  InputLabel,
+  ListItemText,
+  Select
+} from '@material-ui/core';
 
 class ShareItemForm extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      checked: []
+    };
     console.log('tags:', this.props);
   }
 
-  onSubmit(o) {
-    console.log('Submitting:', o);
-  }
-
-  validate(o) {
-    console.log('Validating:', o);
-    const error = {};
-    if (!o.name) {
-      error.name = 'Name is required';
-    }
-    if (!o.description) {
-      error.description = 'description is required';
-    } else if (!/.*@.*\..*/.test(o.description)) {
-      error.description = 'description invalid';
-    }
-    return error;
-  }
+  handleChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
 
   render() {
+    const { classes, tags } = this.props;
+    console.log('Tags:', this.props.tags);
     return (
-      <div className="App">
+      <div className={classes.container}>
         <Typography>
           <h1>Share. Borrow. Grow.</h1>
         </Typography>
@@ -46,12 +38,20 @@ class ShareItemForm extends Component {
           validate={this.validate}
           render={({ handleSubmit }) => (
             <form onSubmit={handleSubmit}>
-              <Button>select an image</Button>
+              <Button className={classes.imageButton}>select an image</Button>
               <Field
                 name="name"
                 render={({ input, meta }) => (
-                  <div className="field">
-                    <TextField inputProps={input} label="Name your item" />
+                  <div>
+                    <TextField
+                      className={classes.textField}
+                      id="filled-name"
+                      inputProps={input}
+                      label="Name your item"
+                      id="margin-none"
+                      // onChange={handleChange('name')}
+                      // value={values.name}
+                    />
 
                     {meta.touched &&
                       meta.invalid && (
@@ -65,12 +65,17 @@ class ShareItemForm extends Component {
                   </div>
                 )}
               />
-
               <Field
                 name="description"
                 render={({ input, meta }) => (
-                  <div className="field">
-                    <TextField inputProps={input} label="Describe your item" />
+                  <div>
+                    <TextField
+                      className={classes.textField}
+                      id="filled-description"
+                      inputProps={input}
+                      label="Describe your item"
+                      rows="4"
+                    />
                     {meta.touched &&
                       meta.invalid && (
                         <div
@@ -83,28 +88,35 @@ class ShareItemForm extends Component {
                   </div>
                 )}
               />
+              {console.log({ tags })}
               <Field
                 name="tags"
                 render={({ input, meta }) => (
-                  <TextField inputProps={input} label="Add your tags" />
-
-                  //   <Select
-                  //   // open={open}
-                  //   // onClose={handleClose}
-                  //   // onOpen={handleOpen}
-                  //   // value={tag}
-                  //   // onChange={handleChange}
-                  //   // inputProps={{
-                  //   //   name: 'tag',
-                  //   //   id: ''
-                  //   // }}
-                  //   >
-                  //     {this.props.tags.map(tag => (
-                  //       <MenuItem key={tag.value} value={tag.value}>
-                  //         {tag.label}
-                  //       </MenuItem>
-                  //     ))}
-                  //   </Select>
+                  <FormControl>
+                    <InputLabel htmlFor="select-multiple-checkbox">
+                      Add some tags
+                    </InputLabel>
+                    <Select
+                      multiple
+                      // open={open}
+                      // onClose={handleClose}
+                      // onOpen={handleOpen}
+                      // value={tag}
+                      onChange={this.handleChange}
+                      inputProps={{
+                        name: 'tag',
+                        id: 'tag'
+                      }}
+                      value={this.state.checked}
+                    >
+                      {tags.map(tag => (
+                        <MenuItem key={tag.id} value={tag.title}>
+                          <Checkbox />
+                          <ListItemText>{tag.title}</ListItemText>
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
                 )}
               />
               <Button type="submit">Share</Button>

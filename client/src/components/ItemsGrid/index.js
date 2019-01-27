@@ -1,3 +1,3 @@
-import ItemsGridContainer from './ItemsGridContainer';
+import ItemsGrid from './ItemsGrid';
 
-export default ItemsGridContainer;
+export default ItemsGrid;
