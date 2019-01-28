@@ -1,3 +1,3 @@
-import ItemsCardContainer from './ItemsCardContainer';
+import ItemsCard from './ItemsCard';
 
-export default ItemsCardContainer;
+export default ItemsCard;

@@ -11,4 +11,4 @@ const Profile = ({ classes, user }) => {
   );
 };
 
-export default withStyles(styles)(Profile);
+export default Profile;
