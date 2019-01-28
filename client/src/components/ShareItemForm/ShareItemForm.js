@@ -11,6 +11,8 @@ import {
   ListItemText,
   Select
 } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
+import styles from './styles';
 
 class ShareItemForm extends Component {
   constructor(props) {
@@ -18,7 +20,6 @@ class ShareItemForm extends Component {
     this.state = {
       checked: []
     };
-    console.log('tags:', this.props);
   }
 
   handleChange = event => {
@@ -86,7 +87,11 @@ class ShareItemForm extends Component {
               <Field
                 name="tags"
                 render={({ input, meta }) => (
-                  <FormControl className={classes.fromControl}>
+                  <FormControl
+                    // fullWidth
+                    className={classes.fromControl}
+                    width="500"
+                  >
                     <InputLabel
                       className={classes.dropDown}
                       htmlFor="select-multiple-checkbox"
@@ -126,4 +131,4 @@ class ShareItemForm extends Component {
   }
 }
 
-export default ShareItemForm;
+export default withStyles(styles)(ShareItemForm);
