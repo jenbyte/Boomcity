@@ -28,7 +28,6 @@ class ShareItemForm extends Component {
 
   render() {
     const { classes, tags } = this.props;
-    console.log('Tags:', this.props.tags);
     return (
       <Fragment className={classes.container}>
         <Typography>

@@ -11,14 +11,13 @@ import styles from './styles';
   When the user is filling ShareItemForm, we will show a preview of 
   this item using the ShareItemPreview. 
   Hint: It should look like any other Item card.
-
 */
 import ShareItemForm from '../../components/ShareItemForm';
-// import ShareItemPreview from '../../components/ShareFormPreview/ShareItemPreview';
+// import ShareItemPreview from '../../components/ShareFormPreview';
 
 const Share = ({ classes, tags }) => {
   return (
-    <div>
+    <div className={classes.container}>
       <div>{/* <ShareItemPreview /> */}</div>
       <div>
         <ShareItemForm classes={classes} tags={tags} />

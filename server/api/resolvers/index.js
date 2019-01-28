@@ -65,7 +65,7 @@ module.exports = app => {
       async itemowner(item, args, { pgResource }) {
         try {
           const itemOwner = await pgResource.getUserById(item.ownerid);
-          console.log(itemOwner);
+          // console.log(itemOwner);
           return itemOwner;
         } catch (e) {
           throw new ApolloError(e);
