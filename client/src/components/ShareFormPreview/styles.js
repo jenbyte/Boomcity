@@ -3,7 +3,12 @@ const styles = theme => ({
     marginRight: 15
   },
   button: {
-    // margin: theme.spacing.unit
+    border: '1px solid black'
+    // marginTop: '10px',
+    // marginBottom: '15px',
+    // backgroundColor: 'white',
+    // border: '1px solid black',
+    // boxShadow: 'none'
   },
   card: {
     minWidth: 300,
@@ -15,6 +20,9 @@ const styles = theme => ({
   },
   description: {
     fontWeight: 400
+  },
+  media: {
+    height: 230
   },
   pos: {
     marginBottom: 12

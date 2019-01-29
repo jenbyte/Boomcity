@@ -7,12 +7,12 @@ const styles = theme => ({
   },
   shareForm: {
     // minWidth: 300,
-    // maxWidth: 0.5,
-    padding: 10
+    maxWidth: '50%',
+    padding: 12
   },
   sharePreview: {
-    // maxWidth: 0.5,
-    padding: 10
+    width: '50%',
+    padding: 12
   }
 });
 

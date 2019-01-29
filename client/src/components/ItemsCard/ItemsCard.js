@@ -64,7 +64,14 @@ const ItemsCard = ({ classes, item }) => {
 };
 
 ItemsCard.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  item: PropTypes.object.isRequired
+  // userInfo: React.PropTypes.object,
+  // provinceList: PropTypes.array.isRequired,
+};
+
+ItemsCard.defaultProps = {
+  classes: 0
 };
 
 export default withStyles(styles)(ItemsCard);

@@ -25,6 +25,7 @@ class ShareItemPreview extends Component {
         <Card className={classes.card}>
           <Fragment>
             <CardMedia
+              background="#212121"
               component="img"
               alt="Contemplative Reptile"
               className={classes.media}

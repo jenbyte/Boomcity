@@ -2,8 +2,8 @@ const styles = theme => ({
   container: {
     display: 'flex',
     flexWrap: 'wrap',
-    justifyContent: 'center',
-    minWidth: 300
+    justifyContent: 'center'
+    // minWidth: 300
   },
   textField: {
     // marginLeft: theme.spacing.unit,
@@ -18,7 +18,7 @@ const styles = theme => ({
     width: '100%'
   },
   formControl: {
-    margin: theme.spacing.unit,
+    // margin: theme.spacing.unit,
     width: '100%'
   },
   dropDown: {
@@ -32,7 +32,7 @@ const styles = theme => ({
   },
   imageButton: {
     background: theme.palette.primary.main,
-    margin: theme.spacing.unit,
+
     width: '100%'
   },
   shareButton: {
