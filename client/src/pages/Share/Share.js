@@ -13,13 +13,15 @@ import styles from './styles';
   Hint: It should look like any other Item card.
 */
 import ShareItemForm from '../../components/ShareItemForm';
-// import ShareItemPreview from '../../components/ShareFormPreview';
+import ShareItemPreview from '../../components/ShareFormPreview';
 
 const Share = ({ classes, tags }) => {
   return (
-    <div className={classes.container}>
-      <div>{/* <ShareItemPreview /> */}</div>
-      <div>
+    <div className={classes.flexBoxForm} height="100vh">
+      <div className={classes.sharePreview}>
+        <ShareItemPreview />
+      </div>
+      <div className={classes.shareForm}>
         <ShareItemForm classes={classes} tags={tags} />
       </div>
     </div>

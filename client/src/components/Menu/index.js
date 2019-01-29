@@ -1,3 +1,3 @@
-import MenuBarContainer from './MenuBarContainer';
+import MenuBar from './MenuBar';
 
-export default MenuBarContainer;
+export default MenuBar;

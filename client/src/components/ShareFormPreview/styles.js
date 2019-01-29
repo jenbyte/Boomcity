@@ -1,17 +1,28 @@
 const styles = theme => ({
-  card: {
-    minWidth: 275
+  avatar: {
+    marginRight: 15
   },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)'
+  button: {
+    // margin: theme.spacing.unit
+  },
+  card: {
+    minWidth: 300,
+    width: '100%'
   },
   title: {
-    fontSize: 14
+    fontWeight: 400,
+    textTransform: 'capitalize'
+  },
+  description: {
+    fontWeight: 400
   },
   pos: {
     marginBottom: 12
+  },
+  userInfo: {
+    display: 'flex',
+    // justifyContent: 'space-between',
+    alignItems: 'center'
   }
 });
 

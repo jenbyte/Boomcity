@@ -1,31 +1,43 @@
 const styles = theme => ({
   container: {
     display: 'flex',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    minWidth: 300
   },
   textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: 200
+    // marginLeft: theme.spacing.unit,
+    // marginRight: theme.spacing.unit,
+    width: '100%'
   },
   dense: {
     marginTop: 19
   },
   menu: {
-    width: 200
+    // minWidth: 200,
+    width: '100%'
   },
   formControl: {
     margin: theme.spacing.unit,
-    minWidth: 120
+    width: '100%'
   },
   dropDown: {
-    width: 250
+    width: '100%'
+  },
+  header: {
+    fontSize: '1.5rem',
+    lineHeight: '1',
+    marginBottom: '3rem'
+    // maxWidth: 0.5
   },
   imageButton: {
     background: theme.palette.primary.main,
-    width: 200
+    margin: theme.spacing.unit,
+    width: '100%'
   },
-  shareButton: {}
+  shareButton: {
+    background: theme.palette.primary.main
+  }
 });
 
 export default styles;

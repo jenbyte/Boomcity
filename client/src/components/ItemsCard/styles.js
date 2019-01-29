@@ -1,30 +1,38 @@
 const styles = theme => ({
+  avatar: {
+    marginRight: 15
+    // width: 60,
+    // height: 60
+  },
+  button: {
+    margin: theme.spacing.unit
+  },
   card: {
     maxWidth: 400
   },
   media: {
     height: 140
   },
-  actions: {
-    display: 'flex'
+  pos: {
+    marginBottom: 12
   },
-  expand: {
-    transform: 'rotate(0deg)',
-    marginLeft: 'auto',
-    transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest
-    })
+  title: {
+    fontWeight: 400,
+    textTransform: 'capitalize'
   },
-  expandOpen: {
-    transform: 'rotate(180deg)'
+  description: {
+    fontWeight: 400
   },
-  avatar: {
-    margin: 10
+  userInfo: {
+    display: 'flex',
+    // justifyContent: 'space-between',
+    alignItems: 'center'
   },
-  bigAvatar: {
-    margin: 10,
-    width: 60,
-    height: 60
+  metaInfo: {
+    display: 'flex',
+    flexDirection: 'column',
+    // justifyContent: 'center',
+    lineHeight: 0
   }
 });
 

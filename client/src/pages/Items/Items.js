@@ -23,18 +23,18 @@ const Items = ({ classes, items }) => {
     //           <CardContent>
     //             <figure>{item.imageurl}</figure>
 
-    //             <Avatar aria-label="user" className={classes.bigAvatar}>
-    //               <img
-    //                 src="https://www.gravatar.com/avatar/{item.itemowner.map(
-    //                 owner => {
-    //                   owner.email;
-    //                 }
-    //               )}"
-    //               />
+    // <Avatar aria-label="user" className={classes.bigAvatar}>
+    //   <img
+    //     src="https://www.gravatar.com/avatar/{item.itemowner.map(
+    //     owner => {
+    //       owner.email;
+    //     }
+    //   )}"
+    //   />
 
-    //               {/* {console.log('itemowner', item.itemowner)} */}
-    //               {/* {item.itemowner.map(owner => <h2>{owner.fullname}</h2>)} */}
-    //             </Avatar>
+    //   {/* {console.log('itemowner', item.itemowner)} */}
+    //   {/* {item.itemowner.map(owner => <h2>{owner.fullname}</h2>)} */}
+    // </Avatar>
 
     //             <Typography>
     //               <h2>{item.title}</h2>

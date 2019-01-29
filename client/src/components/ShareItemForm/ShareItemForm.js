@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { Form, Field } from 'react-final-form';
+import PropTypes from 'prop-types';
 import {
   FormControl,
   TextField,
@@ -30,20 +31,29 @@ class ShareItemForm extends Component {
     const { classes, tags } = this.props;
     return (
       <Fragment className={classes.container}>
-        <Typography>
+        <Typography className={classes.header} component="h1">
           <h1>Share. Borrow. Grow.</h1>
         </Typography>
+
         <Form
           onSubmit={this.onSubmit}
           validate={this.validate}
           render={({ handleSubmit }) => (
             <form onSubmit={handleSubmit}>
-              <Button className={classes.imageButton}>select an image</Button>
+              <label htmlFor="contained-button-file">
+                <Button
+                  className={classes.imageButton}
+                  variant="contained"
+                  component="span"
+                >
+                  select an image
+                </Button>
+              </label>
 
               <Field
                 name="name"
                 render={({ input, meta }) => (
-                  <div className="field">
+                  <div className="field" width="100%">
                     <TextField
                       multiline
                       className={classes.textField}
@@ -54,7 +64,6 @@ class ShareItemForm extends Component {
                       // onChange={handleChange('name')}
                       // value={values.name}
                     />
-
                     {meta.touched &&
                       meta.invalid && (
                         <div
@@ -88,8 +97,7 @@ class ShareItemForm extends Component {
                 render={({ input, meta }) => (
                   <FormControl
                     // fullWidth
-                    className={classes.fromControl}
-                    width="500"
+                    className={classes.formControl}
                   >
                     <InputLabel
                       className={classes.dropDown}
@@ -124,10 +132,16 @@ class ShareItemForm extends Component {
             </form>
           )}
         />
-        <Button type="submit">Share</Button>
+        <br />
+        <Button className={classes.shareButton} type="submit">
+          Share
+        </Button>
       </Fragment>
     );
   }
 }
+ShareItemForm.propTypes = {
+  classes: PropTypes.object.isRequired
+};
 
 export default withStyles(styles)(ShareItemForm);

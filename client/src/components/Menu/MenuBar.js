@@ -1,20 +1,59 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
+import {
+  AppBar,
+  Button,
+  IconButton,
+  ListItemIcon,
+  ListItemText,
+  Menu,
+  MenuItem,
+  Toolbar,
+  Typography
+} from '@material-ui/core';
 import ShareItemForm from '../../components/ShareItemForm';
 // import MenuIcon from '@material-ui/icons/Menu';
 import logo from '../../images/boomtown.svg';
-import MoreVert from '@material-ui/icons/MoreVert';
-import AddCircle from '@material-ui/icons/AddCircle';
+import {
+  MoreVert,
+  AddCircle,
+  Fingerprint,
+  PowerSettingsNew
+} from '@material-ui/icons';
 import styles from './styles';
 
-function MenuBar(props) {
+// const [anchorEl, setAnchorEl] = React.useState(null);
+// const isMenuOpen = Boolean(anchorEl);
+
+// function handleProfileMenuOpen(event) {
+//   setAnchorEl(event.currentTarget);
+// }
+
+// function handleMenuClose() {
+//   setAnchorEl(null);
+// }
+
+const renderMenu = (
+  <Menu
+  // anchorEl={anchorEl}
+  // anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+  // transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+  // open={isMenuOpen}
+  // onClose={handleMenuClose}
+  >
+    <Fingerprint />
+    <MenuItem>Your Profile</MenuItem>
+    <PowerSettingsNew />
+    <MenuItem>Sign Out</MenuItem>
+  </Menu>
+);
+
+function MenuAppBar(props) {
   const { classes } = props;
+  {
+    console.log(renderMenu);
+  }
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -32,17 +71,20 @@ function MenuBar(props) {
             <AddCircle className={classes.menuButton} href={ShareItemForm} />Share
             something
           </Button>
-          <IconButton color="inherit">
-            <MoreVert />
-          </IconButton>
+          <div className={classes.sectionMobile}>
+            <IconButton aria-haspopup="true" color="inherit">
+              <MoreVert />
+            </IconButton>
+            {renderMenu}
+          </div>
         </Toolbar>
       </AppBar>
     </div>
   );
 }
 
-MenuBar.propTypes = {
+MenuAppBar.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(MenuBar);
+export default withStyles(styles)(MenuAppBar);
