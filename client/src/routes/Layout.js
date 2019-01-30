@@ -7,7 +7,6 @@ import Profile from '../pages/Profile';
 import Share from '../pages/Share';
 import MenuBar from '../components/Menu/MenuBar';
 import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
 
 export default ({ match }) => (
   <Fragment>

@@ -6,8 +6,8 @@ const styles = theme => ({
   },
   button: {
     // background: '#fff',
-    // border: '1px solid #D3D3D3',
-    // color: theme.palette.primary.main,
+    border: '1px solid #D3D3D3',
+    color: theme.palette.secondary.main,
     fontSize: '0.9rem',
     margin: theme.spacing.unit,
     marginBottom: '1rem',
@@ -21,7 +21,7 @@ const styles = theme => ({
   media: {
     minHeight: 200
   },
-  pos: {
+  select: {
     color: '#808080',
     marginBottom: 12
   },

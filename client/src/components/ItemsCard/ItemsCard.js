@@ -21,6 +21,7 @@ const ItemsCard = ({ classes, item }) => {
           className={classes.media}
           image={item.imageurl}
           title={item.title}
+          src={item.imageurl}
         />
         {/* {item.imageurl} */}
         <CardContent>
@@ -35,7 +36,7 @@ const ItemsCard = ({ classes, item }) => {
           </div>
           <Typography className={classes.title}>{item.title}</Typography>
           <Typography>
-            <p className={classes.pos} color="textSecondary">
+            <p className={classes.select} color="textSecondary">
               {item.tags.map(tag => `${tag.title}`).join(', ')}
             </p>
             <p className={classes.description}>{item.description}</p>

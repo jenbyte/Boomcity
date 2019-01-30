@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import {
@@ -19,7 +19,7 @@ import {
   PowerSettingsNew
 } from '@material-ui/icons';
 import useStyles from './styles';
-import { renderToStringWithData } from 'react-apollo';
+// import { renderToStringWithData } from 'react-apollo';
 
 class MenuAppBar extends React.Component {
   state = {

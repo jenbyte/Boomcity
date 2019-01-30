@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { Form, Field, FormSpy } from 'react-final-form';
 import PropTypes from 'prop-types';
 import {
@@ -86,7 +86,6 @@ class ShareItemForm extends Component {
 
   render() {
     const { classes, tags, updateItem, resetImage, resetItem } = this.props;
-    console.log(tags);
     return (
       <div>
         <Typography className={classes.header}>Share. Borrow. Grow.</Typography>
@@ -139,7 +138,6 @@ class ShareItemForm extends Component {
                     reset image
                   </Button>
                 )}
-
                 <input
                   hidden
                   type="file"
@@ -236,6 +234,15 @@ class ShareItemForm extends Component {
                           </MenuItem>
                         ))}
                     </Select>
+                    {meta.touched &&
+                      meta.invalid && (
+                        <div
+                          className="error"
+                          style={{ color: 'red', fontsize: '10px' }}
+                        >
+                          {meta.error}
+                        </div>
+                      )}
                   </FormControl>
                 )}
               />
@@ -243,9 +250,25 @@ class ShareItemForm extends Component {
                 className={classes.shareButton}
                 type="submit"
                 disabled={pristine || submitting || invalid}
+                onSubmit={() => {
+                  this.fileInput.current.value = '';
+                  this.setState({
+                    fileSelected: false,
+                    selectedTags: []
+                  });
+                  resetItem();
+                }}
               >
                 Share
               </Button>
+              <input
+                hidden
+                type="submit"
+                id="submit"
+                onSubmit={() => {
+                  this.resetItem();
+                }}
+              />
             </form>
           )}
         />

@@ -14,13 +14,9 @@ function setCookie({ tokenName, token, res }) {
    *  A secure cookie that can be used to store a user's session data has the following properties:
    *  1) It can't be accessed from JavaScript
    *  2) It will only be sent via https (but we'll have to disable this in development using NODE_ENV)
-   *  3) A boomtown cookie should oly be valid for 2 hours.
    */
   // Refactor this method with the correct configuration values.
-  res.cookie(tokenName, token, {
-    // @TODO: Supply the correct configuration values for our cookie here
-  });
-  // -------------------------------
+  res.cookie(tokenName, token, { maxAgie: 6000 * 60 * 2, httpOnly: true });
 }
 
 function generateToken(user, secret) {
@@ -39,23 +35,13 @@ function generateToken(user, secret) {
   // -------------------------------
 }
 
-module.exports = (app) => {
+module.exports = app => {
   return {
     async signup(parent, args, context) {
       try {
-        /**
-         * @TODO: Authentication - Server
-         *
-         * Storing passwords in your project's database requires some basic security
-         * precautions. If someone gains access to your database, and passwords
-         * are stored in 'clear-text' your users accounts immediately compromised.
-         *
-         * The solution is to create a cryptographic hash of the password provided,
-         * and store that instead. The password can be decoded using the original password.
-         */
-        // @TODO: Use bcrypt to generate a cryptographic hash to conceal the user's password before storing it.
-        const hashedPassword = '';
-        // -------------------------------
+        //  Use bcrypt to generate a cryptographic hash to conceal the user's password before storing it.
+        const hashedPassword = await bcrypt.hash(args.user.password, 10);
+        console.log(hashedPassword);
 
         const user = await context.pgResource.createUser({
           fullname: args.user.fullname,
@@ -99,10 +85,10 @@ module.exports = (app) => {
           token: generateToken(user, app.get('JWT_SECRET')),
           res: context.req.res
         });
-
-        return {
-          id: user.id
-        };
+        return 'it worked!';
+        // return {
+        //   id: user.id
+        // };
       } catch (e) {
         throw new AuthenticationError(e);
       }

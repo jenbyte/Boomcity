@@ -3,7 +3,7 @@ import Typography from '@material-ui/core/Typography';
 
 export default function validate(values, selectedTags, fileSelected) {
   const errors = {};
-
+  console.log(selectedTags);
   if (!values.title || values.title === '') {
     errors.title = (
       <Typography style={{ color: 'red', fontsize: '10px' }}>
@@ -18,7 +18,7 @@ export default function validate(values, selectedTags, fileSelected) {
     );
     // } else if (!fileSelected || values.fileSelected === false) {
     //   errors.fileSelected = 'Image is missing';
-  } else if (!selectedTags) {
+  } else if (selectedTags === []) {
     errors.tags = (
       <Typography style={{ color: 'red', fontsize: '10px' }}>
         At least one tag must be selected
