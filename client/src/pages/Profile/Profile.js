@@ -1,13 +1,12 @@
 import React, { Fragment } from 'react';
 import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
-// import SimpleCard from '../../components/Cards/cards';
+import ProfileCard from '../../components/ProfileCard/ProfileCard';
 
-const Profile = ({ classes, user }) => {
+const Profile = ({ classes, profile }) => {
   return (
-    <Fragment>
-      <h1>{user} </h1>
-    </Fragment>
+    <div>
+      <ProfileCard profile={profile} />
+    </div>
   );
 };
 

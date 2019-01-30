@@ -21,7 +21,7 @@ const initialState = {
   tags: [],
   imageurl: 'http://via.placeholder.com/350x250?text=Please select an image',
   itemowner: {},
-  created: new Date()
+  created: new Date().toLocaleDateString('en-US')
 };
 
 export default (state = initialState, action) => {

@@ -2,19 +2,16 @@ import React from 'react';
 import styles from './styles';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import { CircularProgress, Typography } from '@material-ui/core';
 
 function FullScreenLoader(props) {
   const { classes } = props;
   return (
-    <div>
-      <CircularProgress
-        className={classes.progress}
-        color="primary"
-        size={30}
-        thickness={5}
-      />
-      <h3>Loading...</h3>
+    <div className={classes.flex}>
+      <CircularProgress color="primary" size={30} thickness={8} />{' '}
+      <Typography className={classes.loading} component="h3">
+        Loading...
+      </Typography>
     </div>
   );
 }

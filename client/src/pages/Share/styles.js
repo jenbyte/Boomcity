@@ -3,16 +3,21 @@ const styles = theme => ({
     display: 'flex',
     // flexGrow: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    height: '70%',
+    maxWidth: 950
   },
   shareForm: {
-    // minWidth: 300,
-    maxWidth: '50%',
-    padding: 12
+    alignSelf: 'center',
+    padding: 12,
+    // height: '100%',
+    maxWidth: 420,
+    width: '100%'
   },
   sharePreview: {
-    width: '50%',
-    padding: 12
+    padding: 12,
+    maxWidth: 400,
+    width: '100%'
   }
 });
 

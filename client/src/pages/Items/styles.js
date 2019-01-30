@@ -1,5 +1,7 @@
 const styles = theme => ({
-  root: {}
+  root: {
+    background: theme.palette.secondary.main
+  }
 });
 
 export default styles;

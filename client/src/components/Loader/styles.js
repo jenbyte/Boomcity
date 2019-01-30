@@ -1,9 +1,18 @@
 const styles = theme => ({
-  root: {
-    flexGrow: 1
+  container: {
+    height: '100vh',
+    width: '100vw'
   },
-  progress: {
-    margin: theme.spacing.unit * 2
+  loading: {
+    fontSize: '1rem',
+    fontWeight: 600,
+    marginRight: '1rem'
+  },
+  flex: {
+    margin: theme.spacing.unit * 2,
+    display: 'flex',
+    flexDirection: 'center',
+    alignItems: 'center'
     // color: '#00695c'
   }
 });

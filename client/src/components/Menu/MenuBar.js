@@ -1,19 +1,16 @@
-import React from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import {
   AppBar,
   Button,
   IconButton,
-  ListItemIcon,
-  ListItemText,
   Menu,
   MenuItem,
   Toolbar,
   Typography
 } from '@material-ui/core';
 import ShareItemForm from '../../components/ShareItemForm';
-// import MenuIcon from '@material-ui/icons/Menu';
 import logo from '../../images/boomtown.svg';
 import {
   MoreVert,
@@ -21,70 +18,98 @@ import {
   Fingerprint,
   PowerSettingsNew
 } from '@material-ui/icons';
-import styles from './styles';
+import useStyles from './styles';
+import { renderToStringWithData } from 'react-apollo';
 
-// const [anchorEl, setAnchorEl] = React.useState(null);
-// const isMenuOpen = Boolean(anchorEl);
+class MenuAppBar extends React.Component {
+  state = {
+    auth: true,
+    anchorEl: null
+  };
 
-// function handleProfileMenuOpen(event) {
-//   setAnchorEl(event.currentTarget);
-// }
+  handleChange = event => {
+    this.setState({ auth: event.target.checked });
+  };
 
-// function handleMenuClose() {
-//   setAnchorEl(null);
-// }
+  handleMenu = event => {
+    this.setState({ anchorEl: event.currentTarget });
+  };
 
-const renderMenu = (
-  <Menu
-  // anchorEl={anchorEl}
-  // anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-  // transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-  // open={isMenuOpen}
-  // onClose={handleMenuClose}
-  >
-    <Fingerprint />
-    <MenuItem>Your Profile</MenuItem>
-    <PowerSettingsNew />
-    <MenuItem>Sign Out</MenuItem>
-  </Menu>
-);
+  handleClose = () => {
+    this.setState({ anchorEl: null });
+  };
+  render() {
+    const { classes } = this.props;
+    const { auth, anchorEl } = this.state;
+    const open = Boolean(anchorEl);
 
-function MenuAppBar(props) {
-  const { classes } = props;
-  {
-    console.log(renderMenu);
-  }
-  return (
-    <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="Menu"
-            href={classes}
-          >
-            <img className="img-responsive" src={logo} alt="logo" width="40" />
-          </IconButton>
-          <Typography variant="h6" color="inherit" className={classes.grow} />
-          <Button color="inherit">
-            <AddCircle className={classes.menuButton} href={ShareItemForm} />Share
-            something
-          </Button>
-          <div className={classes.sectionMobile}>
-            <IconButton aria-haspopup="true" color="inherit">
-              <MoreVert />
+    return (
+      <Fragment className={classes.root}>
+        <AppBar position="static">
+          <Toolbar>
+            <IconButton
+              className={classes.menuButton}
+              color="inherit"
+              aria-label="Menu"
+              href={classes}
+            >
+              <img
+                className="img-responsive"
+                src={logo}
+                alt="logo"
+                width="40"
+              />
             </IconButton>
-            {renderMenu}
-          </div>
-        </Toolbar>
-      </AppBar>
-    </div>
-  );
+            <Typography color="inherit" className={classes.grow} />
+            <Button color="inherit">
+              <AddCircle className={classes.menuButton} href={ShareItemForm} />Share
+              something
+            </Button>
+            <div className={classes.sectionMobile}>
+              <IconButton
+                aria-owns={open ? 'menu-appbar' : undefined}
+                aria-haspopup="true"
+                onClick={this.handleMenu}
+                color="inherit"
+              >
+                <MoreVert />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right'
+                }}
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right'
+                }}
+                open={open}
+                onClose={this.handleClose}
+              >
+                <MenuItem
+                  className={classes.menuItem}
+                  onClick={this.handleClose}
+                >
+                  <Fingerprint className={classes.menuIcon} /> Your Profile
+                </MenuItem>
+                <MenuItem
+                  className={classes.menuItem}
+                  onClick={this.handleClose}
+                >
+                  <PowerSettingsNew className={classes.menuIcon} /> Sign Out
+                </MenuItem>
+              </Menu>
+            </div>
+          </Toolbar>
+        </AppBar>
+      </Fragment>
+    );
+  }
 }
-
 MenuAppBar.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(MenuAppBar);
+export default withStyles(useStyles)(MenuAppBar);
