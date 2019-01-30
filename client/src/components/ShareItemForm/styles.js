@@ -9,7 +9,7 @@ const styles = theme => ({
   textField: {
     // marginLeft: theme.spacing.unit,
     // marginRight: theme.spacing.unit,
-
+    marginTop: '1.5rem',
     width: '100%'
   },
   dense: {
@@ -20,7 +20,7 @@ const styles = theme => ({
     width: '100%'
   },
   formControl: {
-    // margin: theme.spacing.unit,
+    marginTop: '1.5rem',
     width: '100%'
   },
   dropDown: {

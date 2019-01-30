@@ -14,7 +14,6 @@ import {
 import styles from './styles';
 
 const ItemsCard = ({ classes, item }) => {
-  console.log(item);
   return (
     <Card className={classes.card}>
       <Fragment>
@@ -37,7 +36,7 @@ const ItemsCard = ({ classes, item }) => {
           <Typography className={classes.title}>{item.title}</Typography>
           <Typography>
             <p className={classes.pos} color="textSecondary">
-              {item.tags.map(tag => tag.title)}
+              {item.tags.map(tag => `${tag.title}`).join(', ')}
             </p>
             <p className={classes.description}>{item.description}</p>
           </Typography>

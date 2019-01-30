@@ -5,9 +5,9 @@ const styles = theme => ({
     height: 50
   },
   button: {
-    background: '#fff',
-    border: '1px solid #D3D3D3',
-    color: theme.palette.primary.main,
+    // background: '#fff',
+    // border: '1px solid #D3D3D3',
+    // color: theme.palette.primary.main,
     fontSize: '0.9rem',
     margin: theme.spacing.unit,
     marginBottom: '1rem',

@@ -5,7 +5,10 @@ const styles = theme => ({
     height: 55
   },
   card: {
-    padding: 50,
+    borderRadius: 0,
+    padding: 30,
+    paddingLeft: 20,
+    minWidth: 390,
     width: '100%'
   },
   flex: {
@@ -14,7 +17,15 @@ const styles = theme => ({
     alignItems: 'center'
   },
 
+  userInfo: {
+    display: 'flex',
+    alignItems: 'center',
+    // justifyContent: 'flex-start',
+    // lineHeight: 0,
+    marginBottom: '1rem'
+  },
   fullname: {
+    color: '#696969',
     fontWeight: 400,
     fontSize: '2.8rem',
     textTransform: 'capitalize'
@@ -27,20 +38,28 @@ const styles = theme => ({
   bio: {
     fontWeight: 400,
     fontSize: '1rem',
-    fontStyle: 'italic',
-    margin: 0
+    fontStyle: 'italic'
+    // margin: 0
   },
-  userInfo: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    lineHeight: 0
+  numOfItems: {
+    fontSize: '1.3rem'
+    // alignSelf: 'center'
   },
-  metaInfo: {
+  bold: {
+    fontSize: '1.4rem',
+    fontWeight: 800
+  },
+  profileGridTitle: {
+    color: theme.palette.primary.main,
+    fontSize: '2rem',
+    marginTop: '2.5rem',
+    marginBottom: '1rem'
+  },
+  flexGrid: {
     display: 'flex',
-    flexDirection: 'column',
-    // justifyContent: 'center',
-    lineHeight: 0.5
+    // justifyContent: 'space-around',
+    flexGrow: 1,
+    flexBasis: '100%'
   }
 });
 

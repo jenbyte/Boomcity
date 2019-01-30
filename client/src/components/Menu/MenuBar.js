@@ -61,10 +61,12 @@ class MenuAppBar extends React.Component {
               />
             </IconButton>
             <Typography color="inherit" className={classes.grow} />
+
             <Button color="inherit">
               <AddCircle className={classes.menuButton} href={ShareItemForm} />Share
               something
             </Button>
+
             <div className={classes.sectionMobile}>
               <IconButton
                 aria-owns={open ? 'menu-appbar' : undefined}

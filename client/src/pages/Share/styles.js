@@ -4,8 +4,9 @@ const styles = theme => ({
     // flexGrow: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    height: '70%',
-    maxWidth: 950
+    maxWidth: 950,
+    margin: 'auto',
+    padding: '5% 0'
   },
   shareForm: {
     alignSelf: 'center',

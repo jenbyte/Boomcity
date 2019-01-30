@@ -79,14 +79,14 @@ class ShareItemForm extends Component {
 
   generateTagsText(tags, selected) {
     return tags
-      .map(t => (selected.indexOf(t.id) > -1 ? t.title : false))
+      .map(tag => (selected.indexOf(tag.id) > -1 ? tag.title : false))
       .filter(e => e)
       .join(', ');
   }
 
   render() {
     const { classes, tags, updateItem, resetImage, resetItem } = this.props;
-
+    console.log(tags);
     return (
       <div>
         <Typography className={classes.header}>Share. Borrow. Grow.</Typography>
