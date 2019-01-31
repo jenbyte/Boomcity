@@ -21,18 +21,9 @@ function setCookie({ tokenName, token, res }) {
 
 function generateToken(user, secret) {
   const { id, email, fullname, bio } = user; // Omit the password from the token
-  /**
-   *  @TODO: Authentication - Server
-   *
-   *  This helper function is responsible for generating the JWT token.
-   *  Here, we'll be taking a JSON object representing the user (the 'J' in JWT)
-   *  and cryptographically 'signing' it using our app's 'secret'.
-   *  The result is a cryptographic hash representing out JSON user
-   *  which can be decoded using the app secret to retrieve the stateless session.
-   */
-  // Refactor this return statement to return the cryptographic hash (the Token)
-  return '';
-  // -------------------------------
+  const token = jwt.sign({ id, email, fullname, bio }, secret);
+
+  return token;
 }
 
 module.exports = app => {
@@ -55,9 +46,7 @@ module.exports = app => {
           res: context.req.res
         });
 
-        return {
-          id: user.id
-        };
+        return user.id;
       } catch (e) {
         throw new AuthenticationError(e);
       }
@@ -76,8 +65,8 @@ module.exports = app => {
          *  they submitted from the login form to decrypt the 'hashed' version stored in out database.
          */
         // Use bcrypt to compare the provided password to 'hashed' password stored in your database.
-        const valid = false;
-        // -------------------------------
+        const valid = await bcrypt.compare(args.user.password, user.password);
+        console.log(valid);
         if (!valid || !user) throw 'User was not found.';
 
         setCookie({
@@ -85,10 +74,8 @@ module.exports = app => {
           token: generateToken(user, app.get('JWT_SECRET')),
           res: context.req.res
         });
-        return 'it worked!';
-        // return {
-        //   id: user.id
-        // };
+
+        return user.id;
       } catch (e) {
         throw new AuthenticationError(e);
       }
