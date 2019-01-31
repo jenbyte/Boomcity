@@ -21,20 +21,26 @@ const ItemsCard = ({ classes, item }) => {
           className={classes.media}
           image={item.imageurl}
           title={item.title}
-          // src={item.imageurl}
         />
 
         <CardContent>
           <div className={classes.userInfo}>
             <Avatar className={classes.avatar}>
-              <Gravatar email={item.itemowner.email} />
+              {item.itemowner.email ? (
+                <Gravatar email={item.itemowner.email} />
+              ) : (
+                <Gravatar email="blue@turtle.com" />
+              )}
             </Avatar>
+
             <Typography className={classes.metaInfo}>
               {item.itemowner.fullname}
               <p className={classes.pos}>{item.created} </p>
             </Typography>
           </div>
+
           <Typography className={classes.title}>{item.title}</Typography>
+
           <Typography>
             <p className={classes.select} color="textSecondary">
               {item.tags.map(tag => `${tag.title}`).join(', ')}
@@ -43,6 +49,7 @@ const ItemsCard = ({ classes, item }) => {
           </Typography>
         </CardContent>
       </Fragment>
+
       <CardActions>
         <Button className={classes.button}>Borrow</Button>
       </CardActions>

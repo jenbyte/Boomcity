@@ -58,11 +58,14 @@ class MenuAppBar extends React.Component {
                 width="40"
               />
             </IconButton>
+            <div className={classes.grow} />
 
-            {/* <Typography color="inherit" className={classes.grow} /> */}
-
-            <Button color="inherit" className={classes.shareButton}>
-              {/* className={classes.menuButton} href={ShareItemForm} */}
+            <Button
+              color="inherit"
+              className={classes.shareButton}
+              href="/share"
+            >
+              {/* className={classes.menuButton} */}
               <AddCircle />Share something
             </Button>
 
@@ -93,14 +96,15 @@ class MenuAppBar extends React.Component {
                 <MenuItem
                   className={classes.menuItem}
                   onClick={this.handleClose}
+                  to="/profile"
                 >
                   {/* className={classes.menuIcon} */}
-                  <Fingerprint href="/profile" /> Your Profile
+                  <Fingerprint /> Your Profile
                 </MenuItem>
                 <MenuItem
                   className={classes.menuItem}
                   onClick={this.handleClose}
-                  to=""
+                  to="/logout"
                 >
                   {/* className={classes.menuIcon} */}
                   <PowerSettingsNew /> Sign Out

@@ -21,6 +21,8 @@ import {
 } from '../../redux/modules/ShareItem';
 import { connect } from 'react-redux';
 import validate from './helpers/validation';
+import { Mutation } from 'react-apollo';
+import { ADD_ITEM_MUTATION } from '../../apollo/queries';
 
 class ShareItemForm extends Component {
   constructor(props) {
@@ -95,13 +97,11 @@ class ShareItemForm extends Component {
           validate={values => {
             return validate(
               values,
-              this.state.fileSelected,
-              this.state.selectedTags
+              this.state.selectedTags,
+              this.state.fileSelected
             );
           }}
           render={({ handleSubmit, pristine, submitting, invalid }) => (
-            // <Mutation mutation={ADD_ITEM_MUTATION}>
-            // </Mutation>
             <form onSubmit={handleSubmit}>
               <FormSpy
                 subscription={{ values: true }}
@@ -234,19 +234,53 @@ class ShareItemForm extends Component {
                           </MenuItem>
                         ))}
                     </Select>
-                    {meta.touched &&
-                      meta.invalid && (
-                        <div
-                          className="error"
-                          style={{ color: 'red', fontsize: '10px' }}
-                        >
-                          {meta.error}
-                        </div>
-                      )}
                   </FormControl>
                 )}
               />
-              <Button
+
+              <Mutation mutation={ADD_ITEM_MUTATION}>
+                {(addItem, { data }) => (
+                  <div>
+                    <form
+                      onSubmit={values => {
+                        // e.preventDefault();
+                        addItem({
+                          variables: {
+                            ...values,
+                            tags: this.state.selectedTags
+                          }
+                        });
+                        // input.value = '';
+                      }}
+                    >
+                      <Button
+                        className={classes.shareButton}
+                        type="submit"
+                        disabled={pristine || submitting || invalid}
+                        onSubmit={() => {
+                          this.fileInput.current.value = '';
+                          this.setState({
+                            fileSelected: false,
+                            selectedTags: []
+                          });
+                          resetItem();
+                        }}
+                      >
+                        Share
+                      </Button>
+                      <input
+                        hidden
+                        type="submit"
+                        id="submit"
+                        onSubmit={() => {
+                          this.resetItem();
+                        }}
+                      />
+                    </form>
+                  </div>
+                )}
+              </Mutation>
+              {/* <Button
                 className={classes.shareButton}
                 type="submit"
                 disabled={pristine || submitting || invalid}
@@ -268,7 +302,7 @@ class ShareItemForm extends Component {
                 onSubmit={() => {
                   this.resetItem();
                 }}
-              />
+              /> */}
             </form>
           )}
         />
