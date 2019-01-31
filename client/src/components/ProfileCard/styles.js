@@ -1,8 +1,8 @@
 const styles = theme => ({
   avatar: {
-    marginRight: 30,
-    width: 55,
-    height: 55
+    marginRight: 20,
+    width: 52,
+    height: 52
   },
   card: {
     borderRadius: 0,
@@ -38,8 +38,13 @@ const styles = theme => ({
   bio: {
     fontWeight: 400,
     fontSize: '1rem',
-    fontStyle: 'italic'
-    // margin: 0
+    marginTop: 3
+  },
+  bioNull: {
+    fontWeight: 400,
+    fontSize: '1rem',
+    fontStyle: 'italic',
+    marginTop: 3
   },
   numOfItems: {
     fontSize: '1.3rem'

@@ -7,7 +7,7 @@ import styles from './styles';
 import ItemsCard from '../ItemsCard/ItemsCard';
 
 const ProfileCard = ({ classes, profile }) => {
-  // console.log('1~', profile);
+  console.log('1~', profile);
   return (
     <div>
       <Card className={classes.card}>
@@ -27,7 +27,13 @@ const ProfileCard = ({ classes, profile }) => {
               <span className={classes.bold}>{profile.borrowed.length}</span>{' '}
               Items borrowed
             </Typography>
-            <Typography className={classes.bio}>{profile.bio}</Typography>
+            {profile.bio === null ? (
+              <Typography className={classes.bioNull}>
+                "No bio provided."
+              </Typography>
+            ) : (
+              <Typography className={classes.bio}>"{profile.bio}"</Typography>
+            )}
           </div>
         </CardContent>
       </Card>

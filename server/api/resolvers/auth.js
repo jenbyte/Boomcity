@@ -40,11 +40,11 @@ module.exports = app => {
           password: hashedPassword
         });
 
-        // setCookie({
-        //   tokenName: app.get('JWT_COOKIE_NAME'),
-        //   token: generateToken(user, app.get('JWT_SECRET')),
-        //   res: context.req.res
-        // });
+        setCookie({
+          tokenName: app.get('JWT_COOKIE_NAME'),
+          token: generateToken(user, app.get('JWT_SECRET')),
+          res: context.req.res
+        });
 
         return user.id;
       } catch (e) {
