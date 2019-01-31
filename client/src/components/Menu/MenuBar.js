@@ -42,14 +42,14 @@ class MenuAppBar extends React.Component {
     const open = Boolean(anchorEl);
 
     return (
-      <Fragment className={classes.root}>
+      <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
             <IconButton
               className={classes.menuButton}
               color="inherit"
               aria-label="Menu"
-              href={classes}
+              href="/items"
             >
               <img
                 className="img-responsive"
@@ -58,11 +58,12 @@ class MenuAppBar extends React.Component {
                 width="40"
               />
             </IconButton>
-            <Typography color="inherit" className={classes.grow} />
 
-            <Button color="inherit">
-              <AddCircle className={classes.menuButton} href={ShareItemForm} />Share
-              something
+            {/* <Typography color="inherit" className={classes.grow} /> */}
+
+            <Button color="inherit" className={classes.shareButton}>
+              {/* className={classes.menuButton} href={ShareItemForm} */}
+              <AddCircle />Share something
             </Button>
 
             <div className={classes.sectionMobile}>
@@ -74,6 +75,7 @@ class MenuAppBar extends React.Component {
               >
                 <MoreVert />
               </IconButton>
+
               <Menu
                 id="menu-appbar"
                 anchorEl={anchorEl}
@@ -92,19 +94,22 @@ class MenuAppBar extends React.Component {
                   className={classes.menuItem}
                   onClick={this.handleClose}
                 >
-                  <Fingerprint className={classes.menuIcon} /> Your Profile
+                  {/* className={classes.menuIcon} */}
+                  <Fingerprint href="/profile" /> Your Profile
                 </MenuItem>
                 <MenuItem
                   className={classes.menuItem}
                   onClick={this.handleClose}
+                  to=""
                 >
-                  <PowerSettingsNew className={classes.menuIcon} /> Sign Out
+                  {/* className={classes.menuIcon} */}
+                  <PowerSettingsNew /> Sign Out
                 </MenuItem>
               </Menu>
             </div>
           </Toolbar>
         </AppBar>
-      </Fragment>
+      </div>
     );
   }
 }

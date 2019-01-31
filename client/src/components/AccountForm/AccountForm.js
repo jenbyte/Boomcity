@@ -25,11 +25,15 @@ class AccountForm extends Component {
   }
 
   render() {
-    console.log(this.props);
+    // console.log(this.props);
     const { classes } = this.props;
 
     return (
       // @TODO: Wrap in Final Form <Form />
+      // <Form
+      //   onSubmit={() => {}}
+      //   validate={() => {
+      //     return (
       <form
         onSubmit={() => {
           console.log('Submitted');
@@ -54,7 +58,10 @@ class AccountForm extends Component {
         <FormControl fullWidth className={classes.formControl}>
           <InputLabel htmlFor="email">Email</InputLabel>
           {/* @TODO: Wrap in a Final Form <Field /> */}
-          {/* <Field name="" render={() => {}} */}
+          {/* <Field
+            name="email"
+            render={() => {
+              return ( */}
           <Input
             id="email"
             type="text"
@@ -63,6 +70,9 @@ class AccountForm extends Component {
             }}
             value={''}
           />
+          {/* );
+            }}
+          /> */}
           {/* @TODO: Close Final Form <Field /> */}
         </FormControl>
         <FormControl fullWidth className={classes.formControl}>
@@ -97,8 +107,8 @@ class AccountForm extends Component {
                   this.props.loginMutation({
                     variables: {
                       user: {
-                        email: 'cookiehouse@bakery.com',
-                        password: 'boomtown'
+                        email: 'jj@gmail.com',
+                        password: 'boomtown2'
                       }
                     }
                   });
@@ -106,9 +116,9 @@ class AccountForm extends Component {
                   this.props.signupMutation({
                     variables: {
                       user: {
-                        fullname: 'gg',
-                        email: 'gg@gmail.com',
-                        password: 'boomtown'
+                        fullname: 'hh',
+                        email: 'jj@gmail.com',
+                        password: 'boomtown2'
                       }
                     }
                   });
@@ -143,16 +153,31 @@ class AccountForm extends Component {
         </Typography>
       </form>
       // @TODO: Close Final Form <Form />
+      //     );
+      //   }}
+      // />
     );
   }
 }
 
+const refetchQueries = [
+  {
+    query: VIEWER_QUERY
+  }
+];
+
 // @TODO: Refetch the VIEWER_QUERY to reload the app and access authenticated routes.
 export default compose(
   graphql(SIGNUP_MUTATION, {
+    options: {
+      refetchQueries
+    },
     name: 'signupMutation'
   }),
   graphql(LOGIN_MUTATION, {
+    options: {
+      refetchQueries
+    },
     name: 'loginMutation'
   }),
   withStyles(styles)

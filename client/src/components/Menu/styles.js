@@ -5,11 +5,10 @@ const styles = theme => ({
   grow: {
     flexGrow: 1
   },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20
-  },
-  
+  shareButton: {
+    display: 'flex',
+    justifyContent: 'space-between'
+  }
 });
 
 export default styles;

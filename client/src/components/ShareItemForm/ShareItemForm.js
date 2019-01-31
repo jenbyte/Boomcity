@@ -95,8 +95,8 @@ class ShareItemForm extends Component {
           validate={values => {
             return validate(
               values,
-              this.state.selectedTags,
-              this.state.fileSelected
+              this.state.fileSelected,
+              this.state.selectedTags
             );
           }}
           render={({ handleSubmit, pristine, submitting, invalid }) => (

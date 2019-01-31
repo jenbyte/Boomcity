@@ -1,17 +1,20 @@
 const { ApolloError } = require('apollo-server-express');
 
-// @TODO: Uncomment these lines later when we add auth
 const jwt = require('jsonwebtoken');
 const authMutations = require('./auth');
-// const { UploadScalar, DateScalar } = require('../custom-types');
+const { UploadScalar, DateScalar } = require('../custom-types');
 
 module.exports = app => {
   return {
-    // Upload: UploadScalar,
-    // Date: DateScalar,
+    Upload: UploadScalar,
+    Date: DateScalar,
 
     Query: {
-      viewer() {
+      viewer(parent, args, { token }) {
+        console.log(token);
+        if (token) {
+          return jwt.decode(token, app.get('JWT_SECRET'));
+        }
         return null;
       },
       async user(parent, { id }, { pgResource }, info) {
@@ -99,11 +102,11 @@ module.exports = app => {
     Mutation: {
       ...authMutations(app),
 
-      async addItem(parent, args, { pgResource }) {
+      async addItem(parent, args, context, info) {
         // const image = await image;
-        // const user = await jwt.decode(context.token, app.get('JWT_SECRET'));
-        const user = { id: 33 };
-        const newItem = await pgResource.saveNewItem({
+        const user = await jwt.decode(context.token, app.get('JWT_SECRET'));
+        // const user = { id: 33 };
+        const newItem = await context.pgResource.saveNewItem({
           item: args.item,
           // image: args.image,
           user

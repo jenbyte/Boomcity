@@ -21,9 +21,9 @@ const ItemsCard = ({ classes, item }) => {
           className={classes.media}
           image={item.imageurl}
           title={item.title}
-          src={item.imageurl}
+          // src={item.imageurl}
         />
-        {/* {item.imageurl} */}
+
         <CardContent>
           <div className={classes.userInfo}>
             <Avatar className={classes.avatar}>

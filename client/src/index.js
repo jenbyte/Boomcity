@@ -10,11 +10,12 @@ import theme from './theme';
 import client from './apollo';
 import Layout from './routes/Layout';
 import store from './redux';
+import { ViewerProvider } from './context/ViewerProvider';
 
 /**
  * @TODO: Add the Viewer Context
  *
- * import { ViewerProvider } from './context/ViewerProvider'
+ *
  *
  * Below in your <App />, wrap the <ViewerProvider /> component around
  * the <BrowserRouter /> component so the router is aware of whether a
@@ -25,16 +26,18 @@ import './index.css';
 
 const App = () => {
   return (
-    <ReduxProvider store={store}>
-      <MuiThemeProvider theme={theme}>
-        <CssBaseline />
-        <ApolloProvider client={client}>
-          <BrowserRouter>
-            <Layout />
-          </BrowserRouter>
-        </ApolloProvider>
-      </MuiThemeProvider>
-    </ReduxProvider>
+    <ApolloProvider client={client}>
+      <ReduxProvider store={store}>
+        <MuiThemeProvider theme={theme}>
+          <CssBaseline />
+          <ViewerProvider>
+            <BrowserRouter>
+              <Layout />
+            </BrowserRouter>
+          </ViewerProvider>
+        </MuiThemeProvider>
+      </ReduxProvider>
+    </ApolloProvider>
   );
 };
 
