@@ -1,4 +1,4 @@
-const useStyles = theme => ({
+const styles = theme => ({
   root: {
     flexGrow: 1
   },
@@ -9,14 +9,7 @@ const useStyles = theme => ({
     marginLeft: -12,
     marginRight: 20
   },
-  menuItem: {
-    display: 'flex',
-    alignItems: 'center',
-    marginRight: '1rem'
-  },
-  menuIcon: {
-    paddingRight: '1rem'
-  }
+  
 });
 
-export default useStyles;
+export default styles;

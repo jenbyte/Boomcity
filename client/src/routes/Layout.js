@@ -23,7 +23,7 @@ export default ({ match }) => (
       <Route exact path="/welcome" component={Home} />
       <Route exact path="/items" component={Items} />
       <Route exact path="/profile" component={Profile} />
-      <Route exact path="/profile/:userid" component={Profile} />
+      {/* <Route exact path="/profile/:userid" component={Profile} /> */}
       <Route exact path="/share" component={Share} />
       <Redirect to="/items" />
       {/* <Route component={NotFound} /> */}

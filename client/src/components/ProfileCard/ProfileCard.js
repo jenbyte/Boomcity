@@ -7,7 +7,7 @@ import styles from './styles';
 import ItemsCard from '../ItemsCard/ItemsCard';
 
 const ProfileCard = ({ classes, profile }) => {
-  console.log('pc~', profile);
+  // console.log('1~', profile);
   return (
     <div>
       <Card className={classes.card}>
