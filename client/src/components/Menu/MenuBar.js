@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import {
@@ -7,8 +7,7 @@ import {
   IconButton,
   Menu,
   MenuItem,
-  Toolbar,
-  Typography
+  Toolbar
 } from '@material-ui/core';
 import ShareItemForm from '../../components/ShareItemForm';
 import logo from '../../images/boomtown.svg';

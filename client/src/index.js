@@ -14,9 +14,6 @@ import { ViewerProvider } from './context/ViewerProvider';
 
 /**
  * @TODO: Add the Viewer Context
- *
- *
- *
  * Below in your <App />, wrap the <ViewerProvider /> component around
  * the <BrowserRouter /> component so the router is aware of whether a
  * user is currently logged in and who that user is.
@@ -30,6 +27,7 @@ const App = () => {
       <ReduxProvider store={store}>
         <MuiThemeProvider theme={theme}>
           <CssBaseline />
+
           <ViewerProvider>
             <BrowserRouter>
               <Layout />
