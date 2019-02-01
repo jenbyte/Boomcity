@@ -19,7 +19,7 @@ const styles = theme => ({
     borderRadius: 0
   },
   media: {
-    minHeight: 200
+    minHeight: 250
   },
   select: {
     color: '#808080',

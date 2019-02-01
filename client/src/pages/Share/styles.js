@@ -1,9 +1,10 @@
 const styles = theme => ({
-  flexBoxForm: {
+  flexForm: {
     display: 'flex',
-    // flexGrow: 1,
+    flexGrow: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    // height: '100vh',
     maxWidth: 950,
     margin: 'auto',
     padding: '5% 0'

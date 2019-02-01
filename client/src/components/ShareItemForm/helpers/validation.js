@@ -22,7 +22,7 @@ export default function validate(values, selectedTags, fileSelected) {
     errors.fileSelected = (
       <Typography style={{ color: 'red', fontsize: '10px' }}>
         Image is missing
-      </Typography>
+      </Typography> // look at final-form docs to see how to display error
     );
   }
   if (!selectedTags || selectedTags.length === 0) {

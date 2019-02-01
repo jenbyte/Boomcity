@@ -7,11 +7,13 @@ import { CircularProgress, Typography } from '@material-ui/core';
 function FullScreenLoader(props) {
   const { classes } = props;
   return (
-    <div className={classes.flex}>
-      <CircularProgress color="primary" size={30} thickness={8} />{' '}
-      <Typography className={classes.loading} component="h3">
-        Loading...
-      </Typography>
+    <div className={classes.container}>
+      <div className={classes.flex}>
+        <CircularProgress color="primary" size={50} thickness={5} />{' '}
+        <Typography className={classes.loading} component="h3">
+          Loading...
+        </Typography>
+      </div>
     </div>
   );
 }

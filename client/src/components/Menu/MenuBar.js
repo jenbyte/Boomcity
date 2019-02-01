@@ -9,7 +9,6 @@ import {
   MenuItem,
   Toolbar
 } from '@material-ui/core';
-import ShareItemForm from '../../components/ShareItemForm';
 import logo from '../../images/boomtown.svg';
 import {
   MoreVert,
@@ -18,11 +17,12 @@ import {
   PowerSettingsNew
 } from '@material-ui/icons';
 import useStyles from './styles';
-// import { renderToStringWithData } from 'react-apollo';
+import { graphql, compose } from 'react-apollo';
+import { LOGOUT_MUTATION, VIEWER_QUERY } from '../../apollo/queries';
+import { Link } from 'react-router-dom';
 
 class MenuAppBar extends React.Component {
   state = {
-    auth: true,
     anchorEl: null
   };
 
@@ -35,9 +35,10 @@ class MenuAppBar extends React.Component {
   handleClose = () => {
     this.setState({ anchorEl: null });
   };
+
   render() {
     const { classes } = this.props;
-    const { auth, anchorEl } = this.state;
+    const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
 
     return (
@@ -58,14 +59,8 @@ class MenuAppBar extends React.Component {
               />
             </IconButton>
             <div className={classes.grow} />
-
-            <Button
-              color="inherit"
-              className={classes.shareButton}
-              href="/share"
-            >
-              {/* className={classes.menuButton} */}
-              <AddCircle />Share something
+            <Button color="inherit" href="/share">
+              <AddCircle className={classes.addCircle} />Share something
             </Button>
 
             <div className={classes.sectionMobile}>
@@ -94,19 +89,19 @@ class MenuAppBar extends React.Component {
               >
                 <MenuItem
                   className={classes.menuItem}
-                  onClick={this.handleClose}
+                  component={Link}
                   to="/profile"
                 >
-                  {/* className={classes.menuIcon} */}
-                  <Fingerprint /> Your Profile
+                  <Fingerprint className={classes.menuIcon} /> Your Profile
                 </MenuItem>
                 <MenuItem
                   className={classes.menuItem}
-                  onClick={this.handleClose}
-                  to="/logout"
+                  onClick={e => {
+                    e.preventDefault();
+                    this.props.logoutMutation({});
+                  }}
                 >
-                  {/* className={classes.menuIcon} */}
-                  <PowerSettingsNew /> Sign Out
+                  <PowerSettingsNew className={classes.menuIcon} /> Sign Out
                 </MenuItem>
               </Menu>
             </div>
@@ -116,8 +111,15 @@ class MenuAppBar extends React.Component {
     );
   }
 }
-MenuAppBar.propTypes = {
-  classes: PropTypes.object.isRequired
-};
 
-export default withStyles(useStyles)(MenuAppBar);
+MenuAppBar.propTypes = { classes: PropTypes.object.isRequired };
+
+const refetchQueries = [{ query: VIEWER_QUERY }];
+
+export default compose(
+  graphql(LOGOUT_MUTATION, {
+    options: { refetchQueries },
+    name: 'logoutMutation'
+  }),
+  withStyles(useStyles)
+)(MenuAppBar);

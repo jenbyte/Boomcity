@@ -29,7 +29,7 @@ const ItemsCard = ({ classes, item }) => {
               {item.itemowner.email ? (
                 <Gravatar email={item.itemowner.email} />
               ) : (
-                <Gravatar email="blue@turtle.com" />
+                <Gravatar email="red@turtle.com" />
               )}
             </Avatar>
 

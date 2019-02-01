@@ -9,7 +9,7 @@ import { ALL_USER_ITEMS_QUERY } from '../../apollo/queries';
 class ProfileContainer extends Component {
   render() {
     return (
-      <Query query={ALL_USER_ITEMS_QUERY} variables={{ id: 33 }}>
+      <Query query={ALL_USER_ITEMS_QUERY} variables={{ id: 71 }}>
         {({ loading, error, data }) => {
           if (loading) return <FullScreenLoader inverted />;
           if (error) return <p>{`Error! ${error.message}`}</p>;

@@ -88,6 +88,7 @@ class ShareItemForm extends Component {
 
   render() {
     const { classes, tags, updateItem, resetImage, resetItem } = this.props;
+
     return (
       <div>
         <Typography className={classes.header}>Share. Borrow. Grow.</Typography>
@@ -96,8 +97,8 @@ class ShareItemForm extends Component {
           {addItem => {
             return (
               <Form
-                onSubmit={values => {
-                  console.log(values);
+                onSubmit={async values => {
+                  console.log('values:', values);
                   // e.preventDefault();
                   addItem({
                     variables: {
@@ -110,6 +111,7 @@ class ShareItemForm extends Component {
                       }
                     }
                   });
+                  // resetItem();
                 }}
                 validate={values => {
                   return validate(
@@ -118,8 +120,28 @@ class ShareItemForm extends Component {
                     this.state.fileSelected
                   );
                 }}
-                render={({ handleSubmit, pristine, submitting, invalid }) => (
-                  <form onSubmit={handleSubmit}>
+                render={({
+                  handleSubmit,
+                  pristine,
+                  submitting,
+                  invalid,
+                  form
+                }) => (
+                  <form
+                    onSubmit={event => {
+                      console.log('pic upload', this.fileInput);
+                      handleSubmit(event).then(() => {
+                        form.reset();
+                        resetItem();
+                        this.setState({
+                          selectedTags: [],
+                          fileSelected: false
+                        });
+                        this.fileInput.current.value = '';
+                        resetImage();
+                      });
+                    }}
+                  >
                     <FormSpy
                       subscription={{ values: true }}
                       component={({ values }) => {
@@ -180,12 +202,7 @@ class ShareItemForm extends Component {
                             />
                             {meta.touched &&
                               meta.invalid && (
-                                <div
-                                  className="error"
-                                  style={{ color: 'red', fontsize: '10px' }}
-                                >
-                                  {meta.error}
-                                </div>
+                                <div className="error">{meta.error}</div>
                               )}
                           </div>
                         );
@@ -206,12 +223,7 @@ class ShareItemForm extends Component {
                             />
                             {meta.touched &&
                               meta.invalid && (
-                                <div
-                                  className="error"
-                                  style={{ color: 'red', fontsize: '10px' }}
-                                >
-                                  {meta.error}
-                                </div>
+                                <div className="error">{meta.error}</div>
                               )}
                           </div>
                         );
@@ -256,6 +268,14 @@ class ShareItemForm extends Component {
                       className={classes.shareButton}
                       type="submit"
                       disabled={pristine || submitting || invalid}
+
+                      // onClick={() => {
+                      //   this.fileInput.current.value = '';
+                      //   this.setState({ fileSelected: false });
+                      //   form.reset();
+                      //   resetItem();
+                      //   this.setState({ selectedTags: [] });
+                      // }}
                     >
                       Share
                     </Button>

@@ -138,15 +138,15 @@ module.exports = postgres => {
           try {
             // Begin postgres transaction
             client.query('BEGIN', async err => {
-              // Convert image (file stream) to Base64
-              // const imageStream = image.stream.pipe(strs('base64'));
+              Convert image (file stream) to Base64
+              const imageStream = image.stream.pipe(strs('base64'));
 
-              // let base64Str = '';
-              // imageStream.on('data', data => {
-              //   base64Str += data;
-              // });
+              let base64Str = '';
+              imageStream.on('data', data => {
+                base64Str += data;
+              });
 
-              // imageStream.on('end', async () => {
+              imageStream.on('end', async () => {
               // Image has been converted, begin saving things
               const { title, description, tags } = item;
 
@@ -208,7 +208,7 @@ module.exports = postgres => {
                 resolve(insertNewItem.rows[0]);
               });
             });
-            // });
+            });
           } catch (e) {
             // Something went wrong
             client.query('ROLLBACK', err => {

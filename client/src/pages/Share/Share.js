@@ -6,7 +6,7 @@ import ShareItemPreview from '../../components/ShareFormPreview';
 
 const Share = ({ classes, tags }) => {
   return (
-    <div className={classes.flexBoxForm} height="100vh">
+    <div className={classes.flexForm}>
       <div className={classes.sharePreview}>
         <ShareItemPreview />
       </div>

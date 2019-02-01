@@ -19,12 +19,12 @@ const ItemFields = gql`
       email
       bio
     }
-    # borrower {
-    # id
-    # fullname
-    # email
-    # bio
-    # }
+    borrower {
+      id
+      fullname
+      email
+      bio
+    }
   }
 `;
 
@@ -73,8 +73,8 @@ export const ALL_TAGS_QUERY = gql`
 `;
 
 export const ADD_ITEM_MUTATION = gql`
-  mutation addItem($item: NewItemInput!, $image: Upload) {
-    addItem(item: $item, image: $image) {
+  mutation addItem($item: NewItemInput!) {
+    addItem(item: $item) {
       id
       title
       description
@@ -83,8 +83,6 @@ export const ADD_ITEM_MUTATION = gql`
         title
       }
     }
-    # @TODO: Pass the item and image into the addItem mutation as arguments
-    # and return the new item id when the mutation is complete.
   }
 `;
 
@@ -103,16 +101,16 @@ export const VIEWER_QUERY = gql`
   }
 `;
 
-// export const LOGOUT_MUTATION = gql`
-//   mutation {
-
-//     # @TODO: Run the logout mutation.
-//   }
-// `;
+export const LOGOUT_MUTATION = gql`
+  mutation {
+    logout
+  }
+`;
 
 export const SIGNUP_MUTATION = gql`
   mutation signup($user: SignupInput!) {
     signup(user: $user)
+
     # @TODO: Pass the user into the signup mutation as an argument
     # and return the id of the new user when the mutation is complete.
   }
