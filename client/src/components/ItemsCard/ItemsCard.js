@@ -12,6 +12,7 @@ import {
   Typography
 } from '@material-ui/core';
 import styles from './styles';
+import { Link, withRouter } from 'react-router-dom';
 
 const ItemsCard = ({ classes, item }) => {
   return (
@@ -21,6 +22,8 @@ const ItemsCard = ({ classes, item }) => {
           className={classes.media}
           image={item.imageurl}
           title={item.title}
+          component={Link}
+          to={`/profile/${item.itemowner.id}`}
         />
 
         <CardContent>
@@ -71,4 +74,4 @@ ItemsCard.defaultProps = {
   }
 };
 
-export default withStyles(styles)(ItemsCard);
+export default withRouter(withStyles(styles)(ItemsCard));

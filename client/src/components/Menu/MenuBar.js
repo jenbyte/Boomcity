@@ -19,7 +19,7 @@ import {
 import useStyles from './styles';
 import { graphql, compose } from 'react-apollo';
 import { LOGOUT_MUTATION, VIEWER_QUERY } from '../../apollo/queries';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 class MenuAppBar extends React.Component {
   state = {
@@ -116,10 +116,12 @@ MenuAppBar.propTypes = { classes: PropTypes.object.isRequired };
 
 const refetchQueries = [{ query: VIEWER_QUERY }];
 
-export default compose(
-  graphql(LOGOUT_MUTATION, {
-    options: { refetchQueries },
-    name: 'logoutMutation'
-  }),
-  withStyles(useStyles)
-)(MenuAppBar);
+export default withRouter(
+  compose(
+    graphql(LOGOUT_MUTATION, {
+      options: { refetchQueries },
+      name: 'logoutMutation'
+    }),
+    withStyles(useStyles)
+  )(MenuAppBar)
+);
