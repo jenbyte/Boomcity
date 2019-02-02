@@ -24,86 +24,124 @@ class AccountForm extends Component {
     };
   }
 
+  onSubmit = values => {
+    console.log('onSubmit', values);
+    if (this.state.formToggle) {
+      this.props.loginMutation({
+        variables: {
+          user: {
+            email: values.email,
+            password: values.password
+          }
+        }
+      });
+    } else {
+      this.props.signupMutation({
+        variables: {
+          user: {
+            fullname: 'test',
+            email: 'test@gmail.com',
+            password: 'test'
+          }
+        }
+      });
+    }
+  };
+
   render() {
-    // console.log(this.props);
     const { classes } = this.props;
 
     return (
       <Form
-        onSubmit={values => {
-          console.log('submit:', values);
-        }}
+        onSubmit={() => {}}
         validate={values => {
-          console.log('validate:', values);
+          return validate(
+            values,
+            this.state.selectedTags,
+            this.state.fileSelected
+          );
         }}
-        render={({ handleSubmit, pristine, submitting, invalid, form }) => (
+        render={({ handleSubmit, pristine, submitting, invalid, values }) => (
           <form
             className={classes.accountForm}
-            onSubmit={event => {
-              handleSubmit(event).then(() => {
-                console.log('submitted!');
-              });
+            onSubmit={e => {
+              e.preventDefault();
+              console.log('form', values);
+              if (this.state.formToggle) {
+                this.props.loginMutation({
+                  variables: {
+                    user: {
+                      email: values.email,
+                      password: values.password
+                    }
+                  }
+                });
+              } else {
+                this.props.signupMutation({
+                  variables: {
+                    user: {
+                      fullname: 'test',
+                      email: 'test@gmail.com',
+                      password: 'test'
+                    }
+                  }
+                });
+              }
             }}
           >
             {!this.state.formToggle && (
-              <FormControl fullWidth className={classes.formControl}>
-                <InputLabel htmlFor="fullname">Username</InputLabel>
-                <Field
-                  name="name"
-                  render={({ input, meta }) => (
-                    <div className="field" width="100%">
-                      <Input
-                        id="name"
-                        type="text"
-                        // inputProps={{ autoComplete: 'on' }}
-                        // value={''}
-                      />
-                      {meta.touched && meta.error && <span>{meta.error}</span>}
-                    </div>
-                  )}
-                />
-              </FormControl>
-            )}
-
-            <FormControl fullWidth className={classes.formControl}>
-              <InputLabel htmlFor="email">Email</InputLabel>
-
-              <Field
-                name="email"
-                render={() => {
-                  return (
-                    <div>
-                      <Input
-                        id="email"
-                        type="text"
-                        inputProps={{ autoComplete: 'off' }}
-                        value={''}
-                      />
-                    </div>
-                  );
-                }}
-              />
-            </FormControl>
-
-            <FormControl fullWidth className={classes.formControl}>
-              <InputLabel htmlFor="password">Password</InputLabel>
-
-              <Field
-                name="name"
-                render={({ input, meta }) => {
-                  return (
+              <Field name="fullname">
+                {({ input, meta }) => (
+                  <FormControl fullWidth className={classes.formControl}>
+                    <InputLabel htmlFor="fullname">Username</InputLabel>
                     <Input
-                      id="password"
-                      type="password"
+                      id="fullname"
+                      type="text"
                       inputProps={{
                         autoComplete: 'off'
                       }}
                       value={''}
+                      {...input}
                     />
-                  );
-                }}
-              />
-            </FormControl>
+                    {meta.touched && meta.error && <span>{meta.error}</span>}
+                  </FormControl>
+                )}
+              </Field>
+            )}
+
+            <Field name="email">
+              {({ input, meta }) => (
+                <FormControl fullWidth className={classes.formControl}>
+                  <InputLabel htmlFor="email">Email</InputLabel>
+                  <Input
+                    id="email"
+                    type="text"
+                    inputProps={{ autoComplete: 'off' }}
+                    value={''}
+                    {...input}
+                  />
+                  {meta.touched && meta.error && <span>{meta.error}</span>}
+                </FormControl>
+              )}
+            </Field>
+
+            <Field name="password">
+              {({ input, meta }) => (
+                <FormControl fullWidth className={classes.formControl}>
+                  <InputLabel htmlFor="password">Password</InputLabel>
+                  <Input
+                    id="password"
+                    type="password"
+                    inputProps={{
+                      autoComplete: 'off'
+                    }}
+                    value={''}
+                    {...input}
+                  />
+                  {meta.touched && meta.error && <span>{meta.error}</span>}
+                </FormControl>
+              )}
+            </Field>
 
             <FormControl className={classes.formControl}>
               <Grid
@@ -118,35 +156,34 @@ class AccountForm extends Component {
                   variant="contained"
                   size="large"
                   color="secondary"
-                  onClick={e => {
-                    e.preventDefault();
-                    if (this.state.formToggle) {
-                      this.props.loginMutation({
-                        variables: {
-                          user: {
-                            email: 'doge@paws.com',
-                            password: 'boomtown'
-                          }
-                        }
-                      });
-                    } else {
-                      this.props.signupMutation({
-                        variables: {
-                          user: {
-                            fullname: 'Shiba Inu',
-                            email: 'doge@paws.com',
-                            password: 'boomtown'
-                          }
-                        }
-                      });
-                    }
-                  }}
-                  disabled={
-                    false // @TODO: This prop should depend on pristine or valid state of form
-                  }
+                  disabled={pristine || invalid}
+                  // onClick={e => {
+                  //   e.preventDefault();
+                  //   if (this.state.formToggle) {
+                  //     this.props.loginMutation({
+                  //       variables: {
+                  //         user: {
+                  //           email: values.email,
+                  //           password: '{ password }'
+                  //         }
+                  //       }
+                  //     });
+                  //   } else {
+                  //     this.props.signupMutation({
+                  //       variables: {
+                  //         user: {
+                  //           fullname: '',
+                  //           email: '',
+                  //           password: ''
+                  //         }
+                  //       }
+                  //     });
+                  //   }
+                  // }}
                 >
                   {this.state.formToggle ? 'Enter' : 'Create Account'}
                 </Button>
+
                 <Typography>
                   <button
                     className={classes.formToggle}
@@ -171,7 +208,8 @@ class AccountForm extends Component {
             </Typography>
           </form>
         )}
-      /> // EndOf Form closing tag
+      />
+      // EndOf <Form closing tag
     );
   }
 }
