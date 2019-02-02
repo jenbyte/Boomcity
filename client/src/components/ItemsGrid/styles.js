@@ -1,5 +1,7 @@
 const styles = theme => ({
   root: {
+    display: 'flex',
+    flexWrap: 'wrap',
     flexGrow: 1
   },
   card: {

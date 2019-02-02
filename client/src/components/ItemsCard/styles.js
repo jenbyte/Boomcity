@@ -14,9 +14,11 @@ const styles = theme => ({
     padding: '0.5rem 1.5rem'
   },
   card: {
-    // minWidth: 300,
-    // width: '100%',
-    borderRadius: 0
+    // minWidth: 400,
+    borderRadius: 0,
+    dislay: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between'
   },
   media: {
     minHeight: 250

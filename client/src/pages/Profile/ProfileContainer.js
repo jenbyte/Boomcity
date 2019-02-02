@@ -8,7 +8,7 @@ import { ALL_USER_ITEMS_QUERY } from '../../apollo/queries';
 
 class ProfileContainer extends Component {
   render() {
-    const id = this.props.match.params.path || '68';
+    const id = this.props.match.params.userid || '68';
     console.log(this.props);
     return (
       <Query query={ALL_USER_ITEMS_QUERY} variables={{ id: id }}>
