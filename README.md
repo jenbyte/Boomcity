@@ -21,7 +21,6 @@ npm run start:dev
 ## Technologies Used
 
 - Apollo Client
-- Webpack
 - Javascript
 - GraphQL
 - Node.js

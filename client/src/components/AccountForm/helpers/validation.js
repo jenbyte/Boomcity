@@ -4,10 +4,14 @@ import Typography from '@material-ui/core/Typography';
 export default function validate(values) {
   const errors = {};
 
-  if (!values.email) {
+  if (
+    !values.email ||
+    values.email === '' ||
+    /.*@.*\..*/.test(values.email) === false
+  ) {
     errors.email = (
       <Typography style={{ color: '#d03030', fontsize: '10px' }}>
-        Required
+        Please enter a valid email
       </Typography>
     );
   }

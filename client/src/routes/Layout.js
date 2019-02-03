@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Redirect, Route, Switch } from 'react-router';
 // import { BrowserRouter as Router, Link, NavLink } from 'react-router-dom';
 import Home from '../pages/Home';
@@ -8,8 +8,6 @@ import Share from '../pages/Share';
 import MenuBar from '../components/Menu/MenuBar';
 import { ViewerContext } from '../context/ViewerProvider';
 import FullScreenLoader from '../components/Loader/FullScreenLoader';
-
-// const ViewerContext = React.createContext();
 
 export default () => (
   <React.Fragment>

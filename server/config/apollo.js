@@ -7,7 +7,7 @@ let resolvers = require('../api/resolvers');
 module.exports = ({ app, pgResource }) => {
   resolvers = resolvers(app);
 
-  // Use 'makeExecutableSchema' to wire up your schema to your resolvers:
+  // Use 'makeExecutableSchema' to wire up schema to resolvers:
   const schema = makeExecutableSchema({ typeDefs, resolvers });
 
   const apolloServer = new ApolloServer({

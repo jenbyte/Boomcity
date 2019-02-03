@@ -2,14 +2,12 @@ const styles = theme => ({
   root: {
     flexGrow: 1
   },
-  grow: {
-    flexGrow: 1
-  },
   addCircle: {
     fontSize: 30,
     paddingRight: 8
   },
   shareButton: {
+    flexGrow: 1
     // display: 'flex'
     // justifyContent: 'space-between'
   },
@@ -18,7 +16,7 @@ const styles = theme => ({
     width: 40
   },
   menuItem: {
-    width: 200
+    width: 165
   }
 });
 

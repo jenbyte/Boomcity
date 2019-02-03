@@ -1,7 +1,7 @@
 {
-  "name": "boomtown-client",
+  "name": "boomcity-client",
   "version": "1.0.0",
-  "description": "Client-side code for Boomtown app.",
+  "description": "Client-side code for Boomcity app.",
   "scripts": {
     "build": "react-scripts build && rm -rf ../server/public && mv build ../server/public",
     "precommit": "npm run lint --quiet",

@@ -27,7 +27,11 @@ const ItemsCard = ({ classes, item }) => {
         />
 
         <CardContent>
-          <div className={classes.userInfo}>
+          <div
+            className={classes.userInfo}
+            component={Link}
+            to={`/profile/${item.itemowner.id}`}
+          >
             <Avatar className={classes.avatar}>
               {item.itemowner.email ? (
                 <Gravatar email={item.itemowner.email} />
@@ -35,17 +39,14 @@ const ItemsCard = ({ classes, item }) => {
                 <Gravatar email="red@turtle.com" />
               )}
             </Avatar>
-
-            <Typography className={classes.metaInfo}>
-              <a
-                className={classes.user}
-                component={Link}
-                href={`/profile/${item.itemowner.id}`}
-              >
+            <div className={classes.metaInfo}>
+              <Typography className={classes.metaName}>
                 {item.itemowner.fullname}
-              </a>
-              <p className={classes.pos}>{item.created} </p>
-            </Typography>
+              </Typography>
+              <Typography className={classes.metaDate}>
+                {item.created}
+              </Typography>
+            </div>
           </div>
 
           <Typography className={classes.title}>{item.title}</Typography>

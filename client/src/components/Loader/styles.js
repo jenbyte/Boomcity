@@ -1,22 +1,25 @@
 const styles = theme => ({
-  container: {
+  root: {
     background: theme.palette.bg.main,
-    height: '100%',
+    height: '100vh',
     width: '100%'
   },
   quote: {
-    color: '#F1F1F1',
-    fontSize: '1rem',
+    color: theme.palette.primary.main,
+    fontSize: '1.3rem',
     fontWeight: 500,
-    paddingLeft: 15
+    lineHeight: 1.5,
+    textAlign: 'center',
+    paddingLeft: 15,
+    paddingTop: 50,
+    width: 400
   },
-  flex: {
+  container: {
     margin: theme.spacing.unit * 2,
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    lineHeight: 2
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 });
 

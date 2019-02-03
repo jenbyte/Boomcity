@@ -102,15 +102,16 @@ module.exports = app => {
 
       async addItem(parent, args, context, info) {
         // const image = await image;
-        const user = await jwt.decode(context.token, app.get('JWT_SECRET'));
-
-        const newItem = await context.pgResource.saveNewItem({
-          item: args.item,
-          // image: args.image,
-          user
-        });
-
-        return newItem;
+        try {
+          const user = await jwt.decode(context.token, app.get('JWT_SECRET'));
+          const newItem = await context.pgResource.saveNewItem({
+            item: args.item,
+            user // image: args.image,
+          });
+          return newItem;
+        } catch (e) {
+          throw new ApolloError(e);
+        }
       }
     }
   };

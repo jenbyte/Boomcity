@@ -5,7 +5,6 @@ const styles = theme => ({
     height: 50
   },
   button: {
-    // background: '#fff',
     border: '1px solid #D3D3D3',
     color: theme.palette.secondary.main,
     fontSize: '0.9rem',
@@ -47,14 +46,17 @@ const styles = theme => ({
   metaInfo: {
     display: 'flex',
     flexDirection: 'column',
-    // justifyContent: 'center',
-    lineHeight: 0.5
+    alignItems: 'flex-start',
+    justifyContent: 'center'
   },
-  user: {
+  metaName: {
     '&:hover': {
       color: theme.palette.secondary.main,
       cursor: 'pointer'
     }
+  },
+  metaDate: {
+    color: 'grey'
   }
 });
 
