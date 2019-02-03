@@ -10,7 +10,7 @@ import { ViewerContext } from '../../context/ViewerProvider';
 class ProfileContainer extends Component {
   render() {
     const id = this.props.match.params.userid;
-    console.log('PC', this.props);
+
     return (
       <ViewerContext.Consumer>
         {({ viewer }) => (

@@ -6,7 +6,9 @@ import { ViewerContext } from '../../context/ViewerProvider';
 const ShareItemPreview = ({ shareItemPreview }) => {
   return (
     <ViewerContext.Consumer>
-      {({ viewer }) => <ItemsCard item={shareItemPreview} />}
+      {({ viewer }) => (
+        <ItemsCard item={{ ...shareItemPreview, itemowner: viewer }} />
+      )}
     </ViewerContext.Consumer>
   );
 };
