@@ -34,13 +34,35 @@ class ShareItemForm extends Component {
       selectedTags: []
     };
   }
+
+  handleSelectFile = () => {
+    this.setState({ fileSelected: this.fileInput.current.files[0] });
+  };
+  handleSelectTags = event => {
+    this.setState({ selectedTags: event.target.value });
+  };
+
   applyTags(tags) {
     return (
       tags &&
       tags
-        .filter(t => this.state.selectedTags.indexOf(t.id) >= 0)
-        .map(t => ({ title: t.title, id: t.id }))
+        .filter(tag => this.state.selectedTags.indexOf(tag.id) > -1)
+        .map(tag => ({ title: tag.title, id: tag.id }))
     );
+  }
+
+  dispatchUpdate(values, tags, updateItem) {
+    if (!values.imageurl && this.state.fileSelected) {
+      this.getBase64Url().then(imageurl => {
+        updateItem({
+          imageurl
+        });
+      });
+    }
+    updateItem({
+      ...values,
+      tags: this.applyTags(tags)
+    });
   }
 
   getBase64Url() {
@@ -57,28 +79,6 @@ class ShareItemForm extends Component {
     });
   } // converts file into base64 string
 
-  dispatchUpdate(values, tags, updateItem) {
-    if (!values.imageurl && this.state.fileSelected) {
-      this.getBase64Url().then(imageurl => {
-        updateItem({
-          imageurl
-        });
-      });
-    }
-    updateItem({
-      ...values,
-      tags: this.applyTags(tags)
-    });
-  }
-
-  handleSelectFile = () => {
-    this.setState({ fileSelected: this.fileInput.current.files[0] });
-  };
-
-  handleSelectTags = event => {
-    this.setState({ selectedTags: event.target.value });
-  };
-
   generateTagsText(tags, selected) {
     return tags
       .map(tag => (selected.indexOf(tag.id) > -1 ? tag.title : false))
@@ -88,16 +88,16 @@ class ShareItemForm extends Component {
 
   render() {
     const { classes, tags, updateItem, resetImage, resetItem } = this.props;
-
+    console.log('state', this.state);
     return (
       <div>
         <Typography className={classes.header}>Share. Borrow. Grow.</Typography>
         <Mutation mutation={ADD_ITEM_MUTATION}>
           {addItem => {
+            console.log(tags);
             return (
               <Form
                 onSubmit={async values => {
-                  console.log('values:', values);
                   // e.preventDefault();
                   addItem({
                     variables: {

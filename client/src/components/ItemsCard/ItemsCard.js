@@ -15,13 +15,13 @@ import styles from './styles';
 import { Link, withRouter } from 'react-router-dom';
 
 function convertDate(date) {
-  const now = new Date();
+  const current = new Date();
   {
-    if (!date) date = now;
+    if (!date) date = current;
     const millisecondsInDay = 1000 * 60 * 60 * 24;
-    const daysAgo = Math.floor((now - date) / millisecondsInDay);
+    const daysAgo = Math.floor((current - date) / millisecondsInDay);
     const millisecondsInHour = millisecondsInDay / 24;
-    const hoursAgo = Math.floor((now - date) / millisecondsInHour);
+    const hoursAgo = Math.floor((current - date) / millisecondsInHour);
 
     let timeUnit, timeCount;
     if (daysAgo >= 1) {
@@ -72,11 +72,11 @@ const ItemsCard = ({ classes, item }) => {
 
           <Typography className={classes.title}>{item.title}</Typography>
 
-          <Typography>
-            <p className={classes.select} color="textSecondary">
-              {item.tags.map(tag => `${tag.title}`).join(', ')}
-            </p>
-            <p className={classes.description}>{item.description}</p>
+          <Typography className={classes.select} color="textSecondary">
+            {item.tags.map(tag => `${tag.title}`).join(', ')}
+          </Typography>
+          <Typography className={classes.description}>
+            {item.description}
           </Typography>
         </CardContent>
       </Fragment>
@@ -97,8 +97,7 @@ ItemsCard.defaultProps = {
     title: 'title',
     description: 'description',
     tags: [],
-    imageurl: 'http://via.placeholder.com/350x250?text=Please select an image',
-    itemowner: {}
+    imageurl: 'http://via.placeholder.com/350x250?text=Please select an image'
   }
 };
 

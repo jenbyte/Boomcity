@@ -16,20 +16,17 @@ const UploadScalar = new GraphQLScalarType({
   }
 });
 
-/**
- *  @DONE: Custom Types
- *  GraphQL includes the following built-in Scalar Types: https://graphql.org/learn/schema/#scalar-types
+/**  Custom Types
  *
- *  The purpose of the Scalar type is to validate the information being sent and received
- *  from our GraphQL API.
+ *  GraphQL has these built-in Scalar Types: https://graphql.org/learn/schema/#scalar-types
+ *  Scalar type validates the information being sent and received from GraphQL API.
  *
- *  Apollo allows us to define our own custom types. We'll create our own custom type to handle the value from the 'created' field
- *  on the Item: https://www.apollographql.com/docs/graphql-tools/scalars.html
+ *  Apollo helps create custom types. We'll create our own custom type to handle the value
+ *  from the 'created' field on Item: https://www.apollographql.com/docs/graphql-tools/scalars.html
  *
- *  Once you've defined your custom DATE type, don't forget to add it to your schema.
+ *  Rmb to add custom Date to schema
  */
 
-// @TOOD: Refactor this into a custom DATE scalar type using new GraphQLScalarType()
 const DateScalar = new GraphQLScalarType({
   name: 'Date',
   description: 'Date custom scalar type',

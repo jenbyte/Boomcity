@@ -20,6 +20,9 @@ const styles = theme => ({
     [theme.breakpoints.up('sm')]: {
       width: '400px'
     }
+  },
+  errorMessage: {
+    color: 'blue'
   }
 });
 
