@@ -6,7 +6,7 @@ const styles = theme => ({
   },
   button: {
     border: '1px solid #D3D3D3',
-    color: theme.palette.secondary.main,
+    color: theme.palette.primary.main,
     fontSize: '0.9rem',
     margin: theme.spacing.unit,
     marginBottom: '1rem',

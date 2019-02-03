@@ -97,7 +97,7 @@ class ShareItemForm extends Component {
             return (
               <Form
                 onSubmit={async values => {
-                  // console.log('values:', values);
+                  console.log('values:', values);
                   // e.preventDefault();
                   addItem({
                     variables: {
@@ -165,8 +165,6 @@ class ShareItemForm extends Component {
                       ) : (
                         <Button
                           className={classes.resetImage}
-                          // variant="contained"
-                          // component="span"
                           onClick={() => {
                             this.fileInput.current.value = '';
                             this.setState({ fileSelected: false });

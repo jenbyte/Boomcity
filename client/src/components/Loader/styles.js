@@ -1,8 +1,8 @@
 const styles = theme => ({
   root: {
     background: theme.palette.bg.main,
-    height: '100vh',
-    width: '100%'
+    height: '100%'
+    // width: '100%'
   },
   quote: {
     color: theme.palette.primary.main,

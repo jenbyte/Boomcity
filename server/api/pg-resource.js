@@ -111,7 +111,7 @@ module.exports = postgres => {
     async saveNewItem({ item, user }) {
       return new Promise((resolve, reject) => {
         /**
-         * Begin transaction by opening a long-lived connection
+         * Begin transaction: open a long-lived connection
          * to a client from the client pool.
          */
         postgres.connect((err, client, done) => {
@@ -154,8 +154,8 @@ module.exports = postgres => {
               };
 
               // Upload image
-              const uploadedImage = await client.query(imageUploadQuery);
-              const imageid = uploadedImage.rows[0].id;
+              // const uploadedImage = await client.query(imageUploadQuery);
+              // const imageid = uploadedImage.rows[0].id;
 
               // Generate image relation query
               // @TODO
