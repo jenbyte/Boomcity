@@ -13,8 +13,10 @@ import {
   VIEWER_QUERY
 } from '../../apollo/queries';
 import { graphql, compose } from 'react-apollo';
+import { Mutation } from 'react-apollo';
 import validate from './helpers/validation';
 import styles from './styles';
+import PropTypes from 'prop-types';
 
 class AccountForm extends Component {
   constructor(props) {
@@ -23,83 +25,130 @@ class AccountForm extends Component {
       formToggle: true
     };
   }
+  // onSubmit(e) {
+  //   e.preventDefault();
+  //   console.log('form', e);
+  //   if (this.state.formToggle) {
+  //     this.props.loginMutation({
+  //       variables: {
+  //         user: {
+  //           email: 'values.email',
+  //           password: 'values.password'
+  //         }
+  //       }
+  //     });
+  //   } else {
+  //     this.props.signupMutation({
+  //       variables: {
+  //         user: {
+  //           fullname: 'test',
+  //           email: 'test@gmail.com',
+  //           password: 'test'
+  //         }
+  //       }
+  //     });
+  //   }
+  // }
 
-  onSubmit = values => {
-    console.log('onSubmit', values);
-    if (this.state.formToggle) {
-      this.props.loginMutation({
-        variables: {
-          user: {
-            email: values.email,
-            password: values.password
-          }
-        }
-      });
-    } else {
-      this.props.signupMutation({
-        variables: {
-          user: {
-            fullname: 'test',
-            email: 'test@gmail.com',
-            password: 'test'
-          }
-        }
-      });
-    }
-  };
+  onSubmit(values) {}
 
   render() {
-    const { classes } = this.props;
+    const { classes, loginMutation, signupMutation } = this.props;
+    console.log('props,', this.props);
 
     return (
-      <Form
-        onSubmit={() => {}}
-        validate={values => {
-          return validate(
-            values,
-            this.state.selectedTags,
-            this.state.fileSelected
-          );
-        }}
-        render={({ handleSubmit, pristine, submitting, invalid, values }) => (
-          <form
-            className={classes.accountForm}
-            onSubmit={e => {
-              e.preventDefault();
-              console.log('form', values);
-              if (this.state.formToggle) {
-                this.props.loginMutation({
-                  variables: {
-                    user: {
-                      email: values.email,
-                      password: values.password
+      <div>
+        {/* <Mutation mutation={SIGNUP_MUTATION}>
+          {(loginMutation, signupMutation) => {
+            return ( */}
+        <Form
+          // onSubmit={this.onSubmit()}
+          onSubmit={values => {
+            {
+              this.state.formToggle
+                ? loginMutation({
+                    variables: {
+                      user: {
+                        email: values.email,
+                        password: values.password
+                      }
                     }
-                  }
-                });
-              } else {
-                this.props.signupMutation({
-                  variables: {
-                    user: {
-                      fullname: 'test',
-                      email: 'test@gmail.com',
-                      password: 'test'
+                  })
+                : signupMutation({
+                    variables: {
+                      user: {
+                        fullname: values.fullname,
+                        email: values.email,
+                        password: values.password
+                      }
                     }
-                  }
-                });
-              }
-            }}
-          >
-            {!this.state.formToggle && (
-              <Field name="fullname">
+                  });
+            }
+          }}
+          validate={values => {
+            return validate(values);
+          }}
+          render={({ handleSubmit, pristine, submitting, invalid, values }) => (
+            <form
+              className={classes.accountForm}
+              onSubmit={handleSubmit}
+              // onSubmit={event => {
+              //   console.log(event);
+              //   event.preventDefault();
+              //   console.log('form', values);
+              //   if (this.state.formToggle) {
+              //     this.props.loginMutation({
+              //       variables: {
+              //         user: {
+              //           email: values.email,
+              //           password: values.password
+              //         }
+              //       }
+              //     });
+              //   } else {
+              //     this.props.signupMutation({
+              //       variables: {
+              //         user: {
+              //           fullname: 'test',
+              //           email: 'test@gmail.com',
+              //           password: 'test'
+              //         }
+              //       }
+              //     });
+              //   }
+              // }}
+            >
+              {!this.state.formToggle && (
+                <Field name="fullname">
+                  {({ input, meta }) => (
+                    <FormControl fullWidth className={classes.formControl}>
+                      <InputLabel htmlFor="fullname">Username</InputLabel>
+                      <Input
+                        id="fullname"
+                        type="text"
+                        inputProps={{ autoComplete: 'off' }}
+                        value={''}
+                        {...input}
+                      />
+                      {meta.touched &&
+                        meta.error && (
+                          <span className={classes.errorMessage}>
+                            {meta.error}
+                          </span>
+                        )}
+                    </FormControl>
+                  )}
+                </Field>
+              )}
+
+              <Field name="email">
                 {({ input, meta }) => (
                   <FormControl fullWidth className={classes.formControl}>
-                    <InputLabel htmlFor="fullname">Username</InputLabel>
+                    <InputLabel htmlFor="email">Email</InputLabel>
                     <Input
-                      id="fullname"
+                      id="email"
                       type="text"
-                      inputProps={{
-                        autoComplete: 'off'
-                      }}
+                      inputProps={{ autoComplete: 'off' }}
                       value={''}
                       {...input}
                     />
@@ -107,116 +156,83 @@ class AccountForm extends Component {
                   </FormControl>
                 )}
               </Field>
-            )}
 
-            <Field name="email">
-              {({ input, meta }) => (
-                <FormControl fullWidth className={classes.formControl}>
-                  <InputLabel htmlFor="email">Email</InputLabel>
-                  <Input
-                    id="email"
-                    type="text"
-                    inputProps={{ autoComplete: 'off' }}
-                    value={''}
-                    {...input}
-                  />
-                  {meta.touched && meta.error && <span>{meta.error}</span>}
-                </FormControl>
-              )}
-            </Field>
+              <Field name="password">
+                {({ input, meta }) => (
+                  <FormControl fullWidth className={classes.formControl}>
+                    <InputLabel htmlFor="password">Password</InputLabel>
+                    <Input
+                      id="password"
+                      type="password"
+                      inputProps={{ autoComplete: 'off' }}
+                      value={''}
+                      {...input}
+                    />
+                    {meta.touched && meta.error && <span>{meta.error}</span>}
+                  </FormControl>
+                )}
+              </Field>
 
-            <Field name="password">
-              {({ input, meta }) => (
-                <FormControl fullWidth className={classes.formControl}>
-                  <InputLabel htmlFor="password">Password</InputLabel>
-                  <Input
-                    id="password"
-                    type="password"
-                    inputProps={{
-                      autoComplete: 'off'
-                    }}
-                    value={''}
-                    {...input}
-                  />
-                  {meta.touched && meta.error && <span>{meta.error}</span>}
-                </FormControl>
-              )}
-            </Field>
-
-            <FormControl className={classes.formControl}>
-              <Grid
-                container
-                direction="row"
-                justify="space-between"
-                alignItems="center"
-              >
-                <Button
-                  type="submit"
-                  className={classes.formButton}
-                  variant="contained"
-                  size="large"
-                  color="secondary"
-                  disabled={pristine || invalid}
-                  // onClick={e => {
-                  //   e.preventDefault();
-                  //   if (this.state.formToggle) {
-                  //     this.props.loginMutation({
-                  //       variables: {
-                  //         user: {
-                  //           email: values.email,
-                  //           password: '{ password }'
-                  //         }
-                  //       }
-                  //     });
-                  //   } else {
-                  //     this.props.signupMutation({
-                  //       variables: {
-                  //         user: {
-                  //           fullname: '',
-                  //           email: '',
-                  //           password: ''
-                  //         }
-                  //       }
-                  //     });
-                  //   }
-                  // }}
+              <FormControl className={classes.formControl}>
+                <Grid
+                  container
+                  direction="row"
+                  justify="space-between"
+                  alignItems="center"
                 >
-                  {this.state.formToggle ? 'Enter' : 'Create Account'}
-                </Button>
-
-                <Typography>
-                  <button
-                    className={classes.formToggle}
-                    type="button"
-                    onClick={() => {
-                      // @TODO: Reset the form on submit
-                      this.setState({
-                        formToggle: !this.state.formToggle
-                      });
-                    }}
+                  <Button
+                    type="submit"
+                    className={classes.formButton}
+                    variant="contained"
+                    size="large"
+                    color="secondary"
+                    disabled={pristine || submitting || invalid}
                   >
-                    {this.state.formToggle
-                      ? 'Create an account.'
-                      : 'Login to existing account.'}
-                  </button>
-                </Typography>
-              </Grid>
-            </FormControl>
+                    {this.state.formToggle ? 'Enter' : 'Create Account'}
+                  </Button>
 
-            <Typography className={classes.errorMessage}>
-              {/* @TODO: Display sign-up and login errors */}
-            </Typography>
-          </form>
-        )}
-      />
-      // EndOf <Form closing tag
+                  <Typography>
+                    <button
+                      className={classes.formToggle}
+                      type="button"
+                      onClick={() => {
+                        // @TODO: Reset the form on submit
+                        this.setState({
+                          formToggle: !this.state.formToggle
+                        });
+                      }}
+                    >
+                      {this.state.formToggle
+                        ? 'Create an account.'
+                        : 'Login to existing account.'}
+                    </button>
+                  </Typography>
+                </Grid>
+              </FormControl>
+
+              <Typography className={classes.errorMessage}>
+                {/* @TODO: Display sign-up and login errors */}
+              </Typography>
+            </form>
+          )}
+        />
+        {/* );
+          }}
+        </Mutation> */}
+      </div>
     );
   }
 }
 
+AccountForm.propTypes = {
+  loginMutation: PropTypes.func.isRequired,
+  signupMutation: PropTypes.func.isRequired,
+  classes: PropTypes.object
+};
+
 const refetchQueries = [{ query: VIEWER_QUERY }];
 
-// Reload the app and access authenticated routes via VIEWER_QUERY
+// VIEWER_QUERY reloads the app and access authenticated routes
 export default compose(
   graphql(SIGNUP_MUTATION, {
     options: { refetchQueries },

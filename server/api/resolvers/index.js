@@ -1,5 +1,4 @@
 const { ApolloError } = require('apollo-server-express');
-
 const jwt = require('jsonwebtoken');
 const authMutations = require('./auth');
 const { UploadScalar, DateScalar } = require('../custom-types');
@@ -11,7 +10,6 @@ module.exports = app => {
 
     Query: {
       viewer(parent, args, { token }) {
-        console.log(token);
         if (token) {
           return jwt.decode(token, app.get('JWT_SECRET'));
         }
@@ -52,7 +50,7 @@ module.exports = app => {
           throw new ApolloError(e);
         }
       },
-      async borrowed(user, _args, { pgResource }) {
+      async borrowed(user, args, { pgResource }) {
         try {
           const userBorrowed = await pgResource.getBorrowedItemsForUser(
             user.id

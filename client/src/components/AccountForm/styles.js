@@ -22,7 +22,7 @@ const styles = theme => ({
     }
   },
   errorMessage: {
-    color: 'firebrick'
+    color: 'blue'
   }
 });
 

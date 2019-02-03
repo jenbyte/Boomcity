@@ -3,17 +3,8 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 function setCookie({ tokenName, token, res }) {
-  /**
-   *  @TODO: Authentication - Server
-   *
-   *  This helper function is responsible for attaching a cookie to the HTTP
-   *  response. 'apollo-server-express' handles returning the response to the client.
-   *  We added the 'req' object to the resolver context so we can use it to atttach the cookie.
+  /** We added the 'req' object to the resolver context so we can use it to atttach the cookie.
    *  The 'req' object comes from express.
-   *
-   *  A secure cookie that can be used to store a user's session data has the following properties:
-   *  1) It can't be accessed from JavaScript
-   *  2) It will only be sent via https (but we'll have to disable this in development using NODE_ENV)
    */
   // Refactor this method with the correct configuration values.
   res.cookie(tokenName, token, { maxAgie: 6000 * 60 * 2, httpOnly: true });
@@ -30,9 +21,9 @@ module.exports = app => {
   return {
     async signup(parent, args, context) {
       try {
-        //  Use bcrypt to generate a cryptographic hash to conceal the user's password before storing it.
+        /** Use bcrypt to generate a cryptographic hash that conceals
+         *  the user's password before storing it. */
         const hashedPassword = await bcrypt.hash(args.user.password, 10);
-        console.log(hashedPassword);
 
         const user = await context.pgResource.createUser({
           fullname: args.user.fullname,
@@ -59,7 +50,7 @@ module.exports = app => {
         );
         // Use bcrypt to compare the provided password to 'hashed' password stored in your database.
         const valid = await bcrypt.compare(args.user.password, user.password);
-        console.log(valid);
+        // console.log(valid);
         if (!valid || !user) throw 'User was not found.';
 
         setCookie({

@@ -37,7 +37,13 @@ const ItemsCard = ({ classes, item }) => {
             </Avatar>
 
             <Typography className={classes.metaInfo}>
-              {item.itemowner.fullname}
+              <a
+                className={classes.user}
+                component={Link}
+                href={`/profile/${item.itemowner.id}`}
+              >
+                {item.itemowner.fullname}
+              </a>
               <p className={classes.pos}>{item.created} </p>
             </Typography>
           </div>

@@ -6,21 +6,21 @@ export default function validate(values) {
 
   if (!values.email) {
     errors.email = (
-      <Typography style={{ color: 'red', fontsize: '10px' }}>
+      <Typography style={{ color: '#d03030', fontsize: '10px' }}>
         Required
       </Typography>
     );
   }
   if (!values.password) {
     errors.password = (
-      <Typography style={{ color: 'red', fontsize: '10px' }}>
+      <Typography style={{ color: '#d03030', fontsize: '10px' }}>
         Required
       </Typography>
     );
   }
   if (values.fullname && !values.fullname) {
-    errors.password = (
-      <Typography style={{ color: 'red', fontsize: '10px' }}>
+    errors.fullname = (
+      <Typography style={{ color: '#d03030', fontsize: '10px' }}>
         Required
       </Typography>
     );

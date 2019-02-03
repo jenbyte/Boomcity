@@ -1,14 +1,8 @@
 const { ApolloServer } = require('apollo-server-express');
 const { apolloUploadExpress } = require('apollo-upload-server');
 const { makeExecutableSchema } = require('graphql-tools');
-
 const typeDefs = require('../api/schema');
 let resolvers = require('../api/resolvers');
-
-const jsSchema = makeExecutableSchema({
-  typeDefs,
-  resolvers
-});
 
 module.exports = ({ app, pgResource }) => {
   resolvers = resolvers(app);
@@ -26,14 +20,6 @@ module.exports = ({ app, pgResource }) => {
         pgResource,
         req,
         token
-        /** @DONE: Provide Apollo context
-         *
-         * Above we can see that we are capturing the cookie from the request object,
-         * and retrieving the token. This is important for authentication.
-         *
-         * Refactor this code and supply any additional information (values, methods, objects...etc)
-         * you'll need to use in your resolving functions.
-         */
       };
     },
     schema

@@ -49,6 +49,12 @@ const styles = theme => ({
     flexDirection: 'column',
     // justifyContent: 'center',
     lineHeight: 0.5
+  },
+  user: {
+    '&:hover': {
+      color: theme.palette.secondary.main,
+      cursor: 'pointer'
+    }
   }
 });
 

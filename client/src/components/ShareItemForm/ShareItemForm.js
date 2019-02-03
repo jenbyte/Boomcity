@@ -92,13 +92,12 @@ class ShareItemForm extends Component {
     return (
       <div>
         <Typography className={classes.header}>Share. Borrow. Grow.</Typography>
-
         <Mutation mutation={ADD_ITEM_MUTATION}>
           {addItem => {
             return (
               <Form
                 onSubmit={async values => {
-                  console.log('values:', values);
+                  // console.log('values:', values);
                   // e.preventDefault();
                   addItem({
                     variables: {
@@ -129,17 +128,17 @@ class ShareItemForm extends Component {
                 }) => (
                   <form
                     onSubmit={event => {
-                      console.log('pic upload', this.fileInput);
-                      handleSubmit(event).then(() => {
-                        form.reset();
-                        resetItem();
-                        this.setState({
-                          selectedTags: [],
-                          fileSelected: false
-                        });
-                        this.fileInput.current.value = '';
-                        resetImage();
-                      });
+                      handleSubmit(event);
+                      // .then(() => {
+                      //   form.reset();
+                      //   resetItem();
+                      //   this.setState({
+                      //     selectedTags: [],
+                      //     fileSelected: false
+                      //   });
+                      //   this.fileInput.current.value = '';
+                      //   resetImage();
+                      // });
                     }}
                   >
                     <FormSpy
@@ -289,6 +288,7 @@ class ShareItemForm extends Component {
     );
   }
 }
+
 ShareItemForm.propTypes = {
   classes: PropTypes.object.isRequired
 };
