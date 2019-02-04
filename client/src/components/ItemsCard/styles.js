@@ -14,9 +14,14 @@ const styles = theme => ({
   },
   card: {
     borderRadius: 0,
+
+    height: 570
+  },
+  content: {
     dislay: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    alignItems: 'flex-start'
   },
   media: {
     minHeight: 250

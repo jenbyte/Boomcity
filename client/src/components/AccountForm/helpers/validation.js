@@ -22,10 +22,10 @@ export default function validate(values) {
       </Typography>
     );
   }
-  if (values.fullname && !values.fullname) {
+  if (values.fullname === '') {
     errors.fullname = (
       <Typography style={{ color: '#d03030', fontsize: '10px' }}>
-        Required
+        Username required
       </Typography>
     );
   }
