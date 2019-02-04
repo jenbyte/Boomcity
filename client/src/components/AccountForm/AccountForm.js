@@ -34,26 +34,6 @@ class AccountForm extends Component {
     this.setState({ enteredEmail: e.target.value });
   }
 
-  // handleSubmit(e) {
-  //   console.log(email);
-  //   e.preventDefault();
-  //   const { email, enteredEmail } = this.state;
-  //   const filterEmail = email.filter(e => e === enteredEmail);
-  //   if (filterEmail) {
-  //     this.setState({
-  //       error: true,
-  //       errorMessage: 'Email already exists'
-  //     });
-  //   }
-  // }
-
-  // onSubmit(values) {
-
-  //   console.log('onSubmit', values);
-  //   return '';
-  //   // const filterEmail = email.filter(e => e === enteredEmail);
-  // }
-
   onSubmit = async () => {
     await new Promise(resolve => setTimeout(resolve, 300));
   };
@@ -193,7 +173,7 @@ class AccountForm extends Component {
               </FormControl>
 
               <Typography className={classes.errorMessage}>
-                {/* @TODO: Display sign-up and login errors */}
+                {/* Display sign-up and login errors */}
               </Typography>
             </form>
           )}

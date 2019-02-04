@@ -22,7 +22,7 @@ module.exports = postgres => {
     async createUser({ fullname, email, password }) {
       const newUserInsert = {
         text:
-          'INSERT INTO users(fullname, email, password) VALUES($1, $2, $3) RETURNING *', // @TODO: Authentication - Server
+          'INSERT INTO users(fullname, email, password) VALUES($1, $2, $3) RETURNING *', // Authentication - Server
         values: [fullname, email, password]
       };
       try {
@@ -41,7 +41,7 @@ module.exports = postgres => {
     },
     async getUserAndPasswordForVerification(email) {
       const findUserQuery = {
-        text: 'SELECT * FROM users WHERE email = $1', // @TODO: Authentication - Server
+        text: 'SELECT * FROM users WHERE email = $1', // Authentication - Server
         values: [email]
       };
       try {
@@ -76,7 +76,7 @@ module.exports = postgres => {
     async getItemsForUser(id) {
       const items = await postgres.query({
         /**
-         *  @TODO:  Get all Items. Hint: You'll need to use a LEFT INNER JOIN among others
+         *  Get all Items. Hint: You'll need to use a LEFT INNER JOIN among others
          */
         text: `SELECT * FROM items WHERE ownerid = $1`,
         values: [id]
@@ -86,8 +86,8 @@ module.exports = postgres => {
     async getBorrowedItemsForUser(id) {
       const items = await postgres.query({
         /**
-         *  @TODO: Advanced queries
-         *  Get all Items. Hint: You'll need to use a LEFT INNER JOIN among others
+         *  Advanced queries - Get all Items.
+         *  Hint: You'll need to use a LEFT INNER JOIN among others
          */
         text: `SELECT * FROM items WHERE borrowerid = $1`,
         values: [id]
@@ -158,11 +158,9 @@ module.exports = postgres => {
               // const imageid = uploadedImage.rows[0].id;
 
               // Generate image relation query
-              // @TODO
               // -------------------------------
 
               // Insert image
-              // @TODO
               // -------------------------------
 
               // Generate tag relationships query (use the'tagsQueryString' helper function provided)
