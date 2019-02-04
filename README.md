@@ -5,12 +5,18 @@ This web-based application that allows users to freely lend out their items, as 
 ## Screenshots
 
 **Items Page**
-<img src="/client/src/images/BoomCity-items.png" width="auto" height="450">
-\*\*
+<img src="/client/src/images/BoomCity-items.png" width="880" height="auto">
+\\
+\\
 **Share Item Page**
-<img src="/client/src/images/BoomCity-share.png" width="900" height="auto">
+<img src="/client/src/images/BoomCity-share.png" width="880" height="auto">
 
-## Server
+---
+
+\\
+\\
+
+# Server
 
 Commands must be run from the `server` directory:
 
@@ -20,13 +26,13 @@ Commands must be run from the `server` directory:
 npm install
 ```
 
-#### Run
+### Run
 
 ```bash
 npm run start:dev
 ```
 
-#### Tests
+### Tests
 
 Just linting:
 
@@ -60,7 +66,7 @@ npm run test
 
 ---
 
-## Client
+# Client
 
 Commands must be run from the `client` directory:
 
@@ -106,11 +112,16 @@ npm run test
 
 ## Technologies Used
 
-- Apollo Client
+- Apollo Client & Apollo Server
 - Javascript
 - GraphQL
 - Node.js
 - Postgres
+- Postico
+- Material-Ui
+- Terminal
+- Express
+- Git
 
 ## License
 
