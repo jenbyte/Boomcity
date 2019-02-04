@@ -1,16 +1,16 @@
-# 🏙 Boomcity 🌃
+# 🏙 Boomity 🌃
 
 This web-based application that allows users to freely lend out their items, as well as borrow items from other users.
 
 ## Screenshots
 
 **Items Page**
-![ScreenShot](https://raw.github.com/jenjjy/BoomCity-App/client/src/images/BoomCity-items.png)
+![ScreenShot](https://raw.github.com/jenjjy/BoomCity-App/master/client/src/images/BoomCity-items.png)
 
 <!-- <br/> -->
 
 **Share Item Page**
-![ScreenShot](https://raw.github.com/jenjjy/BoomCity-App/client/src/images/BoomCity-share.png)
+![ScreenShot](https://raw.github.com/jenjjy/BoomCity-App/master/client/src/images/BoomCity-share.png)
 
 ---
 
@@ -26,7 +26,7 @@ Commands must be run from the `server` directory:
 npm install
 ```
 
-### Run-SErver
+### Run-Server
 
 ```bash
 npm run start:dev
