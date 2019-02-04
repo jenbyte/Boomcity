@@ -27,7 +27,6 @@ class AccountForm extends Component {
       enteredEmail: '',
       errorMessage: ''
     };
-    // this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleInputChange(e) {
@@ -35,47 +34,29 @@ class AccountForm extends Component {
     this.setState({ enteredEmail: e.target.value });
   }
 
-  handleSubmit(e) {
-    console.log(email);
-    e.preventDefault();
-    const { email, enteredEmail } = this.state;
-    const filterEmail = email.filter(e => e === enteredEmail);
-    if (filterEmail) {
-      this.setState({
-        error: true,
-        errorMessage: 'Email already exists'
-      });
-    }
-  }
+  // handleSubmit(e) {
+  //   console.log(email);
+  //   e.preventDefault();
+  //   const { email, enteredEmail } = this.state;
+  //   const filterEmail = email.filter(e => e === enteredEmail);
+  //   if (filterEmail) {
+  //     this.setState({
+  //       error: true,
+  //       errorMessage: 'Email already exists'
+  //     });
+  //   }
+  // }
 
-  onSubmit(values) {
-    console.log('onSubmit', values);
-    return '';
-    // const filterEmail = email.filter(e => e === enteredEmail);
-  }
+  // onSubmit(values) {
 
-  // onSubmit = async values => {
-  //   try {
-  //     this.state.formToggle
-  //       ? loginMutation({
-  //           variables: {
-  //             user: {
-  //               email: values.email,
-  //               password: values.password
-  //             }
-  //           }
-  //         })
-  //       : signupMutation({
-  //           variables: {
-  //             user: {
-  //               fullname: values.fullname,
-  //               email: values.email,
-  //               password: values.password
-  //             }
-  //           }
-  //         });
-  //   } catch (e) {}
-  // };
+  //   console.log('onSubmit', values);
+  //   return '';
+  //   // const filterEmail = email.filter(e => e === enteredEmail);
+  // }
+
+  onSubmit = async () => {
+    await new Promise(resolve => setTimeout(resolve, 300));
+  };
 
   render() {
     const { classes, loginMutation, signupMutation } = this.props;
@@ -113,35 +94,7 @@ class AccountForm extends Component {
             return validate(values);
           }}
           render={({ handleSubmit, pristine, submitting, invalid, form }) => (
-            <form
-              className={classes.accountForm}
-              onSubmit={handleSubmit}
-              // onSubmit={event => {
-              //   console.log(event);
-              //   event.preventDefault();
-              //   console.log('form', values);
-              //   if (this.state.formToggle) {
-              //     this.props.loginMutation({
-              //       variables: {
-              //         user: {
-              //           email: values.email,
-              //           password: values.password
-              //         }
-              //       }
-              //     });
-              //   } else {
-              //     this.props.signupMutation({
-              //       variables: {
-              //         user: {
-              //           fullname: 'test',
-              //           email: 'test@gmail.com',
-              //           password: 'test'
-              //         }
-              //       }
-              //     });
-              //   }
-              // }}
-            >
+            <form className={classes.accountForm} onSubmit={handleSubmit}>
               {!this.state.formToggle && (
                 <Field name="fullname">
                   {({ input, meta }) => (
@@ -175,6 +128,9 @@ class AccountForm extends Component {
                       inputProps={{ autoComplete: 'off' }}
                       onChange={this.handleInputChange}
                       value={''}
+                      ref={ref => {
+                        this.email = ref;
+                      }}
                       {...input}
                     />
 
@@ -222,7 +178,6 @@ class AccountForm extends Component {
                       className={classes.formToggle}
                       type="button"
                       onClick={() => {
-                        // @TODO: Reset the form on submit
                         this.setState({
                           formToggle: !this.state.formToggle
                         });

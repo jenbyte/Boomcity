@@ -70,7 +70,9 @@ const ItemsCard = ({ classes, item }) => {
       </Fragment>
 
       <CardActions>
-        <Button className={classes.button}>Borrow</Button>
+        <Button className={classes.button} variant="outlined">
+          Borrow
+        </Button>
       </CardActions>
     </Card>
   );

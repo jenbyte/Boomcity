@@ -5,7 +5,6 @@ const styles = theme => ({
     height: 50
   },
   button: {
-    border: '1px solid #D3D3D3',
     color: theme.palette.primary.main,
     fontSize: '0.9rem',
     margin: theme.spacing.unit,
@@ -14,14 +13,15 @@ const styles = theme => ({
   },
   card: {
     borderRadius: 0,
-
-    height: 570
+    minHeight: 582,
+    height: '100%'
+    // minWidth: 350
   },
   content: {
     dislay: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-between',
-    alignItems: 'flex-start'
+    justifyContent: 'space-between'
+    // alignItems: 'flex-start'
   },
   media: {
     minHeight: 250

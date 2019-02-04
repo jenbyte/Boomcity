@@ -1,32 +1,32 @@
-# Boomtown 🏙
+# 🏙 Boomcity 🌃
 
 This web-based application that allows users to freely lend out their items, as well as borrow items from other users.
 
 ## Screenshots
 
 **Items Page**
-<img src="/client/src/images/BoomCity-items.png" width="880" height="auto">
-\\
-\\
+![ScreenShot](https://raw.github.com/jenjjy/BoomCity-App/client/src/images/BoomCity-items.png)
+
+<!-- <br/> -->
+
 **Share Item Page**
-<img src="/client/src/images/BoomCity-share.png" width="880" height="auto">
+![ScreenShot](https://raw.github.com/jenjjy/BoomCity-App/client/src/images/BoomCity-share.png)
 
 ---
 
-\\
-\\
+<!-- -->
 
-# Server
+## Server
 
 Commands must be run from the `server` directory:
 
-### Installation
+### Installation-Server
 
 ```bash
 npm install
 ```
 
-### Run
+### Run-SErver
 
 ```bash
 npm run start:dev
@@ -46,18 +46,6 @@ Run linting, and fix any errors:
 npm run lint:fix
 ```
 
-Run Jest tests:
-
-```
-npm run jest
-```
-
-Run Jest tests, and watch for changes:
-
-```bash
-npm run jest:watch
-```
-
 Run all tests:
 
 ```bash
@@ -66,17 +54,17 @@ npm run test
 
 ---
 
-# Client
+## Client
 
 Commands must be run from the `client` directory:
 
-### Installation
+### Installation-Client
 
 ```bash
 npm install
 ```
 
-### Run
+### Run-Client
 
 ```bash
 npm start
