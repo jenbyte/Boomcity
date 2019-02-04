@@ -4,11 +4,11 @@ This web-based application that allows users to freely lend out their items, as 
 
 ## Screenshots
 
-_Items Page_
-<img src="images/BoomCity-items.png" width="auto" height="500">
+**Items Page**
+<img src="/client/src/images/BoomCity-items.png" width="auto" height="500">
 
-_Share Item Page_
-<img src="images/BoomCity-share.png" width="auto" height="500">
+**Share Item Page**
+<img src="/client/src/images/BoomCity-share.png" width="auto" height="500">
 
 ## Installation Instructions
 
