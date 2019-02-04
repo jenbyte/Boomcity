@@ -37,26 +37,17 @@ import { connect } from 'react-redux';
 //   }
 // }
 
-// function convertMS(milliseconds) {
-//   let day, hour, min, sec;
-//   seconds = Math.floor(milliseconds / 1000);
-//   minute = Math.floor(seconds / 60);
-//   seconds = seconds % 60;
-//   hour = Math.floor(minute / 60);
-//   minute = minute % 60;
-//   day = Math.floor(hour / 24);
-//   hour = hour % 24;
-//   return {
-//     day: day,
-//     hour: hour,
-//     minute: min,
-//     seconds: sec
-//   };
-// }
+function convertDate(date) {
+  let options = { year: 'numeric', month: 'short', day: 'numeric' };
+  return new Date(date).toLocaleDateString([], options);
+}
+// let time = new Date().toLocaleDateString('en-US');
 
 const ItemsCard = ({ classes, item }) => {
-  // const date = item.created
   // convertDate(date) {new Date().toLocaleDateString('en-US')}
+  // let time = new Date().getTime();
+  // let date = new Date(time);
+
   return (
     <Card className={classes.card}>
       <Fragment>
@@ -82,11 +73,11 @@ const ItemsCard = ({ classes, item }) => {
               )}
             </Avatar>
             <div className={classes.metaInfo}>
-              <Typography className={classes.metaName}>
+              <Typography className={classes.metaName} component="h2">
                 {item.itemowner.fullname}
               </Typography>
               <Typography className={classes.metaDate}>
-                {item.created}
+                {convertDate(item.created)}
               </Typography>
             </div>
           </div>

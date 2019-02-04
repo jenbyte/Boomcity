@@ -20,7 +20,7 @@ const ProfileCard = ({ classes, profile }) => {
             </Typography>
           </div>
           <div>
-            <Typography className={classes.numOfItems}>
+            <Typography className={classes.numOfItems} component="h1">
               <span className={classes.bold}>{profile.items.length}</span> Items
               shared{' '}
               <span className={classes.bold}>{profile.borrowed.length}</span>{' '}
