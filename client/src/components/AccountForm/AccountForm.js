@@ -22,39 +22,63 @@ class AccountForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      formToggle: true
+      formToggle: true,
+      error: false,
+      enteredEmail: '',
+      errorMessage: ''
     };
+    // this.handleSubmit = this.handleSubmit.bind(this);
   }
-  // onSubmit(e) {
-  //   e.preventDefault();
-  //   console.log('form', e);
-  //   if (this.state.formToggle) {
-  //     this.props.loginMutation({
-  //       variables: {
-  //         user: {
-  //           email: 'values.email',
-  //           password: 'values.password'
-  //         }
-  //       }
-  //     });
-  //   } else {
-  //     this.props.signupMutation({
-  //       variables: {
-  //         user: {
-  //           fullname: 'test',
-  //           email: 'test@gmail.com',
-  //           password: 'test'
-  //         }
-  //       }
-  //     });
-  //   }
-  // }
 
-  onSubmit(values) {}
+  handleInputChange(e) {
+    e.preventDefault();
+    this.setState({ enteredEmail: e.target.value });
+  }
+
+  handleSubmit(e) {
+    console.log(email);
+    e.preventDefault();
+    const { email, enteredEmail } = this.state;
+    const filterEmail = email.filter(e => e === enteredEmail);
+    if (filterEmail) {
+      this.setState({
+        error: true,
+        errorMessage: 'Email already exists'
+      });
+    }
+  }
+
+  onSubmit(values) {
+    console.log('onSubmit', values);
+    return '';
+    // const filterEmail = email.filter(e => e === enteredEmail);
+  }
+
+  // onSubmit = async values => {
+  //   try {
+  //     this.state.formToggle
+  //       ? loginMutation({
+  //           variables: {
+  //             user: {
+  //               email: values.email,
+  //               password: values.password
+  //             }
+  //           }
+  //         })
+  //       : signupMutation({
+  //           variables: {
+  //             user: {
+  //               fullname: values.fullname,
+  //               email: values.email,
+  //               password: values.password
+  //             }
+  //           }
+  //         });
+  //   } catch (e) {}
+  // };
 
   render() {
     const { classes, loginMutation, signupMutation } = this.props;
-    console.log('props,', this.props);
 
     return (
       <div>
@@ -88,7 +112,7 @@ class AccountForm extends Component {
           validate={values => {
             return validate(values);
           }}
-          render={({ handleSubmit, pristine, submitting, invalid, values }) => (
+          render={({ handleSubmit, pristine, submitting, invalid, form }) => (
             <form
               className={classes.accountForm}
               onSubmit={handleSubmit}
@@ -149,9 +173,11 @@ class AccountForm extends Component {
                       id="email"
                       type="text"
                       inputProps={{ autoComplete: 'off' }}
+                      onChange={this.handleInputChange}
                       value={''}
                       {...input}
                     />
+
                     {meta.touched && meta.error && <span>{meta.error}</span>}
                   </FormControl>
                 )}
@@ -200,6 +226,7 @@ class AccountForm extends Component {
                         this.setState({
                           formToggle: !this.state.formToggle
                         });
+                        form.reset();
                       }}
                     >
                       {this.state.formToggle

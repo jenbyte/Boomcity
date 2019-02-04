@@ -31,6 +31,7 @@ module.exports = app => {
           password: hashedPassword
         });
 
+        console.log(user);
         setCookie({
           tokenName: app.get('JWT_COOKIE_NAME'),
           token: generateToken(user, app.get('JWT_SECRET')),
@@ -50,7 +51,6 @@ module.exports = app => {
         );
         // Use bcrypt to compare the provided password to 'hashed' password stored in your database.
         const valid = await bcrypt.compare(args.user.password, user.password);
-        // console.log(valid);
         if (!valid || !user) throw 'User was not found.';
 
         setCookie({

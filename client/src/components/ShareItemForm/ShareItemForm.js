@@ -52,10 +52,11 @@ class ShareItemForm extends Component {
   handleSelectFile = () => {
     this.setState({ fileSelected: this.fileInput.current.files[0] });
   };
-
   handleSelectTags = event => {
+    console.log(event);
     this.setState({ selectedTags: event.target.value });
   };
+
   applyTags(tags) {
     return (
       tags &&
@@ -86,15 +87,19 @@ class ShareItemForm extends Component {
       .join(', ');
   }
 
+  handleSubmit = event => {
+    event.preventDefault();
+    console.log('Submitted!');
+  };
+
   render() {
     const { classes, tags, updateItem, resetImage, resetItem } = this.props;
-    console.log('state', this.state);
+
     return (
       <div>
         <Typography className={classes.header}>Share. Borrow. Grow.</Typography>
         <Mutation mutation={ADD_ITEM_MUTATION}>
           {addItem => {
-            console.log(tags);
             return (
               <Form
                 onSubmit={async values => {
@@ -109,7 +114,8 @@ class ShareItemForm extends Component {
                       }
                     }
                   });
-                  // resetItem();
+
+                  resetItem();
                 }}
                 validate={values => {
                   return validate(
@@ -126,18 +132,18 @@ class ShareItemForm extends Component {
                   form
                 }) => (
                   <form
-                    onSubmit={handleSubmit}
-                    // .then(() => {
-                    //   form.reset();
-                    //   resetItem();
-                    //   this.setState({
-                    //     selectedTags: [],
-                    //     fileSelected: false
-                    //   });
-                    //   this.fileInput.current.value = '';
-                    //   resetImage();
-                    // });
-                    // }}
+                    onSubmit={event => {
+                      handleSubmit(event).then(() => {
+                        form.reset();
+                        resetItem();
+                        this.setState({
+                          selectedTags: [],
+                          fileSelected: false
+                        });
+                        this.fileInput.current.value = '';
+                        resetImage();
+                      });
+                    }}
                   >
                     <FormSpy
                       subscription={{ values: true }}
@@ -178,9 +184,7 @@ class ShareItemForm extends Component {
                         id="fileInput"
                         ref={this.fileInput}
                         accept="image/*"
-                        onChange={() => {
-                          this.handleSelectFile();
-                        }}
+                        onChange={this.handleSelectFile}
                       />
                     </label>
                     <Field
@@ -263,13 +267,6 @@ class ShareItemForm extends Component {
                       className={classes.shareButton}
                       type="submit"
                       disabled={pristine || submitting || invalid}
-                      // onClick={() => {
-                      //   this.fileInput.current.value = '';
-                      //   this.setState({ fileSelected: false });
-                      //   form.reset();
-                      //   resetItem();
-                      //   this.setState({ selectedTags: [] });
-                      // }}
                     >
                       Share
                     </Button>

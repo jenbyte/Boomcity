@@ -14,28 +14,47 @@ import {
 import styles from './styles';
 import { Link, withRouter } from 'react-router-dom';
 
-function convertDate(date) {
-  const current = new Date();
-  {
-    if (!date) date = current;
-    const millisecondsInDay = 1000 * 60 * 60 * 24;
-    const daysAgo = Math.floor((current - date) / millisecondsInDay);
-    const millisecondsInHour = millisecondsInDay / 24;
-    const hoursAgo = Math.floor((current - date) / millisecondsInHour);
+// function convertDate(date) {
+//   const current = new Date();
+//   {
+//     if (!date) date = current;
+//     const millisecondsInDay = 1000 * 60 * 60 * 24;
+//     const daysAgo = Math.floor((current - date) / millisecondsInDay);
+//     const millisecondsInHour = millisecondsInDay / 24;
+//     const hoursAgo = Math.floor((current - date) / millisecondsInHour);
 
-    let timeUnit, timeCount;
-    if (daysAgo >= 1) {
-      timeCount = daysAgo;
-      timeUnit = daysAgo === 1 ? 'day' : 'days';
-    } else if (hoursAgo >= 1) {
-      timeCount = hoursAgo;
-      timeUnit = hoursAgo === 1 ? 'hour' : 'hours';
-    }
-    return timeCount ? `${timeCount} ${timeUnit} ago` : 'a few seconds ago';
-  }
-}
+//     let timeUnit, timeCount;
+//     if (daysAgo >= 1) {
+//       timeCount = daysAgo;
+//       timeUnit = daysAgo === 1 ? 'day' : 'days';
+//     } else if (hoursAgo >= 1) {
+//       timeCount = hoursAgo;
+//       timeUnit = hoursAgo === 1 ? 'hour' : 'hours';
+//     }
+//     return timeCount ? `${timeCount} ${timeUnit} ago` : 'a few seconds ago';
+//   }
+// }
+
+// function convertMS(milliseconds) {
+//   let day, hour, min, sec;
+//   seconds = Math.floor(milliseconds / 1000);
+//   minute = Math.floor(seconds / 60);
+//   seconds = seconds % 60;
+//   hour = Math.floor(minute / 60);
+//   minute = minute % 60;
+//   day = Math.floor(hour / 24);
+//   hour = hour % 24;
+//   return {
+//     day: day,
+//     hour: hour,
+//     minute: min,
+//     seconds: sec
+//   };
+// }
 
 const ItemsCard = ({ classes, item }) => {
+  // const date = item.created
+  // convertDate(date) {new Date().toLocaleDateString('en-US')}
   return (
     <Card className={classes.card}>
       <Fragment>
@@ -65,12 +84,14 @@ const ItemsCard = ({ classes, item }) => {
                 {item.itemowner.fullname}
               </Typography>
               <Typography className={classes.metaDate}>
-                {convertDate(item.created)}
+                {item.created}
               </Typography>
             </div>
           </div>
 
-          <Typography className={classes.title}>{item.title}</Typography>
+          <Typography className={classes.title} component="h1">
+            {item.title}
+          </Typography>
 
           <Typography className={classes.select} color="textSecondary">
             {item.tags.map(tag => `${tag.title}`).join(', ')}

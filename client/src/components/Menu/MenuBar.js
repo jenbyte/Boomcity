@@ -58,6 +58,7 @@ class MenuAppBar extends React.Component {
                 width="40"
               />
             </IconButton>
+
             <div className={classes.shareButton} />
             <Button color="inherit" href="/share">
               <AddCircle className={classes.addCircle} />Share something

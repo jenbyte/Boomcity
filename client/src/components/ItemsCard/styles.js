@@ -13,7 +13,6 @@ const styles = theme => ({
     padding: '0.5rem 1.5rem'
   },
   card: {
-    // minWidth: 400,
     borderRadius: 0,
     dislay: 'flex',
     flexDirection: 'column',
@@ -24,13 +23,14 @@ const styles = theme => ({
   },
   select: {
     color: '#808080',
-    marginBottom: 12
+    marginBottom: 5
   },
   title: {
     fontWeight: 400,
     fontSize: '1.5rem',
     textTransform: 'capitalize',
-    marginTop: '1.5rem'
+    marginTop: '1.5rem',
+    marginBottom: 5
   },
   description: {
     fontWeight: 400,
