@@ -12,7 +12,9 @@ import {
   Typography
 } from '@material-ui/core';
 import styles from './styles';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router';
+import { connect } from 'react-redux';
 
 // function convertDate(date) {
 //   const current = new Date();

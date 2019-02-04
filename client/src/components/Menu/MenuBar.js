@@ -19,7 +19,9 @@ import {
 import useStyles from './styles';
 import { graphql, compose } from 'react-apollo';
 import { LOGOUT_MUTATION, VIEWER_QUERY } from '../../apollo/queries';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router';
+import { connect } from 'react-redux';
 
 class MenuAppBar extends React.Component {
   state = {
@@ -37,9 +39,10 @@ class MenuAppBar extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, location } = this.props;
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
+    console.log('bar', this.props);
 
     return (
       <div className={classes.root}>
@@ -60,9 +63,13 @@ class MenuAppBar extends React.Component {
             </IconButton>
 
             <div className={classes.shareButton} />
-            <Button color="inherit" href="/share">
-              <AddCircle className={classes.addCircle} />Share something
-            </Button>
+            {location.pathname === `/share` ? (
+              ''
+            ) : (
+              <Button color="inherit" href="/share">
+                <AddCircle className={classes.addCircle} />Share something
+              </Button>
+            )}
 
             <div className={classes.sectionMobile}>
               <IconButton
