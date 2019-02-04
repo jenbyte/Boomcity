@@ -35,22 +35,6 @@ class ShareItemForm extends Component {
     };
   }
 
-  handleSelectFile = () => {
-    this.setState({ fileSelected: this.fileInput.current.files[0] });
-  };
-  handleSelectTags = event => {
-    this.setState({ selectedTags: event.target.value });
-  };
-
-  applyTags(tags) {
-    return (
-      tags &&
-      tags
-        .filter(tag => this.state.selectedTags.indexOf(tag.id) > -1)
-        .map(tag => ({ title: tag.title, id: tag.id }))
-    );
-  }
-
   dispatchUpdate(values, tags, updateItem) {
     if (!values.imageurl && this.state.fileSelected) {
       this.getBase64Url().then(imageurl => {
@@ -63,6 +47,22 @@ class ShareItemForm extends Component {
       ...values,
       tags: this.applyTags(tags)
     });
+  }
+
+  handleSelectFile = () => {
+    this.setState({ fileSelected: this.fileInput.current.files[0] });
+  };
+
+  handleSelectTags = event => {
+    this.setState({ selectedTags: event.target.value });
+  };
+  applyTags(tags) {
+    return (
+      tags &&
+      tags
+        .filter(tag => this.state.selectedTags.indexOf(tag.id) > -1)
+        .map(tag => ({ title: tag.title, id: tag.id }))
+    );
   }
 
   getBase64Url() {
@@ -98,7 +98,6 @@ class ShareItemForm extends Component {
             return (
               <Form
                 onSubmit={async values => {
-                  // e.preventDefault();
                   addItem({
                     variables: {
                       item: {
@@ -127,19 +126,18 @@ class ShareItemForm extends Component {
                   form
                 }) => (
                   <form
-                    onSubmit={event => {
-                      handleSubmit(event);
-                      // .then(() => {
-                      //   form.reset();
-                      //   resetItem();
-                      //   this.setState({
-                      //     selectedTags: [],
-                      //     fileSelected: false
-                      //   });
-                      //   this.fileInput.current.value = '';
-                      //   resetImage();
-                      // });
-                    }}
+                    onSubmit={handleSubmit}
+                    // .then(() => {
+                    //   form.reset();
+                    //   resetItem();
+                    //   this.setState({
+                    //     selectedTags: [],
+                    //     fileSelected: false
+                    //   });
+                    //   this.fileInput.current.value = '';
+                    //   resetImage();
+                    // });
+                    // }}
                   >
                     <FormSpy
                       subscription={{ values: true }}
@@ -265,7 +263,6 @@ class ShareItemForm extends Component {
                       className={classes.shareButton}
                       type="submit"
                       disabled={pristine || submitting || invalid}
-
                       // onClick={() => {
                       //   this.fileInput.current.value = '';
                       //   this.setState({ fileSelected: false });

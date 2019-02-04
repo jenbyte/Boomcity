@@ -141,17 +141,17 @@ module.exports = postgres => {
               const insertNewItem = await postgres.query(newItemQuery);
               // const itemId = newItem.rows[0].id;
 
-              const imageUploadQuery = {
-                text:
-                  'INSERT INTO uploads (itemid, filename, mimetype, encoding, data) VALUES ($1, $2, $3, $4, $5) RETURNING *',
-                values: [
-                  itemid,
-                  image.filename,
-                  image.mimetype,
-                  'base64',
-                  base64Str
-                ]
-              };
+              // const imageUploadQuery = {
+              //   text:
+              //     'INSERT INTO uploads (itemid, filename, mimetype, encoding, data) VALUES ($1, $2, $3, $4, $5) RETURNING *',
+              //   values: [
+              //     itemid,
+              //     image.filename,
+              //     image.mimetype,
+              //     'base64',
+              //     base64Str
+              //   ]
+              // };
 
               // Upload image
               // const uploadedImage = await client.query(imageUploadQuery);

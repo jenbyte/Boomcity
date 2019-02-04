@@ -1,7 +1,7 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 
-export default function validate(values, selectedTags) {
+export default function validate(values, selectedTags, fileSelected) {
   const errors = {};
 
   if (!values.title || values.title === '') {
@@ -18,12 +18,11 @@ export default function validate(values, selectedTags) {
       </Typography>
     );
   }
+  if (!fileSelected || fileSelected === false) {
+    errors.fileSelected = 'required';
+  }
   if (!selectedTags || selectedTags.length === 0) {
-    errors.selectedTags = (
-      <Typography style={{ color: '#d03030', fontsize: '10px' }}>
-        At least one tag must be selected
-      </Typography>
-    );
+    errors.selectedTags = 'select at least one tag';
   }
 
   return errors;
