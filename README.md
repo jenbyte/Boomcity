@@ -4,16 +4,22 @@ This web-based application that allows users to freely lend out their items, as 
 
 ## Screenshots
 
-**Items Page**
+**Items Page:**
+
+<!-- -->
+
 ![ScreenShot](https://raw.github.com/jenjjy/BoomCity-App/master/client/src/images/BoomCity-items.png)
 
-<!-- <br/> -->
+<!-- -->
+<!-- -->
 
-**Share Item Page**
+**Share Item Page:**
+
+<!-- -->
+
 ![ScreenShot](https://raw.github.com/jenjjy/BoomCity-App/master/client/src/images/BoomCity-share.png)
 
----
-
+<!-- -->
 <!-- -->
 
 ## Server
