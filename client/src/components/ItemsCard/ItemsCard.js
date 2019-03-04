@@ -14,12 +14,7 @@ import {
 import styles from './styles';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
-import { connect } from 'react-redux';
-
-function convertDate(date) {
-  let options = { year: 'numeric', month: 'short', day: 'numeric' };
-  return new Date(date).toLocaleDateString([], options);
-}
+import moment from 'moment';
 
 const ItemsCard = ({ classes, item }) => {
   return (
@@ -51,7 +46,9 @@ const ItemsCard = ({ classes, item }) => {
                 {item.itemowner.fullname}
               </Typography>
               <Typography className={classes.metaDate}>
-                {convertDate(item.created)}
+                {moment(item.created)
+                  .startOf('minutes')
+                  .fromNow()}
               </Typography>
             </div>
           </div>
@@ -79,7 +76,8 @@ const ItemsCard = ({ classes, item }) => {
 };
 
 ItemsCard.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  item: PropTypes.object.isRequired
 };
 
 ItemsCard.defaultProps = {

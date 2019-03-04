@@ -21,7 +21,6 @@ import { graphql, compose } from 'react-apollo';
 import { LOGOUT_MUTATION, VIEWER_QUERY } from '../../apollo/queries';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
-import { connect } from 'react-redux';
 
 class MenuAppBar extends React.Component {
   state = {
@@ -119,7 +118,10 @@ class MenuAppBar extends React.Component {
   }
 }
 
-MenuAppBar.propTypes = { classes: PropTypes.object.isRequired };
+MenuAppBar.propTypes = {
+  classes: PropTypes.object.isRequired,
+  logoutMutation: PropTypes.func.isRequired
+};
 
 const refetchQueries = [{ query: VIEWER_QUERY }];
 

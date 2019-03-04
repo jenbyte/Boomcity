@@ -55,7 +55,12 @@ const ProfileCard = ({ classes, profile }) => {
 };
 
 ProfileCard.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  profile: PropTypes.shape({
+    bio: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    items: PropTypes.array.isRequired
+  }).isRequired
 };
 
 ProfileCard.defaultProps = {

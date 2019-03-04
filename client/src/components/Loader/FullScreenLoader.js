@@ -12,7 +12,7 @@ function FullScreenLoader(props) {
       <div className={classes.container}>
         <CircularProgress color="primary" size={80} thickness={2} />{' '}
         <Typography className={classes.quote}>
-          "Food items do not need to be returned to original owner."
+          "One person's junk is another person's treasure."
         </Typography>
       </div>
     </div>

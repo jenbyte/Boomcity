@@ -63,14 +63,14 @@ module.exports = gql`
     password: String!
   }
 
-  type Query @auth {
+  type Query {
     user(id: ID!): User
     viewer: User
     items(filter: ID): [Item]
     tags: [Tag]
   }
 
-  type Mutation @auth {
+  type Mutation {
     addItem(item: NewItemInput!, image: Upload): Item
     signup(user: SignupInput!): ID!
     login(user: LoginInput!): ID!

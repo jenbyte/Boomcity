@@ -94,7 +94,7 @@ class ShareItemForm extends Component {
 
   render() {
     const { classes, tags, updateItem, resetImage, resetItem } = this.props;
-
+    console.log(this.props);
     return (
       <div>
         <Typography className={classes.header}>Share. Borrow. Grow.</Typography>
@@ -282,7 +282,11 @@ class ShareItemForm extends Component {
 }
 
 ShareItemForm.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  tags: PropTypes.object.isRequired,
+  updateItem: PropTypes.func.isRequired,
+  resetImage: PropTypes.func.isRequired,
+  resetItem: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = dispatch => ({

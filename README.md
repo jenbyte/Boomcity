@@ -82,26 +82,6 @@ npm start
 npm run build
 ```
 
-### Tests
-
-Just linting:
-
-```bash
-npm run lint
-```
-
-Run linting, and fix any errors:
-
-```bash
-npm run lint:fix
-```
-
-Run all tests:
-
-```bash
-npm run test
-```
-
 ---
 
 ## Technologies Used
@@ -111,7 +91,6 @@ npm run test
 - GraphQL
 - Node.js
 - Postgres
-- Postico
 - Material-Ui
 - Terminal
 - Express

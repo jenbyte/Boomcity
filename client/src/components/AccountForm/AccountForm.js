@@ -13,7 +13,6 @@ import {
   VIEWER_QUERY
 } from '../../apollo/queries';
 import { graphql, compose } from 'react-apollo';
-import { Mutation } from 'react-apollo';
 import validate from './helpers/validation';
 import styles from './styles';
 import PropTypes from 'prop-types';
@@ -49,26 +48,24 @@ class AccountForm extends Component {
         <Form
           // onSubmit={this.onSubmit()}
           onSubmit={values => {
-            {
-              this.state.formToggle
-                ? loginMutation({
-                    variables: {
-                      user: {
-                        email: values.email,
-                        password: values.password
-                      }
+            this.state.formToggle
+              ? loginMutation({
+                  variables: {
+                    user: {
+                      email: values.email,
+                      password: values.password
                     }
-                  })
-                : signupMutation({
-                    variables: {
-                      user: {
-                        fullname: values.fullname,
-                        email: values.email,
-                        password: values.password
-                      }
+                  }
+                })
+              : signupMutation({
+                  variables: {
+                    user: {
+                      fullname: values.fullname,
+                      email: values.email,
+                      password: values.password
                     }
-                  });
-            }
+                  }
+                });
           }}
           validate={values => {
             return validate(values);
@@ -189,7 +186,7 @@ class AccountForm extends Component {
 AccountForm.propTypes = {
   loginMutation: PropTypes.func.isRequired,
   signupMutation: PropTypes.func.isRequired,
-  classes: PropTypes.object
+  classes: PropTypes.object.isRequired
 };
 
 const refetchQueries = [{ query: VIEWER_QUERY }];

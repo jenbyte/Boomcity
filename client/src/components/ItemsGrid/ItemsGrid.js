@@ -6,6 +6,7 @@ import ItemsCard from '../ItemsCard/ItemsCard';
 import styles from './styles';
 
 const ItemsGrid = ({ classes, items }) => {
+  console.log('PROPS!!!!!!!:', classes, items);
   return (
     <Grid container className={classes.root} spacing={24}>
       {items.map(item => {
@@ -20,7 +21,10 @@ const ItemsGrid = ({ classes, items }) => {
 };
 
 ItemsGrid.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  items: PropTypes.object.isRequired,
+  card: PropTypes.object.isRequired,
+  gridItem: PropTypes.object.isRequired
 };
 
 export default withStyles(styles)(ItemsGrid);

@@ -6,6 +6,7 @@ import FullScreenLoader from '../../components/Loader/FullScreenLoader';
 import { Query } from 'react-apollo';
 import { ALL_USER_ITEMS_QUERY } from '../../apollo/queries';
 import { ViewerContext } from '../../context/ViewerProvider';
+import PropTypes from 'prop-types';
 
 class ProfileContainer extends Component {
   render() {
@@ -31,5 +32,10 @@ class ProfileContainer extends Component {
     );
   }
 }
+
+Profile.propTypes = {
+  classes: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired
+};
 
 export default withStyles(styles)(ProfileContainer);

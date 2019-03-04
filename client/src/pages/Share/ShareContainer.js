@@ -3,6 +3,7 @@ import Share from './Share';
 import FullScreenLoader from '../../components/Loader/FullScreenLoader';
 import { Query } from 'react-apollo';
 import { ALL_TAGS_QUERY } from '../../apollo/queries';
+import PropTypes from 'prop-types';
 
 class ShareContainer extends Component {
   render() {
@@ -18,4 +19,10 @@ class ShareContainer extends Component {
     );
   }
 }
+
+Share.propTypes = {
+  classes: PropTypes.object.isRequired,
+  tags: PropTypes.object.isRequired
+};
+
 export default ShareContainer;
