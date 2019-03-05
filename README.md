@@ -1,6 +1,6 @@
 # 🏙 Boomity 🌃
 
-This web-based application that allows users to freely lend out their items, as well as borrow items from other users.
+This web-based application that allows users to freely lend out their items, as well as borrow items from other users. It was built using React, Node, Express, Apollo, and GraphQL.
 
 ## Screenshots
 
@@ -8,7 +8,7 @@ This web-based application that allows users to freely lend out their items, as 
 
 <!-- -->
 
-![BoomCityScreenShot](https://raw.github.com/jenjjy/BoomCity-App/master/client/src/images/BoomCity-items.png =250x)
+![BoomCityScreenShot](https://raw.github.com/jenjjy/BoomCity-App/master/client/src/images/BoomCity-items.png)
 
 <!-- -->
 <!-- -->
@@ -17,14 +17,23 @@ This web-based application that allows users to freely lend out their items, as 
 
 <!-- -->
 
-![BoomCityScreenShot](https://raw.github.com/jenjjy/BoomCity-App/master/client/src/images/BoomCity-share.png =250x)
+![BoomCityScreenShot](https://raw.github.com/jenjjy/BoomCity-App/master/client/src/images/BoomCity-share.png)
+
+---
 
 <!-- -->
-<!-- -->
 
-## Server
+## Installation
 
-In `server` directory run:
+```bash
+npm install
+```
+
+## Run
+
+## For development
+
+`cd` into `server` directory and run:
 
 ```bash
 npm run start:dev
@@ -32,9 +41,9 @@ npm run start:dev
 
 ---
 
-## Client
+## For production
 
-In `client` directory, run:
+`cd` into `client` directory and run:
 
 ```bash
 npm start
@@ -54,6 +63,6 @@ npm start
 - Express
 - Git
 
-## License
+## Author
 
-Learning materials content is copyright (c) 2019 RED Academy.
+[Jennifer Yiu](https://www.linkedin.com/in/jennifer-yiu-12145836/), _Fullstack Front-End Developer_
