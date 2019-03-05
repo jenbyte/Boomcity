@@ -33,6 +33,6 @@ export default function validate(values) {
       </Typography>
     );
   }
-  console.log(errors);
+
   return errors;
 }

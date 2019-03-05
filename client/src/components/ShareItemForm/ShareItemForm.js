@@ -53,7 +53,6 @@ class ShareItemForm extends Component {
     this.setState({ fileSelected: this.fileInput.current.files[0] });
   };
   handleSelectTags = event => {
-    console.log(event);
     this.setState({ selectedTags: event.target.value });
   };
 
@@ -94,7 +93,7 @@ class ShareItemForm extends Component {
 
   render() {
     const { classes, tags, updateItem, resetImage, resetItem } = this.props;
-    console.log(this.props);
+
     return (
       <div>
         <Typography className={classes.header}>Share. Borrow. Grow.</Typography>

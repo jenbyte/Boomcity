@@ -6,7 +6,6 @@ import ItemsCard from '../ItemsCard/ItemsCard';
 import styles from './styles';
 
 const ItemsGrid = ({ classes, items }) => {
-  console.log('PROPS!!!!!!!:', classes, items);
   return (
     <Grid container className={classes.root} spacing={24}>
       {items.map(item => {

@@ -31,7 +31,6 @@ module.exports = app => {
           password: hashedPassword
         });
 
-        console.log(user);
         setCookie({
           tokenName: app.get('JWT_COOKIE_NAME'),
           token: generateToken(user, app.get('JWT_SECRET')),

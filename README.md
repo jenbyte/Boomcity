@@ -8,7 +8,7 @@ This web-based application that allows users to freely lend out their items, as 
 
 <!-- -->
 
-![ScreenShot](https://raw.github.com/jenjjy/BoomCity-App/master/client/src/images/BoomCity-items.png)
+![BoomCityScreenShot](https://raw.github.com/jenjjy/BoomCity-App/master/client/src/images/BoomCity-items.png =250x)
 
 <!-- -->
 <!-- -->
@@ -17,69 +17,27 @@ This web-based application that allows users to freely lend out their items, as 
 
 <!-- -->
 
-![ScreenShot](https://raw.github.com/jenjjy/BoomCity-App/master/client/src/images/BoomCity-share.png)
+![BoomCityScreenShot](https://raw.github.com/jenjjy/BoomCity-App/master/client/src/images/BoomCity-share.png =250x)
 
 <!-- -->
 <!-- -->
 
 ## Server
 
-Commands must be run from the `server` directory:
-
-### Installation-Server
-
-```bash
-npm install
-```
-
-### Run-Server
+In `server` directory run:
 
 ```bash
 npm run start:dev
-```
-
-### Tests
-
-Just linting:
-
-```bash
-npm run lint
-```
-
-Run linting, and fix any errors:
-
-```bash
-npm run lint:fix
-```
-
-Run all tests:
-
-```bash
-npm run test
 ```
 
 ---
 
 ## Client
 
-Commands must be run from the `client` directory:
-
-### Installation-Client
-
-```bash
-npm install
-```
-
-### Run-Client
+In `client` directory, run:
 
 ```bash
 npm start
-```
-
-### Build
-
-```bash
-npm run build
 ```
 
 ---

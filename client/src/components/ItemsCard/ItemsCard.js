@@ -46,7 +46,8 @@ const ItemsCard = ({ classes, item }) => {
                 {item.itemowner.fullname}
               </Typography>
               <Typography className={classes.metaDate}>
-                {moment(item.created)
+                {moment
+                  .parseZone(item.created)
                   .startOf('minutes')
                   .fromNow()}
               </Typography>
