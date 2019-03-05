@@ -21,17 +21,15 @@ This web-based application that allows users to freely lend out their items, as 
 
 ---
 
-<!-- -->
-
 ## Installation
 
 ```bash
 npm install
 ```
 
-## Run
+### Run
 
-### For development
+#### For development
 
 `cd` into `server` directory and run:
 
@@ -39,17 +37,13 @@ npm install
 npm run start:dev
 ```
 
----
-
-### For production
+#### For production
 
 `cd` into `client` directory and run:
 
 ```bash
 npm start
 ```
-
----
 
 ## Technologies Used
 
