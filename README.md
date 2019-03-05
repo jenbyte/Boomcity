@@ -27,9 +27,9 @@ This web-based application that allows users to freely lend out their items, as 
 npm install
 ```
 
-### Run
+## Run
 
-#### For development
+### Server-Side
 
 `cd` into `server` directory and run:
 
@@ -37,7 +37,7 @@ npm install
 npm run start:dev
 ```
 
-#### For production
+#### Client-Side
 
 `cd` into `client` directory and run:
 
