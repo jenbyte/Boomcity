@@ -22,7 +22,8 @@ const styles = theme => ({
     }
   },
   errorMessage: {
-    color: 'blue'
+    color: '#d03030',
+    fontsize: '10px'
   }
 });
 

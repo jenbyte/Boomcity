@@ -13,7 +13,7 @@ const styles = theme => ({
   },
   card: {
     borderRadius: 0,
-    minHeight: 582,
+    // minHeight: 582,
     height: '100%'
     // minWidth: 350
   },

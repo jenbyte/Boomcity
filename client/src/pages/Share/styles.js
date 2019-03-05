@@ -2,9 +2,8 @@ const styles = theme => ({
   flexForm: {
     display: 'flex',
     flexGrow: 1,
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    // height: '100vh',
     maxWidth: 950,
     margin: 'auto',
     padding: '5% 0'
@@ -12,7 +11,6 @@ const styles = theme => ({
   shareForm: {
     alignSelf: 'center',
     padding: 12,
-    // height: '100%',
     maxWidth: 420,
     width: '100%'
   },

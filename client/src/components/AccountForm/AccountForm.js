@@ -16,6 +16,7 @@ import { graphql, compose } from 'react-apollo';
 import validate from './helpers/validation';
 import styles from './styles';
 import PropTypes from 'prop-types';
+import { FORM_ERROR } from 'final-form';
 
 class AccountForm extends Component {
   constructor(props) {
@@ -33,44 +34,54 @@ class AccountForm extends Component {
     this.setState({ enteredEmail: e.target.value });
   }
 
-  onSubmit = async () => {
-    await new Promise(resolve => setTimeout(resolve, 300));
-  };
-
   render() {
     const { classes, loginMutation, signupMutation } = this.props;
 
     return (
       <div>
-        {/* <Mutation mutation={SIGNUP_MUTATION}>
-          {(loginMutation, signupMutation) => {
-            return ( */}
         <Form
-          // onSubmit={this.onSubmit()}
-          onSubmit={values => {
-            this.state.formToggle
-              ? loginMutation({
-                  variables: {
-                    user: {
-                      email: values.email,
-                      password: values.password
+          onSubmit={async values => {
+            try {
+              this.state.formToggle
+                ? await loginMutation({
+                    variables: {
+                      user: {
+                        email: values.email,
+                        password: values.password
+                      }
                     }
-                  }
-                })
-              : signupMutation({
-                  variables: {
-                    user: {
-                      fullname: values.fullname,
-                      email: values.email,
-                      password: values.password
+                  })
+                : await signupMutation({
+                    variables: {
+                      user: {
+                        fullname: values.fullname,
+                        email: values.email,
+                        password: values.password
+                      }
                     }
-                  }
-                });
+                  });
+            } catch (e) {
+              console.log(e);
+              return {
+                [FORM_ERROR]: this.state.formToggle
+                  ? 'Incorrect email and/or password.'
+                  : 'The email you entered already exists.'
+              };
+            }
           }}
           validate={values => {
             return validate(values);
           }}
-          render={({ handleSubmit, pristine, submitting, invalid, form }) => (
+          render={({
+            handleSubmit,
+            pristine,
+            submitting,
+            invalid,
+            form,
+            hasValidationErrors,
+            hasSubmitErrors,
+            submitError
+          }) => (
             <form className={classes.accountForm} onSubmit={handleSubmit}>
               {!this.state.formToggle && (
                 <Field name="fullname">
@@ -145,7 +156,7 @@ class AccountForm extends Component {
                     variant="contained"
                     size="large"
                     color="secondary"
-                    disabled={pristine || submitting || invalid}
+                    disabled={pristine || submitting || hasValidationErrors}
                   >
                     {this.state.formToggle ? 'Enter' : 'Create Account'}
                   </Button>
@@ -169,15 +180,14 @@ class AccountForm extends Component {
                 </Grid>
               </FormControl>
 
-              <Typography className={classes.errorMessage}>
-                {/* Display sign-up and login errors */}
-              </Typography>
+              {hasSubmitErrors && (
+                <Typography className={classes.errorMessage}>
+                  {submitError}
+                </Typography>
+              )}
             </form>
           )}
         />
-        {/* );
-          }}
-        </Mutation> */}
       </div>
     );
   }

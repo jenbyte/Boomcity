@@ -1,7 +1,7 @@
 const { gql } = require('apollo-server-express');
 
 module.exports = gql`
-  scalar Upload
+  # scalar Upload
   scalar Date
 
   type Item {
@@ -71,7 +71,7 @@ module.exports = gql`
   }
 
   type Mutation {
-    addItem(item: NewItemInput!, image: Upload): Item
+    addItem(item: NewItemInput!, image: String): Item
     signup(user: SignupInput!): ID!
     login(user: LoginInput!): ID!
     logout: Boolean!
