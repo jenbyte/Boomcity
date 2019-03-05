@@ -31,7 +31,7 @@ npm install
 
 ## Run
 
-## For development
+### For development
 
 `cd` into `server` directory and run:
 
@@ -41,7 +41,7 @@ npm run start:dev
 
 ---
 
-## For production
+### For production
 
 `cd` into `client` directory and run:
 
