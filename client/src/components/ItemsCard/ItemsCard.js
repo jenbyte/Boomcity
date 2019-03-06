@@ -86,7 +86,8 @@ const ItemsCard = ({ classes, item, viewer }) => {
 };
 
 ItemsCard.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  item: PropTypes.object
 };
 
 ItemsCard.defaultProps = {

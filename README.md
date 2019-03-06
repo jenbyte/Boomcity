@@ -54,6 +54,10 @@ npm start
 - Express
 - Git
 
+## Note
+
+Requires a database to run
+
 ## Author
 
 [Jennifer Yiu](https://www.linkedin.com/in/jennifer-yiu-12145836/), _Web and App Developer_
