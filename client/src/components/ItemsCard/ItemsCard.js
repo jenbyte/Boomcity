@@ -16,7 +16,9 @@ import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import moment from 'moment';
 
-const ItemsCard = ({ classes, item }) => {
+const ItemsCard = ({ classes, item, viewer }) => {
+  console.log('!ITEM!', item);
+  console.log('!VIEWER!', viewer);
   return (
     <Card className={classes.card}>
       <Fragment>
@@ -67,11 +69,17 @@ const ItemsCard = ({ classes, item }) => {
         </CardContent>
       </Fragment>
 
-      <CardActions>
-        <Button className={classes.button} variant="outlined">
-          Borrow
-        </Button>
-      </CardActions>
+      {viewer && viewer.id !== item.itemowner.id ? (
+        <CardActions>
+          <Button
+            className={classes.button}
+            variant="outlined"
+            onClick={() => console.log('Borrowed!')}
+          >
+            Borrow
+          </Button>
+        </CardActions>
+      ) : null}
     </Card>
   );
 };

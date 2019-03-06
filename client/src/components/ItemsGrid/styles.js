@@ -10,9 +10,6 @@ const styles = theme => ({
   },
   control: {
     padding: theme.spacing.unit * 2
-  },
-  gridItem: {
-    // flexBasis: '100%'
   }
 });
 

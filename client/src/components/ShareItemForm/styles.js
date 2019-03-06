@@ -7,8 +7,6 @@ const styles = theme => ({
     // minWidth: 300
   },
   textField: {
-    // marginLeft: theme.spacing.unit,
-    // marginRight: theme.spacing.unit,
     marginTop: '1.5rem',
     width: '100%'
   },
@@ -16,7 +14,6 @@ const styles = theme => ({
     marginTop: 19
   },
   menu: {
-    // minWidth: 200,
     width: '100%'
   },
   formControl: {
@@ -31,7 +28,6 @@ const styles = theme => ({
     fontWeight: 700,
     lineHeight: '1',
     marginBottom: '3rem'
-    // maxWidth: 0.5
   },
   imageButton: {
     background: theme.palette.primary.main,

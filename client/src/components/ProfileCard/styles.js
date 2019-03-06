@@ -20,8 +20,6 @@ const styles = theme => ({
   userInfo: {
     display: 'flex',
     alignItems: 'center',
-    // justifyContent: 'flex-start',
-    // lineHeight: 0,
     marginBottom: '1rem'
   },
   fullname: {
@@ -29,7 +27,6 @@ const styles = theme => ({
     fontWeight: 400,
     fontSize: '2.8rem',
     textTransform: 'capitalize'
-    // marginTop: '1.5rem'
   },
   pos: {
     color: '#808080',
@@ -48,7 +45,6 @@ const styles = theme => ({
   },
   numOfItems: {
     fontSize: '1.3rem'
-    // alignSelf: 'center'
   },
   bold: {
     fontSize: '1.4rem',
@@ -62,7 +58,6 @@ const styles = theme => ({
   },
   flexGrid: {
     display: 'flex',
-    // justifyContent: 'space-around',
     flexGrow: 1,
     flexBasis: '100%'
   }

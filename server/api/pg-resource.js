@@ -62,51 +62,87 @@ module.exports = postgres => {
         if (!user) throw 'There is no user with matching id';
         return user.rows[0];
       } catch (e) {
-        throw 'Unable to find user by id';
+        throw 'Unable to find user with id';
       }
     },
 
     async getItems(idToOmit) {
-      const items = await postgres.query({
-        text: `SELECT * FROM items ${idToOmit ? 'WHERE ownerid <> $1' : ''}`,
-        values: idToOmit ? [idToOmit] : []
-      });
-      return items.rows;
+      try {
+        const items = await postgres.query({
+          text: `SELECT * FROM items ${idToOmit ? 'WHERE ownerid <> $1' : ''}`,
+          values: idToOmit ? [idToOmit] : []
+        });
+        return items.rows;
+      } catch (e) {
+        throw 'Error fetching items.';
+      }
     },
     async getItemsForUser(id) {
-      const items = await postgres.query({
-        /**
-         *  Get all Items. Hint: You'll need to use a LEFT INNER JOIN among others
-         */
-        text: `SELECT * FROM items WHERE ownerid = $1`,
-        values: [id]
-      });
-      return items.rows;
+      try {
+        const items = await postgres.query({
+          text: `SELECT * FROM items WHERE ownerid = $1 ORDER BY created DESC`,
+          values: [id]
+        });
+        return items.rows;
+      } catch (e) {
+        throw 'Error fetching items.';
+      }
     },
     async getBorrowedItemsForUser(id) {
-      const items = await postgres.query({
-        /**
-         *  Advanced queries - Get all Items.
-         *  Hint: You'll need to use a LEFT INNER JOIN among others
-         */
-        text: `SELECT * FROM items WHERE borrowerid = $1`,
-        values: [id]
-      });
-      return items.rows;
+      try {
+        const items = await postgres.query({
+          text: `SELECT * FROM items WHERE borrowerid = $1 ORDER BY created DESC`,
+          values: [id]
+        });
+        return items.rows;
+      } catch (e) {
+        throw 'Error fetching borrowed items.';
+      }
     },
+    // async updateBorrower() {
+    //   try {
+    //     const items = await postgres.query({
+    //       text: `SELECT * FROM items WHERE borrowerid`,
+    //       values: []
+    //     });
+    //     return items.rows;
+    //   } catch (e) {
+    //     throw '';
+    //   }
+    // },
     async getTags() {
-      const tags = await postgres.query({
-        text: `SELECT * FROM tags`
-      });
-      return tags.rows;
+      try {
+        const tags = await postgres.query({
+          text: `SELECT * FROM tags`
+        });
+        return tags.rows;
+      } catch (e) {
+        throw 'Error fetching tags.';
+      }
     },
     async getTagsForItem(id) {
-      const tagsQuery = {
-        text: `SELECT * FROM tags WHERE id IN (SELECT tagid FROM itemtags WHERE itemid = $1)`, // @DONE: Advanced queries
-        values: [id]
-      };
-      const tags = await postgres.query(tagsQuery);
-      return tags.rows;
+      try {
+        const tagsQuery = {
+          text: `SELECT * FROM tags WHERE id IN (SELECT tagid FROM itemtags WHERE itemid = $1)`, // @DONE: Advanced queries
+          values: [id]
+        };
+        const tags = await postgres.query(tagsQuery);
+        return tags.rows;
+      } catch (e) {
+        throw 'Error fetching tags for item.';
+      }
+    },
+    async getItemById(id) {
+      try {
+        const itemQuery = {
+          text: `SELECT * FROM items WHERE id  = $1`,
+          values: [id]
+        };
+        const itemById = await postgres.query(itemQuery);
+        return itemById.rows;
+      } catch (e) {
+        throw 'Error fetching tags for item.';
+      }
     },
     async saveNewItem({ item, user }) {
       return new Promise((resolve, reject) => {

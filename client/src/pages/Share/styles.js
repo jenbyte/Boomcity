@@ -2,7 +2,7 @@ const styles = theme => ({
   flexForm: {
     display: 'flex',
     flexGrow: 1,
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     alignItems: 'center',
     maxWidth: 950,
     margin: 'auto',

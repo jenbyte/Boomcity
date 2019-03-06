@@ -8,7 +8,10 @@ const ShareItemPreview = ({ shareItemPreview }) => {
   return (
     <ViewerContext.Consumer>
       {({ viewer }) => (
-        <ItemsCard item={{ ...shareItemPreview, itemowner: viewer }} />
+        <ItemsCard
+          item={{ ...shareItemPreview, itemowner: viewer }}
+          viewer={viewer}
+        />
       )}
     </ViewerContext.Consumer>
   );

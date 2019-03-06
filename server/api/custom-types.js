@@ -43,7 +43,6 @@ const DateScalar = new GraphQLScalarType({
     return null;
   }
 });
-// -------------------------------
 
 module.exports = {
   UploadScalar,

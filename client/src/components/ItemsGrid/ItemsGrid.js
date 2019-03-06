@@ -5,13 +5,14 @@ import { Grid } from '@material-ui/core';
 import ItemsCard from '../ItemsCard/ItemsCard';
 import styles from './styles';
 
-const ItemsGrid = ({ classes, items }) => {
+const ItemsGrid = ({ classes, items, viewer }) => {
+  console.log('!!!!!!!!!!!!!!!!!!', viewer);
   return (
     <Grid container className={classes.root} spacing={24}>
       {items.map(item => {
         return (
           <Grid item xs={12} sm={6} md={4} className={classes.gridItem}>
-            <ItemsCard item={item} />
+            <ItemsCard item={item} viewer={viewer} />
           </Grid>
         );
       })}
@@ -20,10 +21,11 @@ const ItemsGrid = ({ classes, items }) => {
 };
 
 ItemsGrid.propTypes = {
+  card: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired,
   items: PropTypes.object.isRequired,
-  card: PropTypes.object.isRequired,
-  gridItem: PropTypes.object.isRequired
+  gridItem: PropTypes.object.isRequired,
+  viewer: PropTypes.object.isRequired
 };
 
 export default withStyles(styles)(ItemsGrid);

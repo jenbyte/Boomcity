@@ -13,15 +13,13 @@ const styles = theme => ({
   },
   card: {
     borderRadius: 0,
-    // minHeight: 582,
+
     height: '100%'
-    // minWidth: 350
   },
   content: {
     dislay: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between'
-    // alignItems: 'flex-start'
   },
   media: {
     minHeight: 250

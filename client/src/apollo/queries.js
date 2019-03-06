@@ -64,6 +64,15 @@ export const ALL_USER_ITEMS_QUERY = gql`
   ${ItemFields}
 `;
 
+export const BORROWED_ITEMS_QUERY = gql`
+  query item($id: ID!) {
+    item(id: $id) {
+      ...ItemFields
+    }
+  }
+  ${ItemFields}
+`;
+
 export const ALL_TAGS_QUERY = gql`
   query {
     tags {
@@ -117,5 +126,11 @@ export const SIGNUP_MUTATION = gql`
 export const LOGIN_MUTATION = gql`
   mutation loginMutation($user: LoginInput!) {
     login(user: $user)
+  }
+`;
+
+export const BORROW_MUTATION = gql`
+  mutation borrowMutation($itemid: ID!) {
+    borrow(itemid: $itemid)
   }
 `;

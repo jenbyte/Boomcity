@@ -1,6 +1,5 @@
 const styles = theme => ({
   root: {
-    // background: theme.palette.bg.main,
     height: '100%'
     // width: '100%'
   },

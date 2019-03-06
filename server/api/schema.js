@@ -74,6 +74,7 @@ module.exports = gql`
     addItem(item: NewItemInput!, image: String): Item
     signup(user: SignupInput!): ID!
     login(user: LoginInput!): ID!
-    logout: Boolean!
+    logout: Boolean
+    borrow(itemid: ID!): Boolean
   }
 `;
