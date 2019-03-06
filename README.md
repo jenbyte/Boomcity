@@ -23,8 +23,10 @@ This web-based application that allows users to freely lend out their items, as 
 
 ## Running the Project
 
-1. `git clone` this repo
-2. Run `npm install` in the project directory/folder
+_Note:_ Requires a database to run
+
+- `git clone` this repo
+- Run `npm install` in the project directory/folder
 
 ### Server-Side
 
@@ -53,10 +55,6 @@ npm start
 - Terminal
 - Express
 - Git
-
-## Note
-
-Requires a database to run
 
 ## Author
 
