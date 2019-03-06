@@ -17,7 +17,11 @@ const styles = theme => ({
   sharePreview: {
     padding: 12,
     maxWidth: 400,
-    width: '100%'
+    width: '100%',
+
+    [theme.breakpoints.down('xs')]: {
+      display: 'none'
+    }
   }
 });
 

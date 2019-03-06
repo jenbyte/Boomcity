@@ -282,7 +282,8 @@ class ShareItemForm extends Component {
 
 ShareItemForm.propTypes = {
   classes: PropTypes.object.isRequired,
-  tags: PropTypes.object.isRequired,
+  tags: PropTypes.array.isRequired,
+
   updateItem: PropTypes.func.isRequired,
   resetImage: PropTypes.func.isRequired,
   resetItem: PropTypes.func.isRequired

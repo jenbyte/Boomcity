@@ -17,21 +17,22 @@ import { withRouter } from 'react-router';
 import moment from 'moment';
 
 const ItemsCard = ({ classes, item, viewer }) => {
-  console.log('!ITEM!', item);
-  console.log('!VIEWER!', viewer);
   return (
     <Card className={classes.card}>
       <Fragment>
         <CardMedia
           className={classes.media}
-          image={item.imageurl}
+          image={
+            item.imageurl ||
+            'http://via.placeholder.com/350x?text=Image unavailable'
+          }
           title={item.title}
           component={Link}
           to={`/profile/${item.itemowner.id}`}
         />
 
         <CardContent className={classes.content}>
-          <div
+          <CardContent
             className={classes.userInfo}
             component={Link}
             to={`/profile/${item.itemowner.id}`}
@@ -54,7 +55,7 @@ const ItemsCard = ({ classes, item, viewer }) => {
                   .fromNow()}
               </Typography>
             </div>
-          </div>
+          </CardContent>
 
           <Typography className={classes.title} component="h1">
             {item.title}
@@ -85,16 +86,14 @@ const ItemsCard = ({ classes, item, viewer }) => {
 };
 
 ItemsCard.propTypes = {
-  classes: PropTypes.object.isRequired,
-  item: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired
 };
 
 ItemsCard.defaultProps = {
   item: {
     title: 'title',
     description: 'description',
-    tags: [],
-    imageurl: 'http://via.placeholder.com/350x250?text=Please select an image'
+    tags: []
   }
 };
 

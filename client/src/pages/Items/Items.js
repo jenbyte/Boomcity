@@ -12,7 +12,7 @@ const Items = ({ classes, items, viewer }) => {
 
 Items.propTypes = {
   classes: PropTypes.object.isRequired,
-  items: PropTypes.object.isRequired,
+  items: PropTypes.array.isRequired,
   viewer: PropTypes.object.isRequired
 };
 

@@ -1,4 +1,4 @@
-# 🏙 Boomity 🌃
+# 🏙 BoomCity 🌃
 
 This web-based application that allows users to freely lend out their items, as well as borrow items from other users. It was built using React, Node, Express, Apollo, and GraphQL.
 
@@ -21,17 +21,14 @@ This web-based application that allows users to freely lend out their items, as 
 
 ---
 
-## Installation
+## Running the Project
 
-```bash
-npm install
-```
-
-## Run
+1. `git clone` this repo
+2. Run `npm install` in the project directory/folder
 
 ### Server-Side
 
-`cd` into `server` directory and run:
+`cd` into `server` directory/folder and run:
 
 ```bash
 npm run start:dev
@@ -39,7 +36,7 @@ npm run start:dev
 
 #### Client-Side
 
-`cd` into `client` directory and run:
+`cd` into `client` directory/folder and run:
 
 ```bash
 npm start
@@ -59,4 +56,4 @@ npm start
 
 ## Author
 
-[Jennifer Yiu](https://www.linkedin.com/in/jennifer-yiu-12145836/), _Fullstack Front-End Developer_
+[Jennifer Yiu](https://www.linkedin.com/in/jennifer-yiu-12145836/), _Web and App Developer_

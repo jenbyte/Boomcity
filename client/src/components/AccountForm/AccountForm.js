@@ -64,7 +64,7 @@ class AccountForm extends Component {
               console.log(e);
               return {
                 [FORM_ERROR]: this.state.formToggle
-                  ? 'Incorrect email and/or password.'
+                  ? 'Your email and/or password is incorrect.'
                   : 'The email you entered already exists.'
               };
             }

@@ -7,12 +7,10 @@ import styles from './styles';
 import ItemsCard from '../ItemsCard/ItemsCard';
 
 const ProfileCard = ({ classes, profile, viewer }) => {
-  console.log('***', viewer);
-  console.log('@@@@', profile);
   return (
     <div>
       <Card className={classes.card}>
-        <CardContent className={classes}>
+        <CardContent>
           <div className={classes.userInfo}>
             <Avatar className={classes.avatar}>
               <Gravatar email={profile.email} />
@@ -21,6 +19,7 @@ const ProfileCard = ({ classes, profile, viewer }) => {
               {profile.fullname}
             </Typography>
           </div>
+
           <div>
             <Typography className={classes.numOfItems} component="h1">
               <span className={classes.bold}>{profile.items.length}</span> Items
@@ -46,22 +45,35 @@ const ProfileCard = ({ classes, profile, viewer }) => {
       <Grid container className={classes.flexGrid} spacing={24}>
         {profile.items.map(item => {
           return (
-            <Grid item xs={12} sm={6} md={4} className={classes.gridItem}>
+            <Grid
+              key={item.id}
+              item
+              xs={12}
+              sm={6}
+              md={4}
+              className={classes.gridItem}
+            >
               <ItemsCard item={item} profile={profile} viewer={viewer} />
             </Grid>
           );
         })}
       </Grid>
 
-      <Typography className={classes.profileGridTitle} component="h1">
-        Borrowed Items
-      </Typography>
-
+      {profile.borrowed.id && (
+        <Typography className={classes.profileGridTitle} component="h1">
+          Borrowed Items
+        </Typography>
+      )}
       <Grid container className={classes.flexGrid} spacing={24}>
         {profile.borrowed.map(item => {
           return (
             <Grid item xs={12} sm={6} md={4} className={classes.gridItem}>
-              <ItemsCard item={item} profile={profile} viewer={viewer} />
+              <ItemsCard
+                key={item.id}
+                item={item}
+                profile={profile}
+                viewer={viewer}
+              />
             </Grid>
           );
         })}
@@ -73,7 +85,7 @@ const ProfileCard = ({ classes, profile, viewer }) => {
 ProfileCard.propTypes = {
   classes: PropTypes.object.isRequired,
   profile: PropTypes.shape({
-    bio: PropTypes.string.isRequired,
+    bio: PropTypes.string,
     email: PropTypes.string.isRequired,
     items: PropTypes.array.isRequired
   }).isRequired

@@ -20,8 +20,7 @@ const ShareItemPreview = ({ shareItemPreview }) => {
 const mapStateToProps = state => ({ shareItemPreview: state.shareItemPreview });
 
 ShareItemPreview.propTypes = {
-  shareItemPreview: PropTypes.func.isRequired,
-  viewer: PropTypes.object.isRequired
+  shareItemPreview: PropTypes.object.isRequired
 };
 
 export default connect(mapStateToProps)(ShareItemPreview);

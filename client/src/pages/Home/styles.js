@@ -5,7 +5,7 @@ const styles = theme => ({
     background: theme.palette.primary.main,
     padding: theme.spacing.unit * 5,
     [theme.breakpoints.up('md')]: {
-      padding: theme.spacing.unit * 20
+      padding: theme.spacing.unit * 8
     }
   },
   headline: {

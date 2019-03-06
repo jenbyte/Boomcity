@@ -44,7 +44,8 @@ const styles = theme => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    lineHeight: 0
+    lineHeight: 0,
+    padding: 0
   },
   metaInfo: {
     display: 'flex',

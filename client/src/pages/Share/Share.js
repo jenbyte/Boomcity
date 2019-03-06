@@ -9,10 +9,10 @@ const Share = ({ classes, tags }) => {
   return (
     <div className={classes.flexForm}>
       <div className={classes.sharePreview}>
-        <ShareItemPreview />
+        <ShareItemPreview className={classes} />
       </div>
       <div className={classes.shareForm}>
-        <ShareItemForm classes={classes} tags={tags} />
+        <ShareItemForm tags={tags} className={classes} />
       </div>
     </div>
   );
@@ -20,7 +20,7 @@ const Share = ({ classes, tags }) => {
 
 Share.propTypes = {
   classes: PropTypes.object.isRequired,
-  tags: PropTypes.object.isRequired
+  tags: PropTypes.array.isRequired
 };
 
 export default withStyles(styles)(Share);
