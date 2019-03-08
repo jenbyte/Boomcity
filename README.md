@@ -1,8 +1,6 @@
 # 🏙 BoomCity 🌃
 
-This web-based application that allows users to freely lend out their items, as well as borrow items from other users. It was built using React, Node, Express, Apollo, and GraphQL.
-
-## Screenshots
+This web-based application allows users to freely lend out their items, as well as borrow items from other users. It was built using React, Node, Express, Apollo, and GraphQL.
 
 **Items Page:**
 
@@ -21,28 +19,33 @@ This web-based application that allows users to freely lend out their items, as 
 
 ---
 
+## Before you start
+
+- Install [PostgreSQL](https://postgresapp.com/downloads.html) and run locally on your machine
+
 ## Running the Project
 
-_Note:_ Requires a database to run
+1. Clone this repo into your desired directory/folder
+2. `cd` into `boomtcity`
+3. Run `npm install`
 
-- `git clone` this repo
-- Run `npm install` in the project directory/folder
+## Server-Side
 
-### Server-Side
-
-`cd` into `server` directory/folder and run:
+`cd` into `server` directory, then run:
 
 ```bash
 npm run start:dev
 ```
 
-#### Client-Side
+## Client-Side
 
-`cd` into `client` directory/folder and run:
+`cd` into `client` directory, then run:
 
 ```bash
 npm start
 ```
+
+---
 
 ## Technologies Used
 
@@ -55,6 +58,7 @@ npm start
 - Terminal
 - Express
 - Git
+- React
 
 ## Author
 
